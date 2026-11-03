@@ -1,0 +1,585 @@
+"use client";
+
+/**
+ * ILLUSTRATIVE DASHBOARD MOCKUP — not a real Prime-Techmate product.
+ * Rendered at a fixed 1200×720 design size; wrap in <ScaledCanvas>.
+ */
+
+import { useId, type ComponentType, type ReactNode } from "react";
+import { useReducedMotion } from "motion/react";
+import {
+  Area,
+  AreaChart,
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Pie,
+  PieChart,
+  XAxis,
+  YAxis,
+} from "recharts";
+import {
+  Activity,
+  BedDouble,
+  Bell,
+  Building,
+  CalendarDays,
+  ChevronDown,
+  CircleCheck,
+  ClipboardList,
+  Download,
+  FileChartColumn,
+  FileText,
+  FlaskConical,
+  LayoutDashboard,
+  Pill,
+  RefreshCw,
+  Search,
+  Settings,
+  Stethoscope,
+  UserPlus,
+  Users,
+  type LucideProps,
+} from "lucide-react";
+import { cn } from "@/lib/cn";
+import {
+  appointments,
+  attendance,
+  clinicians,
+  departments,
+  facilities,
+  facilityMix,
+  indicators,
+  monthly,
+  patients,
+  recentRegistrations,
+  visits14,
+} from "./data";
+
+export type DashboardView = "overview" | "records" | "appointments" | "reports";
+
+export const DASHBOARD_WIDTH = 1200;
+export const DASHBOARD_HEIGHT = 720;
+
+const TEAL = "#14b3a0";
+const NAVY = "#1c3358";
+const AXIS = { fontSize: 11, fill: "#98a2b3" };
+
+type Icon = ComponentType<LucideProps>;
+
+export function DemoDashboard({ view = "overview" }: { view?: DashboardView }) {
+  const titles: Record<DashboardView, string> = {
+    overview: "Facility overview",
+    records: "Patient records",
+    appointments: "Appointments",
+    reports: "Reports & analytics",
+  };
+  return (
+    <div className="flex h-[720px] w-[1200px] bg-mist font-sans text-[13px] text-ink">
+      <Sidebar view={view} />
+      <div className="flex min-w-0 flex-1 flex-col">
+        <Topbar title={titles[view]} />
+        <div className="min-h-0 flex-1 overflow-hidden p-6">
+          {view === "overview" && <OverviewView />}
+          {view === "records" && <RecordsView />}
+          {view === "appointments" && <AppointmentsView />}
+          {view === "reports" && <ReportsView />}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------------------------------------------------------------- chrome */
+
+function Sidebar({ view }: { view: DashboardView }) {
+  const items: { label: string; icon: Icon; key?: DashboardView }[] = [
+    { label: "Overview", icon: LayoutDashboard, key: "overview" },
+    { label: "Patients", icon: Users, key: "records" },
+    { label: "Appointments", icon: CalendarDays, key: "appointments" },
+    { label: "Facilities", icon: Building },
+    { label: "Reports", icon: FileChartColumn, key: "reports" },
+    { label: "Settings", icon: Settings },
+  ];
+  return (
+    <aside className="flex w-[220px] shrink-0 flex-col border-r border-line bg-white px-4 py-5">
+      <div className="flex items-center gap-2.5 px-2">
+        <span className="grid size-8 place-items-center rounded-lg bg-navy-900">
+          <Activity className="size-4 text-teal-400" />
+        </span>
+        <div className="leading-tight">
+          <p className="font-display text-[14px] font-bold tracking-tight">Health HIS</p>
+          <p className="text-[11px] text-muted">Demo environment</p>
+        </div>
+      </div>
+      <p className="mt-7 px-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-subtle">Workspace</p>
+      <ul className="mt-2 space-y-0.5">
+        {items.map((it) => {
+          const active = it.key === view;
+          return (
+            <li
+              key={it.label}
+              className={cn(
+                "relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium",
+                active ? "bg-teal-50 text-teal-700" : "text-body",
+              )}
+            >
+              {active && <span className="absolute -left-4 top-2 h-5 w-[3px] rounded-r bg-teal-500" />}
+              <it.icon className="size-[16px]" />
+              {it.label}
+            </li>
+          );
+        })}
+      </ul>
+      <div className="mt-auto rounded-xl border border-dashed border-line bg-mist p-3.5">
+        <p className="text-[12px] font-semibold">Sample data only</p>
+        <p className="mt-1 text-[11px] leading-snug text-muted">All names, IDs and figures in this interface are fictional.</p>
+      </div>
+    </aside>
+  );
+}
+
+function Topbar({ title }: { title: string }) {
+  return (
+    <header className="flex h-16 shrink-0 items-center gap-4 border-b border-line bg-white px-6">
+      <div>
+        <p className="text-[11px] text-muted">Demo District Hospital</p>
+        <h3 className="font-display text-[17px] font-bold tracking-tight">{title}</h3>
+      </div>
+      <div className="ml-auto flex h-9 w-[300px] items-center gap-2 rounded-lg border border-line bg-mist px-3 text-[12px] text-subtle">
+        <Search className="size-3.5" /> Search patients, records, reports…
+      </div>
+      <div className="flex h-9 items-center gap-2 rounded-lg border border-line px-3 text-[12px] text-body">
+        <CalendarDays className="size-3.5" /> Today <ChevronDown className="size-3.5" />
+      </div>
+      <span className="relative grid size-9 place-items-center rounded-lg border border-line text-body">
+        <Bell className="size-4" />
+        <span className="absolute right-2 top-2 size-1.5 rounded-full bg-teal-500" />
+      </span>
+      <span className="grid size-9 place-items-center rounded-full bg-navy-900 text-[12px] font-semibold text-white">DA</span>
+    </header>
+  );
+}
+
+function Card({ title, action, className, children }: { title?: string; action?: ReactNode; className?: string; children: ReactNode }) {
+  return (
+    <section className={cn("rounded-xl border border-line bg-white p-4", className)}>
+      {title && (
+        <div className="mb-3 flex items-center justify-between">
+          <h4 className="font-sans text-[13px] font-semibold">{title}</h4>
+          {action}
+        </div>
+      )}
+      {children}
+    </section>
+  );
+}
+
+function Legend({ items }: { items: { label: string; color: string }[] }) {
+  return (
+    <div className="flex items-center gap-3 text-[11px] text-muted">
+      {items.map((i) => (
+        <span key={i.label} className="flex items-center gap-1.5">
+          <span className="size-2 rounded-full" style={{ background: i.color }} />
+          {i.label}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function Kpi({ label, value, delta, icon: I }: { label: string; value: string; delta?: string; icon: Icon }) {
+  return (
+    <div className="rounded-xl border border-line bg-white p-4">
+      <div className="flex items-center justify-between text-[12px] text-muted">
+        {label}
+        <span className="grid size-7 place-items-center rounded-lg bg-teal-50 text-teal-700">
+          <I className="size-3.5" />
+        </span>
+      </div>
+      <div className="mt-2 flex items-end justify-between">
+        <span className="font-display text-[26px] font-bold leading-none tracking-tight">{value}</span>
+        {delta && <span className="rounded-full bg-teal-50 px-2 py-0.5 text-[11px] font-semibold text-teal-700">{delta}</span>}
+      </div>
+    </div>
+  );
+}
+
+function StatusChip({ status }: { status: string }) {
+  const tone =
+    status === "In consultation" || status === "Online"
+      ? "bg-teal-50 text-teal-700"
+      : status === "Awaiting lab" || status === "Syncing" || status === "Follow-up due"
+        ? "bg-[#fff6e6] text-[#9a6200]"
+        : "bg-cloud text-muted";
+  return <span className={cn("inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-medium", tone)}>{status}</span>;
+}
+
+/* ---------------------------------------------------------------- views */
+
+function OverviewView() {
+  const gid = useId().replace(/:/g, "");
+  const reduce = useReducedMotion();
+  const maxDept = Math.max(...departments.map((d) => d.value));
+  return (
+    <div className="grid h-full grid-rows-[auto_1fr_auto] gap-4">
+      <div className="grid grid-cols-4 gap-4">
+        <Kpi label="Registrations today" value="128" delta="+8%" icon={UserPlus} />
+        <Kpi label="Appointments" value="342" delta="+3%" icon={CalendarDays} />
+        <Kpi label="Bed occupancy" value="76%" icon={BedDouble} />
+        <Kpi label="Records synchronised" value="99.4%" icon={RefreshCw} />
+      </div>
+
+      <div className="grid min-h-0 grid-cols-[1.75fr_1fr] gap-4">
+        <Card
+          title="Patient visits · last 14 days"
+          action={<Legend items={[{ label: "Outpatient", color: TEAL }, { label: "Follow-up", color: NAVY }]} />}
+        >
+          <AreaChart width={580} height={196} data={visits14} margin={{ top: 6, right: 6, left: -16, bottom: 0 }}>
+            <defs>
+              <linearGradient id={`opd-${gid}`} x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor={TEAL} stopOpacity={0.28} />
+                <stop offset="100%" stopColor={TEAL} stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid vertical={false} stroke="#eef2f6" />
+            <XAxis dataKey="d" tickLine={false} axisLine={false} tick={AXIS} />
+            <YAxis tickLine={false} axisLine={false} tick={AXIS} width={44} />
+            <Area type="monotone" dataKey="opd" stroke={TEAL} strokeWidth={2.2} fill={`url(#opd-${gid})`} isAnimationActive={!reduce} animationDuration={1400} />
+            <Area type="monotone" dataKey="fu" stroke={NAVY} strokeWidth={2} fill="transparent" isAnimationActive={!reduce} animationDuration={1400} />
+          </AreaChart>
+        </Card>
+
+        <Card title="Visits by department" action={<span className="text-[11px] text-muted">This week</span>}>
+          <ul className="space-y-3.5 pt-1">
+            {departments.map((d, i) => (
+              <li key={d.name}>
+                <div className="flex justify-between text-[12px]">
+                  <span className="text-body">{d.name}</span>
+                  <span className="font-semibold tabular-nums">{d.value}</span>
+                </div>
+                <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-cloud">
+                  <div
+                    className="h-full origin-left rounded-full"
+                    style={{
+                      width: `${(d.value / maxDept) * 100}%`,
+                      background: i === 0 ? TEAL : i === 1 ? NAVY : "#7fe0d3",
+                    }}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <Card title="Recent registrations" action={<span className="text-[11px] font-medium text-teal-700">View all</span>}>
+          <ul className="divide-y divide-line">
+            {recentRegistrations.slice(0, 3).map((r) => (
+              <li key={r.id} className="flex items-center gap-3 py-2">
+                <span className="grid size-8 place-items-center rounded-full bg-cloud text-[11px] font-semibold text-navy-700">{r.name.replace(/\. ?/g, "")}</span>
+                <div className="min-w-0 flex-1 leading-tight">
+                  <p className="text-[12.5px] font-medium">{r.name} · {r.sex}, {r.age}</p>
+                  <p className="text-[11px] text-muted">{r.id} · {r.unit}</p>
+                </div>
+                <span className="text-[11px] tabular-nums text-muted">{r.time}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+        <Card title="Facility activity" action={<span className="flex items-center gap-1 text-[11px] text-teal-700"><span className="size-1.5 rounded-full bg-teal-500" />Live</span>}>
+          <ul className="space-y-2.5">
+            {facilities.slice(0, 3).map((f) => (
+              <li key={f.name} className="flex items-center gap-3">
+                <span className="grid size-8 place-items-center rounded-lg bg-mist text-navy-700"><Building className="size-3.5" /></span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between text-[12px]">
+                    <span className="font-medium">{f.name}</span>
+                    <StatusChip status={f.status} />
+                  </div>
+                  <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-cloud">
+                    <div className="h-full rounded-full bg-navy-700" style={{ width: `${f.load}%` }} />
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+function RecordsView() {
+  const selected = patients[0];
+  const timeline: { label: string; meta: string; icon: Icon; done: boolean }[] = [
+    { label: "Registered at OPD", meta: "08:52", icon: UserPlus, done: true },
+    { label: "Vitals recorded", meta: "09:05", icon: Activity, done: true },
+    { label: "Consultation started", meta: "09:40", icon: Stethoscope, done: true },
+    { label: "Lab request · Full blood count", meta: "Pending", icon: FlaskConical, done: false },
+    { label: "Prescription", meta: "Pending", icon: Pill, done: false },
+  ];
+  return (
+    <div className="grid h-full grid-cols-[1fr_300px] gap-4">
+      <Card
+        title="All patients"
+        className="min-h-0"
+        action={
+          <div className="flex gap-2">
+            <span className="rounded-lg border border-line px-2.5 py-1 text-[11px] text-body">All facilities ▾</span>
+            <span className="rounded-lg bg-navy-900 px-2.5 py-1 text-[11px] font-medium text-white">+ New patient</span>
+          </div>
+        }
+      >
+        <table className="w-full text-left text-[12px]">
+          <thead>
+            <tr className="border-b border-line text-[11px] uppercase tracking-wide text-subtle">
+              <th className="py-2 font-medium">Patient ID</th>
+              <th className="py-2 font-medium">Name</th>
+              <th className="py-2 font-medium">Age / Sex</th>
+              <th className="py-2 font-medium">Facility</th>
+              <th className="py-2 font-medium">Last visit</th>
+              <th className="py-2 font-medium">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {patients.map((p, i) => (
+              <tr key={p.id} className={cn("border-b border-line/70", i === 0 && "bg-teal-50/60")}>
+                <td className="py-[11px] pl-1 font-mono text-[11.5px] text-muted">{p.id}</td>
+                <td className="py-[11px] font-medium">{p.name}</td>
+                <td className="py-[11px] text-body">{p.age} · {p.sex}</td>
+                <td className="py-[11px] text-body">{p.facility}</td>
+                <td className="py-[11px] text-body">{p.last}</td>
+                <td className="py-[11px]"><StatusChip status={p.status} /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Card>
+
+      <div className="flex min-h-0 flex-col gap-4">
+        <Card>
+          <div className="flex items-center gap-3">
+            <span className="grid size-11 place-items-center rounded-full bg-navy-900 font-display text-[14px] font-bold text-white">AM</span>
+            <div className="leading-tight">
+              <p className="font-display text-[15px] font-bold">{selected.name}</p>
+              <p className="whitespace-nowrap text-[11px] text-muted">{selected.id} · {selected.sex}, {selected.age}</p>
+            </div>
+          </div>
+          <div className="mt-3"><StatusChip status={selected.status} /></div>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            {[
+              ["Blood pressure", "118/76"],
+              ["Temperature", "36.7 °C"],
+              ["Pulse", "72 bpm"],
+              ["SpO₂", "98%"],
+            ].map(([k, v]) => (
+              <div key={k} className="rounded-lg bg-mist px-3 py-2">
+                <p className="text-[10.5px] text-muted">{k}</p>
+                <p className="font-display text-[15px] font-bold tabular-nums">{v}</p>
+              </div>
+            ))}
+          </div>
+        </Card>
+        <Card title="Today's visit" className="flex-1">
+          <ol className="relative space-y-3.5 pl-1">
+            <span className="absolute bottom-2 left-[14px] top-2 w-px bg-line" />
+            {timeline.map((t) => (
+              <li key={t.label} className="relative flex items-center gap-3">
+                <span className={cn("relative grid size-[22px] place-items-center rounded-full ring-4 ring-white", t.done ? "bg-teal-500 text-white" : "bg-cloud text-subtle")}>
+                  <t.icon className="size-3" />
+                </span>
+                <span className={cn("flex-1 text-[12px]", t.done ? "font-medium" : "text-muted")}>{t.label}</span>
+                <span className="text-[11px] text-muted">{t.meta}</span>
+              </li>
+            ))}
+          </ol>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+function AppointmentsView() {
+  const reduce = useReducedMotion();
+  const hours = [8, 9, 10, 11, 12, 13, 14];
+  const rowH = 64;
+  const toneClass: Record<string, string> = {
+    teal: "border-teal-500 bg-teal-50 text-teal-700",
+    navy: "border-navy-700 bg-[#eef2f8] text-navy-800",
+    slate: "border-[#cbd5e1] bg-mist text-muted",
+  };
+  const total = attendance.reduce((s, a) => s + a.value, 0);
+  return (
+    <div className="grid h-full grid-cols-[1fr_280px] gap-4">
+      <Card
+        title="Thursday schedule"
+        className="min-h-0 overflow-hidden"
+        action={
+          <div className="flex gap-1 rounded-lg bg-mist p-0.5 text-[11px]">
+            {["Mon", "Tue", "Wed", "Thu", "Fri"].map((d) => (
+              <span key={d} className={cn("rounded-md px-2.5 py-1", d === "Thu" ? "bg-white font-semibold shadow-sm" : "text-muted")}>{d}</span>
+            ))}
+          </div>
+        }
+      >
+        <div className="grid grid-cols-[48px_1fr_1fr_1fr] border-b border-line pb-2 text-[11px] font-semibold text-body">
+          <span />
+          {clinicians.map((c) => <span key={c} className="px-2">{c}</span>)}
+        </div>
+        <div className="relative grid grid-cols-[48px_1fr_1fr_1fr]" style={{ height: hours.length * rowH }}>
+          <div>
+            {hours.map((h) => (
+              <div key={h} className="text-[10.5px] tabular-nums text-subtle" style={{ height: rowH }}>{String(h).padStart(2, "0")}:00</div>
+            ))}
+          </div>
+          {clinicians.map((c, col) => (
+            <div key={c} className="relative border-l border-line">
+              {hours.map((h) => <div key={h} className="border-b border-dashed border-line/80" style={{ height: rowH }} />)}
+              {appointments
+                .filter((a) => a.col === col)
+                .map((a) => (
+                  <div
+                    key={`${a.who}-${a.start}`}
+                    className={cn("absolute inset-x-1.5 rounded-md border-l-[3px] px-2 py-1 leading-tight", toneClass[a.tone])}
+                    style={{ top: (a.start - 8) * rowH + 2, height: a.dur * rowH - 4 }}
+                  >
+                    <p className="text-[11.5px] font-semibold">{a.who}</p>
+                    <p className="text-[10.5px] opacity-80">{a.type}</p>
+                  </div>
+                ))}
+            </div>
+          ))}
+          <div className="pointer-events-none absolute left-[44px] right-0 flex items-center" style={{ top: 2.6 * rowH }}>
+            <span className="size-2 rounded-full bg-teal-500" />
+            <span className="h-px flex-1 bg-teal-500" />
+          </div>
+        </div>
+      </Card>
+
+      <div className="flex min-h-0 flex-col gap-4">
+        <Card title="Attendance this week">
+          <div className="relative mx-auto" style={{ width: 160, height: 160 }}>
+            <PieChart width={160} height={160}>
+              <Pie data={attendance} dataKey="value" innerRadius={52} outerRadius={74} paddingAngle={2} stroke="none" isAnimationActive={!reduce} animationDuration={1200}>
+                {attendance.map((a) => <Cell key={a.name} fill={a.color} />)}
+              </Pie>
+            </PieChart>
+            <div className="absolute inset-0 grid place-items-center text-center leading-tight">
+              <div>
+                <p className="font-display text-[22px] font-bold">{Math.round((attendance[0].value / total) * 100)}%</p>
+                <p className="text-[10.5px] text-muted">attended</p>
+              </div>
+            </div>
+          </div>
+          <div className="mt-3 flex justify-center">
+            <Legend items={attendance.map((a) => ({ label: a.name, color: a.color }))} />
+          </div>
+        </Card>
+        <Card title="Up next" className="flex-1">
+          <ul className="space-y-2.5">
+            {[
+              ["10:15", "J. K.", "Follow-up · Room 1"],
+              ["10:30", "G. F.", "Postnatal · Maternal"],
+              ["11:00", "Y. B.", "Child welfare · Room 2"],
+            ].map(([t, n, d]) => (
+              <li key={t} className="flex items-center gap-3 rounded-lg bg-mist px-3 py-2">
+                <span className="font-mono text-[11.5px] font-semibold text-navy-700">{t}</span>
+                <div className="leading-tight">
+                  <p className="text-[12px] font-medium">{n}</p>
+                  <p className="text-[11px] text-muted">{d}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+function ReportsView() {
+  const reduce = useReducedMotion();
+  const reports = [
+    { title: "Outpatient summary", meta: "June · PDF, Excel", state: "Ready" },
+    { title: "Facility performance", meta: "Q2 · 4 facilities", state: "Ready" },
+    { title: "Surveillance export", meta: "Weekly · CSV", state: "Generating" },
+  ];
+  return (
+    <div className="grid h-full grid-rows-[auto_1fr] gap-4">
+      <div className="grid grid-cols-3 gap-4">
+        {reports.map((r) => (
+          <div key={r.title} className="flex items-center gap-3 rounded-xl border border-line bg-white p-4">
+            <span className="grid size-10 place-items-center rounded-lg bg-mist text-navy-700"><FileText className="size-4" /></span>
+            <div className="min-w-0 flex-1 leading-tight">
+              <p className="truncate text-[12.5px] font-semibold">{r.title}</p>
+              <p className="mt-0.5 text-[11px] text-muted">{r.meta}</p>
+              {r.state === "Generating" && (
+                <div className="mt-2 h-1 overflow-hidden rounded-full bg-cloud"><div className="h-full w-2/3 rounded-full bg-teal-500" /></div>
+              )}
+            </div>
+            {r.state === "Ready" ? (
+              <span className="grid size-8 place-items-center rounded-lg border border-line text-body"><Download className="size-3.5" /></span>
+            ) : (
+              <RefreshCw className="size-4 text-teal-600" />
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="grid min-h-0 grid-cols-[1.5fr_1fr] gap-4">
+        <Card title="Visits and admissions · Jan – Jun" action={<Legend items={[{ label: "Visits", color: NAVY }, { label: "Admissions ×5", color: TEAL }]} />}>
+          <BarChart width={520} height={250} data={monthly.map((m) => ({ ...m, adm: m.admissions * 5 }))} margin={{ top: 6, right: 0, left: -10, bottom: 0 }} barGap={4}>
+            <CartesianGrid vertical={false} stroke="#eef2f6" />
+            <XAxis dataKey="m" tickLine={false} axisLine={false} tick={AXIS} />
+            <YAxis tickLine={false} axisLine={false} tick={AXIS} width={48} />
+            <Bar dataKey="visits" fill={NAVY} radius={[5, 5, 0, 0]} barSize={20} isAnimationActive={!reduce} animationDuration={1100} />
+            <Bar dataKey="adm" fill={TEAL} radius={[5, 5, 0, 0]} barSize={20} isAnimationActive={!reduce} animationDuration={1100} />
+          </BarChart>
+          <div className="mt-3 border-t border-line pt-3">
+            <p className="mb-2 text-[12px] font-semibold">Key indicators</p>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
+              {indicators.map((ind) => (
+                <div key={ind.name}>
+                  <div className="flex justify-between text-[11.5px]">
+                    <span className="text-body">{ind.name}</span>
+                    <span className="font-semibold tabular-nums">{ind.value}%</span>
+                  </div>
+                  <div className="mt-1 h-1 overflow-hidden rounded-full bg-cloud"><div className="h-full rounded-full bg-teal-500" style={{ width: `${ind.value}%` }} /></div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Card>
+
+        <Card title="Visits by facility type">
+          <div className="flex items-center gap-4">
+            <PieChart width={170} height={170}>
+              <Pie data={facilityMix} dataKey="value" innerRadius={50} outerRadius={80} paddingAngle={2} stroke="none" isAnimationActive={!reduce} animationDuration={1200}>
+                {facilityMix.map((f) => <Cell key={f.name} fill={f.color} />)}
+              </Pie>
+            </PieChart>
+            <ul className="flex-1 space-y-2.5">
+              {facilityMix.map((f) => (
+                <li key={f.name} className="flex items-center justify-between text-[12px]">
+                  <span className="flex items-center gap-2 text-body"><span className="size-2 rounded-full" style={{ background: f.color }} />{f.name}</span>
+                  <span className="font-semibold tabular-nums">{f.value}%</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="mt-5 rounded-lg border border-line bg-mist p-3">
+            <div className="flex items-center gap-2 text-[12px] font-semibold"><ClipboardList className="size-3.5 text-teal-600" />Scheduled reporting</div>
+            <ul className="mt-2 space-y-1.5 text-[11.5px] text-body">
+              {["Weekly surveillance · every Monday", "Monthly summary · 1st of month", "Quarterly review · end of quarter"].map((s) => (
+                <li key={s} className="flex items-center gap-2"><CircleCheck className="size-3.5 text-teal-500" />{s}</li>
+              ))}
+            </ul>
+          </div>
+        </Card>
+      </div>
+    </div>
+  );
+}

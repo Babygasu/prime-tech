@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Prime-Techmate design tokens
+   Navy = corporate trust, Teal = technology accent, neutrals for calm.
+------------------------------------------------------------------- */
+@theme {
+  --color-navy-950: #071122;
+  --color-navy-900: #0b1a33;
+  --color-navy-800: #122544;
+  --color-navy-700: #1c3358;
+  --color-navy-600: #2a4572;
+  --color-navy-400: #7d8fae;
+
+  --color-teal-50: #ebf8f6;
+  --color-teal-100: #d3f1ec;
+  --color-teal-200: #a7e3da;
+  --color-teal-300: #7fe0d3;
+  --color-teal-400: #3ccbb8;
+  --color-teal-500: #14b3a0;
+  --color-teal-600: #0e9384;
+  --color-teal-700: #0b766b;
+
+  --color-ink: #0b1220;
+  --color-body: #475467;
+  --color-muted: #667085;
+  --color-subtle: #98a2b3;
+  --color-line: #e4e9f0;
+  --color-cloud: #eef2f6;
+  --color-mist: #f6f8fb;
+
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --shadow-soft: 0 1px 2px rgb(11 26 51 / 0.04), 0 8px 24px -12px rgb(11 26 51 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(11 26 51 / 0.04), 0 18px 40px -18px rgb(11 26 51 / 0.22);
+  --shadow-frame: 0 1px 2px rgb(11 26 51 / 0.05), 0 40px 80px -40px rgb(11 26 51 / 0.35);
+
+  --animate-float: float 8s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-drift: drift 22s ease-in-out infinite;
+  --animate-pulse-ring: pulse-ring 3.2s var(--ease-premium) infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(4%, 3%, 0) scale(1.06); }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.85); opacity: 0.55; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+    font-feature-settings: "cv11", "ss01";
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display text-balance;
+  }
+  p {
+    @apply text-pretty;
+  }
+  ::selection {
+    @apply bg-teal-100 text-navy-900;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-teal-500;
+  }
+}
+
+/* Faint technical grid used behind hero and dark sections */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(11 26 51 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(11 26 51 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.bg-grid-dark {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Hide scrollbars on horizontally scrollable tab rails */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .motion-dot {
+    display: none;
+  }
+}
