@@ -26,11 +26,21 @@ export function Hero() {
 
   return (
     <section id="top" aria-labelledby="hero-title" className="relative overflow-hidden pb-16 pt-28 sm:pb-24 sm:pt-32 lg:pt-[6.75rem]">
-      {/* Backdrop: faint grid, a soft navy glow, and a fade into the next section */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="bg-grid absolute inset-0 [mask-image:radial-gradient(ellipse_70%_45%_at_50%_0%,black,transparent_75%)]" />
-        <div className="absolute left-1/2 top-[-10%] h-[560px] w-[1000px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(36_66_158/0.08),transparent)] motion-safe:animate-drift" />
-        <div className="absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-b from-transparent to-mist" />
+      {/*
+        Atmospheric backdrop: a predominantly white page with a soft pale-blue
+        haze pooled behind the dashboard, a faint blue drift top-left and a
+        barely-there warm white glow top-right. Large blurred radial layers keep
+        every transition smooth, with no visible edges or banding.
+      */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white via-white to-paper">
+        {/* Warm white glow, top right */}
+        <div className="absolute -right-[12%] -top-[14%] h-[620px] w-[780px] rounded-full bg-[radial-gradient(closest-side,rgb(251_236_214/0.85),rgb(251_238_220/0.35)_55%,transparent)] blur-3xl" />
+        {/* Faint pale blue drift, top left */}
+        <div className="absolute -left-[14%] top-[2%] h-[680px] w-[860px] rounded-full bg-[radial-gradient(closest-side,rgb(204_225_249/0.9),rgb(214_231_250/0.4)_55%,transparent)] blur-3xl motion-safe:animate-drift" />
+        {/* Main pale blue pool behind the dashboard */}
+        <div className="absolute left-1/2 top-[26%] h-[1100px] w-[1700px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(194_219_248/1),rgb(210_229_250/0.65)_45%,rgb(230_240_252/0.25)_72%,transparent)] blur-3xl" />
+        {/* Gentle fade into the next section */}
+        <div className="absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-b from-transparent to-mist" />
       </div>
 
       <Container className="relative">

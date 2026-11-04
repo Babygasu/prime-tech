@@ -17,10 +17,10 @@ export function HeroVisual() {
 
   return (
     <div className="relative mx-auto mt-10 w-full max-w-[1240px] px-4 sm:mt-9 sm:px-6 lg:px-8">
-      {/* Ambient glow that lifts the window off the page */}
+      {/* Soft pale-blue halo that separates the window from the page */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-[8%] top-16 bottom-10 -z-10 rounded-[48px] bg-[radial-gradient(closest-side,rgb(36_66_158/0.16),transparent)] blur-2xl"
+        className="pointer-events-none absolute -inset-x-[2%] -top-8 bottom-4 -z-10 rounded-[64px] bg-[radial-gradient(closest-side,rgb(184_211_247/0.85),rgb(206_226_250/0.45)_60%,transparent)] blur-3xl"
       />
 
       <motion.div
