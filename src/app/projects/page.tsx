@@ -26,12 +26,12 @@ export default function ProjectsPage() {
         eyebrow="Projects & experience"
         title={
           <>
-            Work that supports <span className="text-teal-600">healthcare delivery.</span>
+            Work that supports <span className="text-brand-500">healthcare delivery.</span>
           </>
         }
         lead="A selection of the projects and implementations behind our experience. Verified project details are being prepared and will be published here."
       >
-        <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-dashed border-teal-500/50 bg-teal-50 px-4 py-2 text-[13px] font-medium text-teal-700">
+        <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-dashed border-charcoal-900/20 bg-cloud px-4 py-2 text-[13px] font-medium text-muted">
           Placeholder content: awaiting verified project details
         </p>
       </PageHero>
@@ -68,7 +68,7 @@ export default function ProjectsPage() {
                 <ol className="mt-8 space-y-6 border-t border-line pt-8">
                   {caseStudyParts.map((part, i) => (
                     <li key={part.label} className="grid grid-cols-[2rem_1fr] gap-3">
-                      <span className="font-mono text-[13px] font-medium text-teal-700">0{i + 1}</span>
+                      <span className="font-mono text-[13px] font-medium text-brand-600">0{i + 1}</span>
                       <div>
                         <p className="font-semibold text-ink">{part.label}</p>
                         <p className="mt-1 text-[15px] leading-relaxed text-muted">{part.text}</p>

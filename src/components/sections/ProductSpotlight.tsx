@@ -16,7 +16,7 @@ export function ProductSpotlight() {
               <h2 id="product-title" className="mt-5 text-[2.5rem] font-extrabold leading-[1.04] tracking-[-0.04em] text-ink sm:text-6xl">
                 {product.name}
               </h2>
-              <p className="mt-3 font-display text-lg font-semibold tracking-tight text-teal-700 sm:text-xl">{product.tagline}</p>
+              <p className="mt-3 font-display text-lg font-semibold tracking-tight text-charcoal-600 sm:text-xl">{product.tagline}</p>
               <p className="mt-6 text-lg leading-relaxed text-body">{product.summary}</p>
             </Reveal>
             <Reveal delay={0.08}>
@@ -25,7 +25,7 @@ export function ProductSpotlight() {
                   const Icon = capabilityIcons[c.icon];
                   return (
                     <li key={c.title} className="flex items-center gap-3 text-[15px] font-medium text-ink">
-                      <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-white text-teal-700 ring-1 ring-line">
+                      <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-white text-charcoal-900 ring-1 ring-line">
                         <Icon aria-hidden className="size-4" />
                       </span>
                       {c.title}

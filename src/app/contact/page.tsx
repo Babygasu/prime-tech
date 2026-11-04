@@ -23,7 +23,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         title={
           <>
-            Let&apos;s talk about <span className="text-teal-600">your project.</span>
+            Let&apos;s talk about <span className="text-brand-500">your project.</span>
           </>
         }
         lead="Whether you have a clear brief or are still exploring ideas, we are happy to start the conversation."
@@ -31,11 +31,11 @@ export default function ContactPage() {
         <ol className="mt-12 grid gap-4 sm:grid-cols-3">
           {steps.map((s, i) => (
             <li key={s.title} className="flex gap-4 rounded-2xl border border-line bg-white p-5">
-              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-teal-50 text-teal-700">
+              <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-cloud text-charcoal-900">
                 <s.icon aria-hidden className="size-[18px]" strokeWidth={1.8} />
               </span>
               <div>
-                <p className="font-mono text-[12px] font-medium text-teal-700">0{i + 1}</p>
+                <p className="font-mono text-[12px] font-medium text-brand-600">0{i + 1}</p>
                 <p className="mt-1 font-semibold text-ink">{s.title}</p>
                 <p className="mt-1 text-[14px] leading-relaxed text-body">{s.text}</p>
               </div>

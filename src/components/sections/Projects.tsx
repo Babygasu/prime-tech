@@ -20,7 +20,7 @@ export function Projects() {
             />
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="inline-flex items-center gap-2 rounded-full border border-dashed border-teal-500/50 bg-teal-50 px-4 py-2 text-[13px] font-medium text-teal-700">
+            <p className="inline-flex items-center gap-2 rounded-full border border-dashed border-charcoal-900/20 bg-cloud px-4 py-2 text-[13px] font-medium text-muted">
               Placeholder content: awaiting verified project details
             </p>
           </Reveal>

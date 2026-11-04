@@ -24,11 +24,12 @@ export function Eyebrow({
     <p
       className={cn(
         "inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] sm:text-xs",
-        tone === "light" ? "text-teal-700" : "text-teal-300",
+        tone === "light" ? "text-charcoal-600" : "text-charcoal-300",
         className,
       )}
     >
-      <span aria-hidden className={cn("h-px w-6 shrink-0 bg-current opacity-70", centered && "hidden sm:block")} />
+      {/* Signature red rule: a small, consistent brand detail on every section label. */}
+      <span aria-hidden className={cn("h-[2px] w-6 shrink-0 rounded-full bg-brand-500", centered && "hidden sm:block")} />
       {children}
     </p>
   );
@@ -64,7 +65,7 @@ export function SectionHeading({
         <p
           className={cn(
             "mt-5 text-base leading-relaxed sm:text-lg",
-            tone === "light" ? "text-body" : "text-navy-400",
+            tone === "light" ? "text-body" : "text-charcoal-400",
             align === "center" && "mx-auto max-w-2xl",
           )}
         >
@@ -78,10 +79,16 @@ export function SectionHeading({
 const buttonBase =
   "group inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-[15px] font-semibold tracking-[-0.01em] transition-[background-color,color,border-color,box-shadow,transform] duration-300 ease-premium active:scale-[0.98]";
 
+/**
+ * primary   red call to action (brand-600 keeps white labels above 4.5:1)
+ * dark      charcoal button for secondary emphasis on light backgrounds
+ * secondary quiet outline button
+ * ghostDark outline button on dark surfaces
+ */
 const buttonVariants = {
-  primary: "bg-navy-900 text-white hover:bg-navy-700 shadow-[0_1px_0_rgb(255_255_255/0.08)_inset]",
-  secondary: "border border-line bg-white text-ink hover:border-navy-900/25 hover:bg-mist",
-  accent: "bg-teal-400 text-navy-950 hover:bg-teal-300",
+  primary: "bg-brand-600 text-white hover:bg-brand-700 shadow-[0_1px_0_rgb(255_255_255/0.12)_inset]",
+  dark: "bg-charcoal-900 text-white hover:bg-charcoal-700",
+  secondary: "border border-line bg-white text-ink hover:border-charcoal-900/25 hover:bg-mist",
   ghostDark: "border border-white/15 text-white hover:border-white/35 hover:bg-white/5",
 } as const;
 
@@ -118,10 +125,10 @@ export function DemoBadge({ children = "Illustrative concept · fictional data",
     <span
       className={cn(
         "inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-medium tracking-wide",
-        tone === "light" ? "bg-cloud text-muted" : "bg-white/[0.06] text-navy-400 ring-1 ring-white/10",
+        tone === "light" ? "bg-cloud text-muted" : "bg-white/[0.06] text-charcoal-400 ring-1 ring-white/10",
       )}
     >
-      <span aria-hidden className="size-1.5 rounded-full bg-teal-500" />
+      <span aria-hidden className="size-1.5 rounded-full bg-brand-500" />
       {children}
     </span>
   );

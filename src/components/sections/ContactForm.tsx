@@ -96,7 +96,7 @@ export function ContactForm() {
             className="flex min-h-[420px] flex-col items-center justify-center text-center"
             role="status"
           >
-            <span className="grid size-14 place-items-center rounded-full bg-teal-50 text-teal-600">
+            <span className="grid size-14 place-items-center rounded-full bg-success-soft text-success">
               <CircleCheck className="size-7" />
             </span>
             <h3 className="mt-5 text-2xl font-bold tracking-tight">Thank you, {fields.name.split(" ")[0]}.</h3>
@@ -117,7 +117,7 @@ export function ContactForm() {
                 setSimulated(false);
                 setState("idle");
               }}
-              className="mt-6 text-[14px] font-semibold text-teal-700 hover:text-teal-600"
+              className="mt-6 text-[14px] font-semibold text-brand-600 hover:text-brand-700"
             >
               Send another enquiry
             </button>
@@ -154,7 +154,7 @@ export function ContactForm() {
 
             <div className="sm:col-span-2">
               <label htmlFor="cf-message" className="text-[13px] font-medium text-ink">
-                Tell us about your project <span className="text-teal-700">*</span>
+                Tell us about your project <span className="text-brand-600">*</span>
               </label>
               <textarea
                 id="cf-message"
@@ -194,7 +194,7 @@ export function ContactForm() {
               <button
                 type="submit"
                 disabled={state === "sending"}
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-navy-900 px-7 text-[15px] font-semibold text-white transition-colors duration-300 hover:bg-navy-700 disabled:opacity-70"
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-brand-600 px-7 text-[15px] font-semibold text-white transition-colors duration-300 hover:bg-brand-700 disabled:opacity-70"
               >
                 {state === "sending" ? <LoaderCircle className="size-4 animate-spin" /> : null}
                 {finalCta.cta}
@@ -211,7 +211,7 @@ export function ContactForm() {
 }
 
 const inputClass =
-  "mt-1.5 h-12 w-full rounded-xl border border-line bg-mist px-4 text-[15px] text-ink outline-none transition-colors placeholder:text-subtle focus:border-teal-500 focus:bg-white";
+  "mt-1.5 h-12 w-full rounded-xl border border-line bg-mist px-4 text-[15px] text-ink outline-none transition-colors placeholder:text-subtle focus:border-charcoal-900 focus:bg-white";
 const errorClass = "border-[#d92d20] bg-white";
 
 function Field({
@@ -229,7 +229,7 @@ function Field({
   return (
     <div>
       <label htmlFor={`cf-${id}`} className="text-[13px] font-medium text-ink">
-        {label} {required ? <span className="text-teal-700">*</span> : null}
+        {label} {required ? <span className="text-brand-600">*</span> : null}
       </label>
       <input
         id={`cf-${id}`}

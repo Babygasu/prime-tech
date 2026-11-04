@@ -1,42 +1,64 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Prime-Techmate design tokens
-   Navy = corporate trust, Teal = technology accent, neutrals for calm.
+   Prime-Techmate design tokens — derived from the official logo
+   (black + signature red #ED1C24).
+
+   PRIMARY    charcoal   near-black brand colour: dark surfaces, primary data series
+   ACCENT     brand      signature red, used sparingly: CTAs, active states,
+                         highlights, single key data points
+   NEUTRALS   warm greys for backgrounds, borders and secondary text
+   STATUS     muted success / warning tones for dashboard states only
+
+   Contrast (WCAG 2.x, measured):
+   - brand-500 (#ED1C24, the logo red) vs white is 4.38:1 — below AA for small
+     text, so it is reserved for graphics, rules, dots and large display type.
+   - brand-600 (#C8161D) vs white is 5.85:1 — used for buttons with white
+     labels and for small red text/links.
+   - body on white 8.65:1 · muted on paper 5.19:1 · muted on mist 4.97:1
+   - on charcoal-950: charcoal-300 9.9:1 · charcoal-400 6.0:1 · brand-400 5.8:1
+   - subtle (#9C9CA2) is decorative only (2.7:1), never for meaningful text.
 ------------------------------------------------------------------- */
 @theme {
-  --color-navy-950: #071122;
-  --color-navy-900: #0b1a33;
-  --color-navy-800: #122544;
-  --color-navy-700: #1c3358;
-  --color-navy-600: #2a4572;
-  --color-navy-400: #7d8fae;
+  --color-charcoal-950: #0e0f11;
+  --color-charcoal-900: #17181b;
+  --color-charcoal-800: #212226;
+  --color-charcoal-700: #2d2f33;
+  --color-charcoal-600: #44464c;
+  --color-charcoal-500: #5d6067;
+  --color-charcoal-400: #8d9097;
+  --color-charcoal-300: #b8bac0;
 
-  --color-teal-50: #ebf8f6;
-  --color-teal-100: #d3f1ec;
-  --color-teal-200: #a7e3da;
-  --color-teal-300: #7fe0d3;
-  --color-teal-400: #3ccbb8;
-  --color-teal-500: #14b3a0;
-  --color-teal-600: #0e9384;
-  --color-teal-700: #0b766b;
+  --color-brand-50: #fef4f3;
+  --color-brand-100: #fde3e2;
+  --color-brand-200: #f9c3c1;
+  --color-brand-400: #f2585d;
+  --color-brand-500: #ed1c24;
+  --color-brand-600: #c8161d;
+  --color-brand-700: #a11218;
 
-  --color-ink: #0b1220;
-  --color-body: #475467;
-  --color-muted: #667085;
-  --color-subtle: #98a2b3;
-  --color-line: #e4e9f0;
-  --color-cloud: #eef2f6;
-  --color-mist: #f6f8fb;
+  --color-ink: #141416;
+  --color-body: #4b4b52;
+  --color-muted: #6a6a71;
+  --color-subtle: #9c9ca2;
+  --color-line: #e7e5e1;
+  --color-cloud: #f0eeea;
+  --color-mist: #f7f6f3;
+  --color-paper: #fcfbf9;
+
+  --color-success: #2f7a58;
+  --color-success-soft: #eaf4ee;
+  --color-warning: #94600a;
+  --color-warning-soft: #fbf1df;
 
   --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
   --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --shadow-soft: 0 1px 2px rgb(11 26 51 / 0.04), 0 8px 24px -12px rgb(11 26 51 / 0.12);
-  --shadow-lift: 0 2px 4px rgb(11 26 51 / 0.04), 0 18px 40px -18px rgb(11 26 51 / 0.22);
-  --shadow-frame: 0 1px 2px rgb(11 26 51 / 0.05), 0 40px 80px -40px rgb(11 26 51 / 0.35);
+  --shadow-soft: 0 1px 2px rgb(23 24 27 / 0.04), 0 8px 24px -12px rgb(23 24 27 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(23 24 27 / 0.04), 0 18px 40px -18px rgb(23 24 27 / 0.2);
+  --shadow-frame: 0 1px 2px rgb(23 24 27 / 0.05), 0 40px 80px -40px rgb(23 24 27 / 0.32);
 
   --animate-float: float 8s ease-in-out infinite;
   --animate-float-slow: float 11s ease-in-out infinite;
@@ -64,7 +86,7 @@
     -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-white font-sans text-ink antialiased;
+    @apply bg-paper font-sans text-ink antialiased;
     font-feature-settings: "cv11", "ss01";
     text-rendering: optimizeLegibility;
   }
@@ -75,18 +97,18 @@
     @apply text-pretty;
   }
   ::selection {
-    @apply bg-teal-100 text-navy-900;
+    @apply bg-brand-100 text-charcoal-900;
   }
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-teal-500;
+    @apply outline-2 outline-offset-2 outline-brand-500;
   }
 }
 
 /* Faint technical grid used behind hero and dark sections */
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgb(11 26 51 / 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(11 26 51 / 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgb(23 24 27 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(23 24 27 / 0.045) 1px, transparent 1px);
   background-size: 56px 56px;
 }
 .bg-grid-dark {

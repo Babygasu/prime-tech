@@ -1,37 +1,26 @@
 import { cn } from "@/lib/cn";
 
 /**
- * Temporary wordmark. TODO(confirm): replace with the official
- * Prime-Techmate logo files once supplied.
+ * Official Prime-Techmate logo.
+ *
+ * Source: public/logo.svg (supplied by Prime-Techmate). The copy in
+ * public/brand/prime-techmate-logo.svg is identical except for a tighter
+ * viewBox that trims the empty artboard, so the artwork, proportions and
+ * colours are unchanged. Do not recolour or redraw without approval.
+ *
+ * Intrinsic aspect ratio: 927 × 208.
  */
-export function Logo({ tone = "dark", className }: { tone?: "dark" | "light"; className?: string }) {
+export function Logo({ className, priority = false }: { className?: string; priority?: boolean }) {
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <LogoMark tone={tone} />
-      <span
-        className={cn(
-          "font-display text-[17px] font-bold tracking-[-0.02em]",
-          tone === "dark" ? "text-ink" : "text-white",
-        )}
-      >
-        Prime<span className="text-teal-500">-</span>Techmate
-      </span>
-    </span>
-  );
-}
-
-export function LogoMark({ tone = "dark", size = 30 }: { tone?: "dark" | "light"; size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden focusable="false">
-      <rect width="32" height="32" rx="9" fill={tone === "dark" ? "#0b1a33" : "rgba(255,255,255,0.08)"} />
-      <path
-        d="M6.5 17h4.2l2.6-6.2 4.4 11.4 2.6-5.2h5.2"
-        fill="none"
-        stroke="#3ccbb8"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+    // eslint-disable-next-line @next/next/no-img-element -- static export; SVG needs no optimisation
+    <img
+      src="/brand/prime-techmate-logo.svg"
+      alt="Prime-Techmate"
+      width={927}
+      height={208}
+      fetchPriority={priority ? "high" : undefined}
+      className={cn("h-9 w-auto select-none", className)}
+      draggable={false}
+    />
   );
 }

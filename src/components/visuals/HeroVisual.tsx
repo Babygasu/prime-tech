@@ -58,7 +58,7 @@ export function HeroVisual() {
           <div className="leading-tight">
             <p className="text-[13px] font-semibold text-ink">Lab results synchronised</p>
             <p className="mt-0.5 flex items-center gap-1 text-[12px] text-muted">
-              <CircleCheck className="size-3.5 text-teal-600" /> Added to patient record
+              <CircleCheck className="size-3.5 text-success" /> Added to patient record
             </p>
           </div>
         </FloatCard>
@@ -66,14 +66,14 @@ export function HeroVisual() {
         <FloatCard className="-right-4 bottom-[14%] w-[230px] xl:-right-14" delay={1.3} floatDelay="-6s" stacked>
           <div className="flex w-full items-center justify-between">
             <p className="text-[12px] font-semibold text-ink">Appointments this week</p>
-            <span className="text-[11px] font-semibold text-teal-700">+12%</span>
+            <span className="text-[11px] font-semibold text-success">+12%</span>
           </div>
           <div className="mt-3 flex h-12 w-full items-end gap-1.5">
             {[40, 62, 48, 75, 66, 88, 58].map((h, i) => (
               <motion.span
                 key={i}
                 className="flex-1 rounded-t-[3px]"
-                style={{ background: i === 5 ? "#14b3a0" : "#d3f1ec" }}
+                style={{ background: i === 5 ? "#ed1c24" : "#e7e5e1" }}
                 initial={{ height: 0 }}
                 animate={{ height: `${h}%` }}
                 transition={{ duration: 0.9, ease, delay: 1.5 + i * 0.06 }}
@@ -92,7 +92,7 @@ export function HeroVisual() {
 }
 
 function IconTile({ children }: { children: ReactNode }) {
-  return <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-teal-50 text-teal-700">{children}</span>;
+  return <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-cloud text-charcoal-900">{children}</span>;
 }
 
 function FloatCard({

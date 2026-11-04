@@ -56,26 +56,26 @@ export const patients = [
 export const clinicians = ["Clinic Room 1", "Clinic Room 2", "Maternal Health"];
 
 export const appointments = [
-  { col: 0, start: 8, dur: 0.5, who: "A. M.", type: "Review", tone: "teal" },
-  { col: 0, start: 9, dur: 0.75, who: "K. O.", type: "Consultation", tone: "navy" },
-  { col: 0, start: 10.25, dur: 0.5, who: "J. K.", type: "Follow-up", tone: "teal" },
-  { col: 0, start: 12, dur: 1, who: "Team", type: "Ward round", tone: "slate" },
-  { col: 0, start: 13.5, dur: 0.5, who: "S. D.", type: "Results", tone: "navy" },
-  { col: 1, start: 8.5, dur: 0.75, who: "P. T.", type: "Consultation", tone: "navy" },
-  { col: 1, start: 9.75, dur: 0.5, who: "R. N.", type: "Review", tone: "teal" },
-  { col: 1, start: 11, dur: 0.75, who: "Y. B.", type: "Child welfare", tone: "teal" },
-  { col: 1, start: 13, dur: 0.75, who: "M. A.", type: "Consultation", tone: "navy" },
-  { col: 2, start: 8, dur: 1, who: "Clinic", type: "Antenatal session", tone: "slate" },
-  { col: 2, start: 9.5, dur: 0.5, who: "E. A.", type: "Antenatal", tone: "teal" },
-  { col: 2, start: 10.5, dur: 0.75, who: "G. F.", type: "Postnatal", tone: "navy" },
-  { col: 2, start: 12.5, dur: 0.5, who: "L. Q.", type: "Antenatal", tone: "teal" },
-  { col: 2, start: 13.5, dur: 0.75, who: "H. W.", type: "Review", tone: "navy" },
+  { col: 0, start: 8, dur: 0.5, who: "A. M.", type: "Review", tone: "primary" },
+  { col: 0, start: 9, dur: 0.75, who: "K. O.", type: "Consultation", tone: "secondary" },
+  { col: 0, start: 10.25, dur: 0.5, who: "J. K.", type: "Follow-up", tone: "primary" },
+  { col: 0, start: 12, dur: 1, who: "Team", type: "Ward round", tone: "muted" },
+  { col: 0, start: 13.5, dur: 0.5, who: "S. D.", type: "Results", tone: "secondary" },
+  { col: 1, start: 8.5, dur: 0.75, who: "P. T.", type: "Consultation", tone: "secondary" },
+  { col: 1, start: 9.75, dur: 0.5, who: "R. N.", type: "Review", tone: "primary" },
+  { col: 1, start: 11, dur: 0.75, who: "Y. B.", type: "Child welfare", tone: "primary" },
+  { col: 1, start: 13, dur: 0.75, who: "M. A.", type: "Consultation", tone: "secondary" },
+  { col: 2, start: 8, dur: 1, who: "Clinic", type: "Antenatal session", tone: "muted" },
+  { col: 2, start: 9.5, dur: 0.5, who: "E. A.", type: "Antenatal", tone: "primary" },
+  { col: 2, start: 10.5, dur: 0.75, who: "G. F.", type: "Postnatal", tone: "secondary" },
+  { col: 2, start: 12.5, dur: 0.5, who: "L. Q.", type: "Antenatal", tone: "primary" },
+  { col: 2, start: 13.5, dur: 0.75, who: "H. W.", type: "Review", tone: "secondary" },
 ];
 
 export const attendance = [
-  { name: "Attended", value: 286, color: "#14b3a0" },
-  { name: "Upcoming", value: 41, color: "#1c3358" },
-  { name: "Missed", value: 15, color: "#cbd5e1" },
+  { name: "Attended", value: 286, color: "#17181b" },
+  { name: "Upcoming", value: 41, color: "#c9c7c2" },
+  { name: "Missed", value: 15, color: "#ed1c24" },
 ];
 
 export const monthly = [
@@ -88,15 +88,15 @@ export const monthly = [
 ];
 
 export const facilityMix = [
-  { name: "Hospital", value: 46, color: "#1c3358" },
-  { name: "Polyclinic", value: 27, color: "#14b3a0" },
-  { name: "Health centre", value: 18, color: "#7fe0d3" },
-  { name: "Clinic", value: 9, color: "#cbd5e1" },
+  { name: "Hospital", value: 46, color: "#17181b" },
+  { name: "Polyclinic", value: 27, color: "#5d6067" },
+  { name: "Health centre", value: 18, color: "#a3a5ab" },
+  { name: "Clinic", value: 9, color: "#dedcd7" },
 ];
 
 export const indicators = [
-  { name: "Records completed within 24h", value: 94 },
-  { name: "Lab results returned on time", value: 87 },
-  { name: "Appointments kept", value: 84 },
-  { name: "Reports submitted on schedule", value: 100 },
+  { name: "Records completed within 24h", value: 94, target: 90 },
+  { name: "Lab results returned on time", value: 87, target: 85 },
+  { name: "Appointments kept", value: 84, target: 90 },
+  { name: "Reports submitted on schedule", value: 100, target: 95 },
 ];

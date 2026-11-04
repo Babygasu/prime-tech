@@ -15,7 +15,7 @@ export function ProjectCard({ category }: { category: string }) {
         </span>
       </div>
       <div className="flex flex-1 flex-col p-6 pt-4">
-        <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-teal-700">{category}</p>
+        <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-muted">{category}</p>
         <h3 className="mt-3 text-xl font-bold tracking-[-0.02em] text-ink">[Project title to be confirmed]</h3>
         <p className="mt-3 text-[15px] leading-relaxed text-body">
           Short summary of the client sector, scope of work and outcome. Replace with verified project details.

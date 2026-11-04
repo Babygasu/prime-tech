@@ -33,19 +33,19 @@ export function NetworkIllustration() {
       <svg viewBox={`0 0 ${W} ${H}`} className="absolute inset-0 size-full" aria-hidden>
         <defs>
           <radialGradient id="hub-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#14b3a0" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#14b3a0" stopOpacity="0" />
+            <stop offset="0%" stopColor="#ed1c24" stopOpacity="0.09" />
+            <stop offset="100%" stopColor="#ed1c24" stopOpacity="0" />
           </radialGradient>
         </defs>
         <circle cx={HUB.x} cy={HUB.y} r="150" fill="url(#hub-glow)" />
-        <circle cx={HUB.x} cy={HUB.y} r="118" fill="none" stroke="#0b1a33" strokeOpacity="0.06" />
-        <circle cx={HUB.x} cy={HUB.y} r="182" fill="none" stroke="#0b1a33" strokeOpacity="0.05" strokeDasharray="2 6" />
+        <circle cx={HUB.x} cy={HUB.y} r="118" fill="none" stroke="#17181b" strokeOpacity="0.07" />
+        <circle cx={HUB.x} cy={HUB.y} r="182" fill="none" stroke="#17181b" strokeOpacity="0.06" strokeDasharray="2 6" />
         {nodes.map((n, i) => {
           const d = `M ${n.x} ${n.y} Q ${n.c[0]} ${n.c[1]} ${HUB.x} ${HUB.y}`;
           return (
             <g key={n.label}>
-              <path d={d} fill="none" stroke="#0b1a33" strokeOpacity="0.14" strokeWidth="1.5" strokeDasharray="4 5" />
-              <circle r="3.5" fill="#14b3a0" className="motion-dot">
+              <path d={d} fill="none" stroke="#17181b" strokeOpacity="0.16" strokeWidth="1.5" strokeDasharray="4 5" />
+              <circle r="3.5" fill="#ed1c24" className="motion-dot">
                 <animateMotion
                   dur={`${3.6 + (i % 3) * 0.6}s`}
                   begin={`${i * 0.55}s`}
@@ -64,12 +64,12 @@ export function NetworkIllustration() {
       {/* Central platform */}
       <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: pct(HUB.x, W), top: pct(HUB.y, H) }}>
         <div className="relative grid place-items-center">
-          <span aria-hidden className="absolute size-full animate-pulse-ring rounded-2xl bg-teal-400/30 sm:rounded-3xl" />
-          <div className="relative grid size-16 place-items-center rounded-2xl bg-navy-900 shadow-lift sm:size-20 sm:rounded-3xl">
-            <Database aria-hidden className="size-6 text-teal-300 sm:size-8" />
+          <span aria-hidden className="absolute size-full animate-pulse-ring rounded-2xl bg-brand-500/20 sm:rounded-3xl" />
+          <div className="relative grid size-16 place-items-center rounded-2xl bg-charcoal-900 shadow-lift sm:size-20 sm:rounded-3xl">
+            <Database aria-hidden className="size-6 text-white sm:size-8" />
           </div>
         </div>
-        <p className="absolute left-1/2 top-full mt-2 hidden w-max -translate-x-1/2 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-navy-900 ring-1 ring-line sm:block">
+        <p className="absolute left-1/2 top-full mt-2 hidden w-max -translate-x-1/2 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-charcoal-900 ring-1 ring-line sm:block">
           Secure data platform
         </p>
       </div>
@@ -84,10 +84,10 @@ export function NetworkIllustration() {
             className="flex items-center gap-1.5 rounded-xl border border-line bg-white py-1.5 pl-1.5 pr-2.5 shadow-soft motion-safe:animate-float sm:gap-2 sm:py-2 sm:pl-2 sm:pr-3.5"
             style={{ animationDelay: `${i * -1.3}s` }}
           >
-            <span className="grid size-6 place-items-center rounded-lg bg-teal-50 text-teal-700 sm:size-8">
+            <span className="grid size-6 place-items-center rounded-lg bg-cloud text-charcoal-900 sm:size-8">
               <n.icon aria-hidden className="size-3.5 sm:size-4" />
             </span>
-            <span className="whitespace-nowrap text-[10px] font-semibold text-navy-900 sm:text-[13px]">{n.label}</span>
+            <span className="whitespace-nowrap text-[10px] font-semibold text-charcoal-900 sm:text-[13px]">{n.label}</span>
           </div>
         </div>
       ))}

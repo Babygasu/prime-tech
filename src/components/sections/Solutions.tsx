@@ -26,19 +26,19 @@ export function Solutions() {
                 <Reveal delay={(i % 2) * 0.07} className="h-full">
                   <Link
                     href={`/solutions/#${s.slug}`}
-                    className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white p-7 transition-[transform,box-shadow,border-color] duration-500 ease-premium hover:-translate-y-1 hover:border-teal-500/30 hover:shadow-lift sm:p-8"
+                    className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white p-7 transition-[transform,box-shadow,border-color] duration-500 ease-premium hover:-translate-y-1 hover:border-charcoal-900/15 hover:shadow-lift sm:p-8"
                   >
                     <span
                       aria-hidden
-                      className="pointer-events-none absolute -right-16 -top-16 size-40 rounded-full bg-teal-400/0 blur-2xl transition-colors duration-700 group-hover:bg-teal-400/15"
+                      className="pointer-events-none absolute -right-16 -top-16 size-40 rounded-full bg-brand-500/0 blur-2xl transition-colors duration-700 group-hover:bg-brand-500/[0.07]"
                     />
                     <span className="flex items-start justify-between">
-                      <span className="grid size-12 place-items-center rounded-2xl bg-teal-50 text-teal-700 transition-colors duration-500 group-hover:bg-navy-900 group-hover:text-teal-300">
+                      <span className="grid size-12 place-items-center rounded-2xl bg-cloud text-charcoal-900 transition-colors duration-500 group-hover:bg-charcoal-900 group-hover:text-brand-400">
                         <Icon aria-hidden className="size-[22px]" strokeWidth={1.75} />
                       </span>
                       <ArrowUpRight
                         aria-hidden
-                        className="size-5 text-subtle opacity-0 transition-[opacity,transform,color] duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-teal-600 group-hover:opacity-100"
+                        className="size-5 text-subtle opacity-0 transition-[opacity,transform,color] duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-brand-600 group-hover:opacity-100"
                       />
                     </span>
                     <h3 className="mt-7 text-xl font-bold tracking-[-0.02em] text-ink sm:text-[22px]">{s.title}</h3>

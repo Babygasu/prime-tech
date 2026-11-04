@@ -6,10 +6,10 @@ import { HeroVisual } from "@/components/visuals/HeroVisual";
 export function Hero() {
   return (
     <section id="top" aria-labelledby="hero-title" className="relative overflow-hidden pb-20 pt-32 sm:pb-28 sm:pt-40">
-      {/* Backdrop: faint grid + slowly drifting teal glow */}
+      {/* Backdrop: faint grid + slowly drifting warm red glow */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="bg-grid absolute inset-0 [mask-image:radial-gradient(ellipse_70%_55%_at_50%_0%,black,transparent_75%)]" />
-        <div className="absolute left-1/2 top-[-12%] h-[620px] w-[1000px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(20_179_160/0.14),transparent)] motion-safe:animate-drift" />
+        <div className="absolute left-1/2 top-[-12%] h-[620px] w-[1000px] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(237_28_36/0.07),transparent)] motion-safe:animate-drift" />
         <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-b from-transparent to-mist" />
       </div>
 
@@ -26,7 +26,7 @@ export function Hero() {
               className="mt-6 text-[2.75rem] font-extrabold leading-[1.02] tracking-[-0.045em] text-ink sm:text-7xl lg:text-[5.5rem]"
             >
               Powering Healthcare <br className="hidden sm:block" />
-              Through <span className="text-teal-600">Technology.</span>
+              Through <span className="text-brand-500">Technology.</span>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>

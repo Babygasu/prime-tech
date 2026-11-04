@@ -12,7 +12,7 @@ export function Footer() {
       <Container className="py-16 sm:py-20">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1.2fr_1.2fr]">
           <div className="max-w-sm">
-            <Logo />
+            <Logo className="h-11" />
             <p className="mt-5 text-[15px] leading-relaxed text-body">
               A Ghana-based technology solutions company specialising in health systems development and digital
               health infrastructure, with over {site.experienceYears} years of industry experience. Serving clients
@@ -47,7 +47,7 @@ export function Footer() {
 
           <FooterColumn title="Contact">
             <li className="flex gap-2.5 text-body">
-              <MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-teal-600" />
+              <MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-brand-500" />
               <address className="not-italic">{site.contact.address}</address>
             </li>
             {site.contact.email ? (
@@ -59,7 +59,7 @@ export function Footer() {
             ) : null}
             {site.contact.phone ? <li className="text-body">{site.contact.phone}</li> : null}
             <li>
-              <Link href={enquiryHref} className="font-semibold text-teal-700 hover:text-teal-600">
+              <Link href={enquiryHref} className="font-semibold text-brand-600 hover:text-brand-700">
                 Send us an enquiry →
               </Link>
             </li>

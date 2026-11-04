@@ -61,10 +61,10 @@ export function TechInAction() {
   };
 
   return (
-    <section id="technology" aria-labelledby="technology-title" className="relative overflow-hidden bg-navy-950 py-24 text-white sm:py-32">
+    <section id="technology" aria-labelledby="technology-title" className="relative overflow-hidden bg-charcoal-950 py-24 text-white sm:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="bg-grid-dark absolute inset-0 [mask-image:radial-gradient(ellipse_60%_50%_at_70%_40%,black,transparent_80%)]" />
-        <div className="absolute right-[-10%] top-[10%] h-[560px] w-[760px] rounded-full bg-[radial-gradient(closest-side,rgb(20_179_160/0.16),transparent)] motion-safe:animate-drift" />
+        <div className="absolute right-[-10%] top-[10%] h-[560px] w-[760px] rounded-full bg-[radial-gradient(closest-side,rgb(237_28_36/0.14),transparent)] motion-safe:animate-drift" />
       </div>
 
       <Container className="relative">
@@ -115,7 +115,7 @@ export function TechInAction() {
                       <motion.span
                         layoutId="tech-tab-indicator"
                         aria-hidden
-                        className="absolute inset-0 rounded-2xl ring-1 ring-teal-400/40"
+                        className="absolute inset-0 rounded-2xl ring-1 ring-white/15"
                         transition={{ type: "spring", stiffness: 360, damping: 34 }}
                       />
                     )}
@@ -123,12 +123,12 @@ export function TechInAction() {
                       <span
                         className={cn(
                           "grid size-9 place-items-center rounded-xl transition-colors duration-300",
-                          selected ? "bg-teal-400 text-navy-950" : "bg-white/[0.06] text-navy-400 group-hover:text-white",
+                          selected ? "bg-brand-600 text-white" : "bg-white/[0.06] text-charcoal-400 group-hover:text-white",
                         )}
                       >
                         <t.icon aria-hidden className="size-[18px]" />
                       </span>
-                      <span className={cn("whitespace-nowrap text-[15px] font-semibold", selected ? "text-white" : "text-navy-400 group-hover:text-white")}>
+                      <span className={cn("whitespace-nowrap text-[15px] font-semibold", selected ? "text-white" : "text-charcoal-400 group-hover:text-white")}>
                         {t.label}
                       </span>
                     </span>
@@ -139,7 +139,7 @@ export function TechInAction() {
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                          className="relative hidden overflow-hidden px-5 text-[14px] leading-relaxed text-navy-400 lg:block"
+                          className="relative hidden overflow-hidden px-5 text-[14px] leading-relaxed text-charcoal-400 lg:block"
                         >
                           <span className="block pb-5 pl-12">{t.description}</span>
                         </motion.p>
@@ -149,7 +149,7 @@ export function TechInAction() {
                 );
               })}
             </div>
-            <p className="mt-4 text-[14px] leading-relaxed text-navy-400 lg:hidden">{current.description}</p>
+            <p className="mt-4 text-[14px] leading-relaxed text-charcoal-400 lg:hidden">{current.description}</p>
           </Reveal>
 
           <Reveal delay={0.08}>

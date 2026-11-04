@@ -25,7 +25,7 @@ export function Approach() {
           {/* Connecting line (desktop) */}
           <div aria-hidden className="absolute left-6 right-[calc(25%-3rem)] top-6 hidden h-px bg-line lg:block">
             <motion.div
-              className="h-full origin-left bg-gradient-to-r from-teal-500 to-navy-700"
+              className="h-full origin-left bg-gradient-to-r from-brand-500 to-charcoal-700"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true, margin: "0px 0px -20% 0px" }}
@@ -39,10 +39,10 @@ export function Approach() {
               <li key={step.title} className="relative">
                 <Reveal delay={0.15 + i * 0.12}>
                   <div className="relative flex items-center gap-4 lg:block">
-                    <span className="relative z-10 grid size-12 place-items-center rounded-2xl border border-line bg-white text-navy-900 shadow-soft">
+                    <span className="relative z-10 grid size-12 place-items-center rounded-2xl border border-line bg-white text-charcoal-900 shadow-soft">
                       <Icon aria-hidden className="size-5" strokeWidth={1.8} />
                     </span>
-                    <span className="font-mono text-[13px] font-medium text-teal-700 lg:mt-7 lg:block">0{i + 1}</span>
+                    <span className="font-mono text-[13px] font-medium text-brand-600 lg:mt-7 lg:block">0{i + 1}</span>
                   </div>
                   <h3 className="mt-5 text-2xl font-bold tracking-[-0.02em] text-ink lg:mt-3">{step.title}</h3>
                   <p className="mt-3 max-w-xs text-[15px] leading-relaxed text-body">{step.description}</p>

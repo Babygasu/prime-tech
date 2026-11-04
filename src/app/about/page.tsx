@@ -34,7 +34,7 @@ export default function AboutPage() {
         title={
           <>
             Health technology, <br className="hidden sm:block" />
-            made in <span className="text-teal-600">Ghana.</span>
+            made in <span className="text-brand-500">Ghana.</span>
           </>
         }
         lead="We specialise in health systems development and digital health infrastructure, providing reliable ICT solutions that strengthen healthcare delivery, improve data management and support efficient health administration."
@@ -67,7 +67,7 @@ export default function AboutPage() {
                   {facts.map((f) => (
                     <div key={f.label} className="px-3 py-5 first:pl-0 sm:px-5">
                       <dt className="sr-only">{f.label}</dt>
-                      <dd className="font-display text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl">{f.value}</dd>
+                      <dd className="font-display text-2xl font-bold tracking-tight text-charcoal-900 sm:text-3xl">{f.value}</dd>
                       <dd className="mt-1 text-[12px] leading-snug text-muted sm:text-[13px]">{f.label}</dd>
                     </div>
                   ))}
@@ -102,20 +102,20 @@ export default function AboutPage() {
                   <article
                     className={
                       i === 0
-                        ? "relative flex h-full flex-col overflow-hidden rounded-3xl bg-navy-900 p-8 text-white sm:p-10"
+                        ? "relative flex h-full flex-col overflow-hidden rounded-3xl bg-charcoal-900 p-8 text-white sm:p-10"
                         : "flex h-full flex-col rounded-3xl border border-line bg-white p-8 sm:p-10"
                     }
                   >
                     <span
                       className={
                         i === 0
-                          ? "grid size-11 place-items-center rounded-xl bg-white/[0.08] text-teal-300"
-                          : "grid size-11 place-items-center rounded-xl bg-teal-50 text-teal-700"
+                          ? "grid size-11 place-items-center rounded-xl bg-white/[0.08] text-brand-400"
+                          : "grid size-11 place-items-center rounded-xl bg-cloud text-charcoal-900"
                       }
                     >
                       <s.icon aria-hidden className="size-5" strokeWidth={1.8} />
                     </span>
-                    <h3 className={i === 0 ? "mt-8 text-[13px] font-semibold uppercase tracking-[0.16em] text-teal-300" : "mt-8 text-[13px] font-semibold uppercase tracking-[0.16em] text-teal-700"}>
+                    <h3 className={i === 0 ? "mt-8 text-[13px] font-semibold uppercase tracking-[0.16em] text-charcoal-300" : "mt-8 text-[13px] font-semibold uppercase tracking-[0.16em] text-muted"}>
                       {s.label}
                     </h3>
                     <p className={i === 0 ? "mt-3 font-display text-xl font-semibold leading-snug tracking-tight sm:text-2xl" : "mt-3 font-display text-xl font-semibold leading-snug tracking-tight text-ink sm:text-2xl"}>
@@ -129,11 +129,11 @@ export default function AboutPage() {
 
           <Reveal delay={0.1}>
             <div className="mx-auto mt-5 flex max-w-5xl flex-col gap-4 rounded-3xl border border-line bg-mist p-8 sm:flex-row sm:items-center sm:gap-6 sm:p-10">
-              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-white text-teal-700 ring-1 ring-line">
+              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-white text-brand-500 ring-1 ring-line">
                 <MapPin aria-hidden className="size-5" strokeWidth={1.8} />
               </span>
               <div>
-                <h3 className="text-[13px] font-semibold uppercase tracking-[0.16em] text-teal-700">Our reach</h3>
+                <h3 className="text-[13px] font-semibold uppercase tracking-[0.16em] text-muted">Our reach</h3>
                 <p className="mt-2 text-lg leading-relaxed text-ink">{about.reach}</p>
               </div>
             </div>

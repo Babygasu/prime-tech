@@ -49,7 +49,7 @@ export function Navbar() {
     >
       <nav aria-label="Main" className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" aria-label="Prime-Techmate home" className="rounded-lg" onClick={() => setOpen(false)}>
-          <Logo />
+          <Logo priority className="h-10" />
         </Link>
 
         <ul className="hidden items-center gap-0.5 xl:flex">
@@ -73,7 +73,10 @@ export function Navbar() {
                     aria-hidden
                     className="absolute inset-0 rounded-full bg-cloud"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                  />
+                  >
+                    {/* Red active marker travels with the pill. */}
+                    <span className="absolute bottom-[3px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-brand-500" />
+                  </motion.span>
                 ) : null}
               </li>
             );
@@ -83,7 +86,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <Link
             href={enquiryHref}
-            className="group hidden h-10 items-center gap-1.5 rounded-full bg-navy-900 px-5 text-[14px] font-semibold text-white transition-colors duration-300 hover:bg-navy-700 sm:inline-flex"
+            className="group hidden h-10 items-center gap-1.5 rounded-full bg-brand-600 px-5 text-[14px] font-semibold text-white transition-colors duration-300 hover:bg-brand-700 sm:inline-flex"
           >
             Make an Enquiry
             <ArrowRight aria-hidden className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -125,7 +128,7 @@ export function Navbar() {
                     aria-current={active === item.id ? "page" : undefined}
                     className={cn(
                       "flex items-center justify-between border-b border-line py-4 font-display text-2xl font-semibold tracking-tight",
-                      active === item.id ? "text-teal-700" : "text-ink",
+                      active === item.id ? "text-brand-600" : "text-ink",
                     )}
                   >
                     {item.label}
@@ -138,7 +141,7 @@ export function Navbar() {
               <Link
                 href={enquiryHref}
                 onClick={() => setOpen(false)}
-                className="flex h-12 items-center justify-center rounded-full bg-navy-900 text-[15px] font-semibold text-white"
+                className="flex h-12 items-center justify-center rounded-full bg-brand-600 text-[15px] font-semibold text-white"
               >
                 Make an Enquiry
               </Link>

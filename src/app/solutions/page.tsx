@@ -25,7 +25,7 @@ export default function SolutionsPage() {
         eyebrow="Our solutions"
         title={
           <>
-            Technology for every part of <span className="text-teal-600">healthcare.</span>
+            Technology for every part of <span className="text-brand-500">healthcare.</span>
           </>
         }
         lead="We design, implement and support advanced digital systems that power modern healthcare environments, for hospitals, clinics and health institutions across Ghana."
@@ -38,9 +38,9 @@ export default function SolutionsPage() {
                 <li key={s.slug}>
                   <a
                     href={`#${s.slug}`}
-                    className="inline-flex h-10 items-center gap-2 rounded-full border border-line bg-white px-4 text-[14px] font-medium text-body transition-colors duration-300 hover:border-teal-500/40 hover:text-ink"
+                    className="inline-flex h-10 items-center gap-2 rounded-full border border-line bg-white px-4 text-[14px] font-medium text-body transition-colors duration-300 hover:border-charcoal-900/20 hover:text-ink"
                   >
-                    <Icon aria-hidden className="size-4 text-teal-600" />
+                    <Icon aria-hidden className="size-4 text-charcoal-600" />
                     {s.shortTitle}
                   </a>
                 </li>
@@ -60,10 +60,10 @@ export default function SolutionsPage() {
                 <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
                   <Reveal className={cn(flip && "lg:order-2")}>
                     <div className="flex items-center gap-4">
-                      <span className="grid size-12 place-items-center rounded-2xl bg-navy-900 text-teal-300">
+                      <span className="grid size-12 place-items-center rounded-2xl bg-charcoal-900 text-white">
                         <Icon aria-hidden className="size-[22px]" strokeWidth={1.75} />
                       </span>
-                      <span className="font-mono text-[13px] font-medium text-teal-700">0{i + 1}</span>
+                      <span className="font-mono text-[13px] font-medium text-brand-600">0{i + 1}</span>
                     </div>
                     <h2
                       id={`${s.slug}-title`}
@@ -75,7 +75,7 @@ export default function SolutionsPage() {
                     <ul className="mt-8 space-y-3 border-t border-line pt-8">
                       {s.highlights.map((h) => (
                         <li key={h} className="flex items-start gap-3 text-[15px] text-ink">
-                          <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-teal-50 text-teal-700">
+                          <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-cloud text-charcoal-900">
                             <Check aria-hidden className="size-3" strokeWidth={2.5} />
                           </span>
                           {h}
@@ -85,7 +85,7 @@ export default function SolutionsPage() {
                     {s.icon === "emr" ? (
                       <Link
                         href={`/${product.slug}/`}
-                        className="group mt-8 inline-flex items-center gap-2 text-[15px] font-semibold text-teal-700 hover:text-teal-600"
+                        className="group mt-8 inline-flex items-center gap-2 text-[15px] font-semibold text-brand-600 hover:text-brand-700"
                       >
                         Discover {product.name}, our own EMR system
                         <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />

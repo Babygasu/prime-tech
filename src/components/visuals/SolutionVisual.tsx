@@ -56,12 +56,12 @@ function RecordVisual() {
     <div className="relative w-full max-w-[360px]">
       <Card className="p-5">
         <div className="flex items-center gap-3">
-          <span className="grid size-11 place-items-center rounded-full bg-navy-900 font-display text-sm font-bold text-teal-300">AK</span>
+          <span className="grid size-11 place-items-center rounded-full bg-charcoal-900 font-display text-sm font-bold text-white">AK</span>
           <div>
             <p className="text-[14px] font-semibold text-ink">Patient A. K.</p>
             <p className="font-mono text-[11px] text-muted">DEMO-10482</p>
           </div>
-          <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-teal-50 px-2 py-0.5 text-[11px] font-medium text-teal-700">
+          <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-cloud px-2 py-0.5 text-[11px] font-medium text-charcoal-700">
             <Lock className="size-3" /> Secure
           </span>
         </div>
@@ -80,7 +80,7 @@ function RecordVisual() {
         </div>
       </Card>
       <Card className="absolute -bottom-6 -right-2 flex items-center gap-2 px-3 py-2 motion-safe:animate-float sm:-right-8">
-        <FlaskConical className="size-4 text-teal-600" />
+        <FlaskConical className="size-4 text-brand-500" />
         <span className="text-[12px] font-medium text-ink">Lab result added</span>
       </Card>
     </div>
@@ -102,12 +102,12 @@ export function WorkflowVisual() {
       <ol className="mt-4 space-y-2.5">
         {steps.map((s, i) => (
           <li key={s.label} className="flex items-center gap-3 rounded-xl bg-mist px-3 py-2.5">
-            <span className={cn("grid size-8 place-items-center rounded-lg", i < 4 ? "bg-teal-50 text-teal-700" : "bg-white text-subtle ring-1 ring-line")}>
+            <span className={cn("grid size-8 place-items-center rounded-lg", i < 4 ? "bg-cloud text-charcoal-900" : "bg-white text-subtle ring-1 ring-line")}>
               <s.icon className="size-4" />
             </span>
             <span className="text-[14px] font-medium text-ink">{s.label}</span>
             {i < 4 ? (
-              <CircleCheck className="ml-auto size-4 text-teal-600" />
+              <CircleCheck className="ml-auto size-4 text-success" />
             ) : (
               <span className="ml-auto text-[11px] font-medium text-muted">In progress</span>
             )}
@@ -127,19 +127,19 @@ function NetworkVisual() {
           { label: "Records server", icon: HardDrive },
           { label: "Backup storage", icon: HardDrive },
         ].map((d, i) => (
-          <div key={d.label} className="flex items-center gap-3 rounded-xl bg-navy-950 px-3.5 py-3">
-            <d.icon className="size-4 text-navy-400" />
+          <div key={d.label} className="flex items-center gap-3 rounded-xl bg-charcoal-950 px-3.5 py-3">
+            <d.icon className="size-4 text-charcoal-400" />
             <span className="text-[13px] font-medium text-white">{d.label}</span>
             <span className="ml-auto flex items-center gap-1.5">
-              <span className="size-1.5 rounded-full bg-teal-400 motion-safe:animate-pulse" style={{ animationDelay: `${i * 0.4}s` }} />
-              <span className="size-1.5 rounded-full bg-navy-600" />
-              <span className="size-1.5 rounded-full bg-navy-600" />
+              <span className="size-1.5 rounded-full bg-white motion-safe:animate-pulse" style={{ animationDelay: `${i * 0.4}s` }} />
+              <span className="size-1.5 rounded-full bg-charcoal-600" />
+              <span className="size-1.5 rounded-full bg-charcoal-600" />
             </span>
           </div>
         ))}
       </Card>
       <Card className="absolute -left-3 -top-5 flex items-center gap-2 px-3 py-2 motion-safe:animate-float sm:-left-8">
-        <Wifi className="size-4 text-teal-600" />
+        <Wifi className="size-4 text-brand-500" />
         <span className="text-[12px] font-medium text-ink">Network online</span>
       </Card>
     </div>
@@ -161,7 +161,7 @@ function AnalyticsVisual() {
         {bars.map((h, i) => (
           <span
             key={i}
-            className={cn("flex-1 rounded-t-md", i === bars.length - 2 ? "bg-teal-500" : "bg-navy-900/80")}
+            className={cn("flex-1 rounded-t-md", i === bars.length - 2 ? "bg-brand-500" : "bg-charcoal-900/85")}
             style={{ height: `${h}%` }}
           />
         ))}
@@ -180,8 +180,8 @@ function AnalyticsVisual() {
 function ClaimsVisual() {
   const claims = [
     { id: "DEMO-C-2041", status: "Submitted", tone: "bg-cloud text-muted" },
-    { id: "DEMO-C-2042", status: "Under review", tone: "bg-[#fff6e5] text-[#9a6200]" },
-    { id: "DEMO-C-2043", status: "Approved", tone: "bg-teal-50 text-teal-700" },
+    { id: "DEMO-C-2042", status: "Under review", tone: "bg-warning-soft text-warning" },
+    { id: "DEMO-C-2043", status: "Approved", tone: "bg-success-soft text-success" },
   ];
   return (
     <div className="relative w-full max-w-[380px]">
@@ -198,7 +198,7 @@ function ClaimsVisual() {
         </ul>
       </Card>
       <Card className="absolute -right-2 -top-6 flex items-center gap-2 px-3 py-2 motion-safe:animate-float sm:-right-8">
-        <GraduationCap className="size-4 text-teal-600" />
+        <GraduationCap className="size-4 text-brand-500" />
         <span className="text-[12px] font-medium text-ink">Staff training session</span>
       </Card>
     </div>
