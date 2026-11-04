@@ -21,7 +21,7 @@ export function PageHero({
     <section aria-labelledby="page-title" className={cn("relative overflow-hidden pb-16 pt-36 sm:pb-20 sm:pt-44", className)}>
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="bg-grid absolute inset-0 [mask-image:radial-gradient(ellipse_60%_70%_at_15%_0%,black,transparent_75%)]" />
-        <div className="absolute -left-40 -top-56 h-[520px] w-[760px] rounded-full bg-[radial-gradient(closest-side,rgb(237_28_36/0.06),transparent)] motion-safe:animate-drift" />
+        <div className="absolute -left-40 -top-56 h-[520px] w-[760px] rounded-full bg-[radial-gradient(closest-side,rgb(36_66_158/0.06),transparent)] motion-safe:animate-drift" />
       </div>
       <Container className="relative">
         <div className="max-w-3xl">

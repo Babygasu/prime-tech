@@ -28,14 +28,15 @@ const groups: { title: string; note: string; swatches: Swatch[] }[] = [
     ],
   },
   {
-    title: "Accent · Signature red",
-    note: "From the logo. Used sparingly: calls to action, active states, highlights, one key data point.",
+    title: "Accent · Navy",
+    note: "Used sparingly: calls to action, active states, highlights, one key data point.",
     swatches: [
-      { name: "Brand 500", token: "brand-500", hex: "#ED1C24", role: "Logo red · graphics & large type", dark: true },
-      { name: "Brand 600", token: "brand-600", hex: "#C8161D", role: "Buttons · small red text", dark: true },
-      { name: "Brand 700", token: "brand-700", hex: "#A11218", role: "Button hover", dark: true },
-      { name: "Brand 400", token: "brand-400", hex: "#F2585D", role: "Red on dark surfaces", dark: true },
-      { name: "Brand 50", token: "brand-50", hex: "#FEF4F3", role: "Selected row tint" },
+      { name: "Accent 600", token: "accent-600", hex: "#1E3A8A", role: "Navy · buttons, links", dark: true },
+      { name: "Accent 700", token: "accent-700", hex: "#172D6B", role: "Button hover", dark: true },
+      { name: "Accent 500", token: "accent-500", hex: "#24429E", role: "Highlights & key data", dark: true },
+      { name: "Accent 400", token: "accent-400", hex: "#7B96D6", role: "Accent on dark surfaces" },
+      { name: "Accent 100", token: "accent-100", hex: "#E2E9F8", role: "Light button hover" },
+      { name: "Accent 50", token: "accent-50", hex: "#F1F4FB", role: "Selected row tint" },
     ],
   },
   {
@@ -61,7 +62,7 @@ const groups: { title: string; note: string; swatches: Swatch[] }[] = [
   },
   {
     title: "Status (dashboard only)",
-    note: "Muted tones so states never compete with the brand red.",
+    note: "Muted tones so states never compete with the navy accent.",
     swatches: [
       { name: "Success", token: "success", hex: "#2F7A58", role: "Online, approved, positive change", dark: true },
       { name: "Success soft", token: "success-soft", hex: "#EAF4EE", role: "Success chip background" },
@@ -72,29 +73,28 @@ const groups: { title: string; note: string; swatches: Swatch[] }[] = [
 ];
 
 const contrast: [string, string, string, string][] = [
-  ["White on Brand 600 (buttons)", "#FFFFFF", "#C8161D", "5.85 : 1 · AA"],
-  ["Brand 600 on white (links)", "#C8161D", "#FFFFFF", "5.85 : 1 · AA"],
-  ["Brand 500 on white (large type only)", "#ED1C24", "#FFFFFF", "4.38 : 1 · AA large"],
+  ["White on Accent 600 (buttons)", "#FFFFFF", "#1E3A8A", "10.36 : 1 · AAA"],
+  ["Accent 600 on paper (links)", "#1E3A8A", "#FCFBF9", "10.02 : 1 · AAA"],
   ["Body on white", "#4B4B52", "#FFFFFF", "8.65 : 1 · AAA"],
   ["Muted on paper", "#6A6A71", "#FCFBF9", "5.19 : 1 · AA"],
   ["Charcoal 300 on Charcoal 950", "#B8BAC0", "#0E0F11", "9.88 : 1 · AAA"],
-  ["Brand 400 on Charcoal 950", "#F2585D", "#0E0F11", "5.78 : 1 · AA"],
+  ["Accent 400 on Charcoal 950", "#7B96D6", "#0E0F11", "6.55 : 1 · AA"],
 ];
 
-const redDo = [
+const accentDo = [
   "Primary call-to-action buttons",
   "Active navigation and selected tabs",
   "One highlighted word in a page headline",
   "The small rule beside section labels",
-  "A single key data point in a chart (today, below target, missed)",
+  "A single key data point in a chart (today, missed appointments)",
   "Notification and live indicators",
 ];
-const redDont = [
+const accentDont = [
   "Large background areas or full sections",
   "Every chart series or every icon",
   "Body text or long passages",
   "Decorative gradients",
-  "Success or neutral states",
+  "Success, warning or neutral states",
 ];
 
 export default function BrandPage() {
@@ -105,7 +105,7 @@ export default function BrandPage() {
           <SectionHeading
             eyebrow="Design system · internal"
             title="Prime-Techmate colour system"
-            lead="Built from the official logo: charcoal as the primary brand colour, the signature red as a controlled accent, and warm neutrals for calm, premium backgrounds."
+            lead="Charcoal from the official logo as the primary brand colour, navy blue as a controlled accent, and warm neutrals for calm, premium backgrounds. The logo itself keeps its original red and black."
           />
           <div className="rounded-3xl border border-line bg-white p-6">
             <Logo className="h-14" />
@@ -136,11 +136,11 @@ export default function BrandPage() {
 
         <section className="mt-20 grid gap-5 lg:grid-cols-2">
           <div className="rounded-3xl border border-line bg-white p-8">
-            <h2 className="text-xl font-bold tracking-tight text-ink">Where red is used</h2>
+            <h2 className="text-xl font-bold tracking-tight text-ink">Where navy is used</h2>
             <ul className="mt-5 space-y-3">
-              {redDo.map((r) => (
+              {accentDo.map((r) => (
                 <li key={r} className="flex items-start gap-3 text-[15px] text-ink">
-                  <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-brand-600 text-white">
+                  <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-accent-600 text-white">
                     <Check className="size-3" strokeWidth={3} />
                   </span>
                   {r}
@@ -149,9 +149,9 @@ export default function BrandPage() {
             </ul>
           </div>
           <div className="rounded-3xl border border-line bg-white p-8">
-            <h2 className="text-xl font-bold tracking-tight text-ink">Where red is avoided</h2>
+            <h2 className="text-xl font-bold tracking-tight text-ink">Where navy is avoided</h2>
             <ul className="mt-5 space-y-3">
-              {redDont.map((r) => (
+              {accentDont.map((r) => (
                 <li key={r} className="flex items-start gap-3 text-[15px] text-body">
                   <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-cloud text-charcoal-600">
                     <X className="size-3" strokeWidth={3} />
@@ -169,7 +169,7 @@ export default function BrandPage() {
             <div className="rounded-3xl border border-line bg-white p-8">
               <Eyebrow>Section label</Eyebrow>
               <p className="mt-4 font-display text-4xl font-extrabold tracking-[-0.04em] text-ink">
-                Powering Healthcare Through <span className="text-brand-500">Technology.</span>
+                Powering Healthcare Through <span className="text-accent-500">Technology.</span>
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <ButtonLink href="/brand/" arrow>Primary</ButtonLink>
@@ -184,15 +184,15 @@ export default function BrandPage() {
               </div>
             </div>
             <div className="relative overflow-hidden rounded-3xl bg-charcoal-950 p-8 text-white">
-              <div aria-hidden className="absolute -right-24 -top-24 size-80 rounded-full bg-[radial-gradient(closest-side,rgb(237_28_36/0.18),transparent)]" />
+              <div aria-hidden className="absolute -right-24 -top-24 size-80 rounded-full bg-[radial-gradient(closest-side,rgb(123_150_214/0.18),transparent)]" />
               <div className="relative">
                 <Eyebrow tone="dark">On dark</Eyebrow>
                 <p className="mt-4 font-display text-4xl font-extrabold tracking-[-0.04em]">
-                  14<span className="text-brand-500">+</span> years
+                  14<span className="text-accent-400">+</span> years
                 </p>
                 <p className="mt-3 max-w-sm text-[15px] text-charcoal-400">Secondary text on charcoal uses Charcoal 400 for comfortable contrast.</p>
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <ButtonLink href="/brand/" arrow>Primary</ButtonLink>
+                  <ButtonLink href="/brand/" variant="light" arrow>Light</ButtonLink>
                   <ButtonLink href="/brand/" variant="ghostDark">Ghost</ButtonLink>
                 </div>
               </div>
@@ -202,7 +202,7 @@ export default function BrandPage() {
 
         <section className="mt-20">
           <h2 className="text-2xl font-bold tracking-tight text-ink">Data colours</h2>
-          <p className="mt-1 text-[15px] text-body">Charcoal leads, greys support, red marks only what needs attention.</p>
+          <p className="mt-1 text-[15px] text-body">Charcoal leads, greys support, navy marks only what needs attention.</p>
           <div className="mt-6 rounded-3xl border border-line bg-white p-8">
             <div className="flex h-40 items-end gap-3">
               {[54, 62, 58, 70, 66, 78, 74, 88].map((h, i) => (
@@ -212,7 +212,7 @@ export default function BrandPage() {
                 </div>
               ))}
               <div className="flex flex-1 items-end gap-1">
-                <span className="flex-1 rounded-t-md bg-brand-500" style={{ height: "96%" }} />
+                <span className="flex-1 rounded-t-md bg-accent-500" style={{ height: "96%" }} />
                 <span className="flex-1 rounded-t-md bg-[#c9c7c2]" style={{ height: "58%" }} />
               </div>
             </div>
@@ -220,14 +220,14 @@ export default function BrandPage() {
               <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-charcoal-900" />Primary series · #17181B</span>
               <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#8d9097]" />Secondary · #8D9097</span>
               <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#c9c7c2]" />Tertiary · #C9C7C2</span>
-              <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-brand-500" />Highlight · #ED1C24</span>
+              <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-accent-500" />Highlight · #24429E (navy)</span>
             </div>
           </div>
         </section>
 
         <section className="mt-20">
           <h2 className="text-2xl font-bold tracking-tight text-ink">Contrast checks</h2>
-          <p className="mt-1 text-[15px] text-body">Measured against WCAG 2.1. The logo red is kept for graphics and large type; buttons use Brand 600.</p>
+          <p className="mt-1 text-[15px] text-body">Measured against WCAG 2.1. On dark sections the lighter Accent 400 is used, because navy is too dark to read on charcoal.</p>
           <ul className="mt-6 divide-y divide-line overflow-hidden rounded-3xl border border-line bg-white">
             {contrast.map(([label, fg, bg, ratio]) => (
               <li key={label} className="flex items-center gap-4 px-6 py-4">

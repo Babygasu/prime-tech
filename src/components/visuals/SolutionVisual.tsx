@@ -80,7 +80,7 @@ function RecordVisual() {
         </div>
       </Card>
       <Card className="absolute -bottom-6 -right-2 flex items-center gap-2 px-3 py-2 motion-safe:animate-float sm:-right-8">
-        <FlaskConical className="size-4 text-brand-500" />
+        <FlaskConical className="size-4 text-accent-500" />
         <span className="text-[12px] font-medium text-ink">Lab result added</span>
       </Card>
     </div>
@@ -139,7 +139,7 @@ function NetworkVisual() {
         ))}
       </Card>
       <Card className="absolute -left-3 -top-5 flex items-center gap-2 px-3 py-2 motion-safe:animate-float sm:-left-8">
-        <Wifi className="size-4 text-brand-500" />
+        <Wifi className="size-4 text-accent-500" />
         <span className="text-[12px] font-medium text-ink">Network online</span>
       </Card>
     </div>
@@ -161,7 +161,7 @@ function AnalyticsVisual() {
         {bars.map((h, i) => (
           <span
             key={i}
-            className={cn("flex-1 rounded-t-md", i === bars.length - 2 ? "bg-brand-500" : "bg-charcoal-900/85")}
+            className={cn("flex-1 rounded-t-md", i === bars.length - 2 ? "bg-accent-500" : "bg-charcoal-900/85")}
             style={{ height: `${h}%` }}
           />
         ))}
@@ -198,7 +198,7 @@ function ClaimsVisual() {
         </ul>
       </Card>
       <Card className="absolute -right-2 -top-6 flex items-center gap-2 px-3 py-2 motion-safe:animate-float sm:-right-8">
-        <GraduationCap className="size-4 text-brand-500" />
+        <GraduationCap className="size-4 text-accent-500" />
         <span className="text-[12px] font-medium text-ink">Staff training session</span>
       </Card>
     </div>

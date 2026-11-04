@@ -74,8 +74,8 @@ export function Navbar() {
                     className="absolute inset-0 rounded-full bg-cloud"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   >
-                    {/* Red active marker travels with the pill. */}
-                    <span className="absolute bottom-[3px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-brand-500" />
+                    {/* Navy active marker travels with the pill. */}
+                    <span className="absolute bottom-[3px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-accent-500" />
                   </motion.span>
                 ) : null}
               </li>
@@ -86,7 +86,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           <Link
             href={enquiryHref}
-            className="group hidden h-10 items-center gap-1.5 rounded-full bg-brand-600 px-5 text-[14px] font-semibold text-white transition-colors duration-300 hover:bg-brand-700 sm:inline-flex"
+            className="group hidden h-10 items-center gap-1.5 rounded-full bg-accent-600 px-5 text-[14px] font-semibold text-white transition-colors duration-300 hover:bg-accent-700 sm:inline-flex"
           >
             Make an Enquiry
             <ArrowRight aria-hidden className="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
@@ -128,7 +128,7 @@ export function Navbar() {
                     aria-current={active === item.id ? "page" : undefined}
                     className={cn(
                       "flex items-center justify-between border-b border-line py-4 font-display text-2xl font-semibold tracking-tight",
-                      active === item.id ? "text-brand-600" : "text-ink",
+                      active === item.id ? "text-accent-600" : "text-ink",
                     )}
                   >
                     {item.label}
@@ -141,7 +141,7 @@ export function Navbar() {
               <Link
                 href={enquiryHref}
                 onClick={() => setOpen(false)}
-                className="flex h-12 items-center justify-center rounded-full bg-brand-600 text-[15px] font-semibold text-white"
+                className="flex h-12 items-center justify-center rounded-full bg-accent-600 text-[15px] font-semibold text-white"
               >
                 Make an Enquiry
               </Link>

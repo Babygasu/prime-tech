@@ -47,7 +47,7 @@ export function Footer() {
 
           <FooterColumn title="Contact">
             <li className="flex gap-2.5 text-body">
-              <MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-brand-500" />
+              <MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-accent-500" />
               <address className="not-italic">{site.contact.address}</address>
             </li>
             {site.contact.email ? (
@@ -59,7 +59,7 @@ export function Footer() {
             ) : null}
             {site.contact.phone ? <li className="text-body">{site.contact.phone}</li> : null}
             <li>
-              <Link href={enquiryHref} className="font-semibold text-brand-600 hover:text-brand-700">
+              <Link href={enquiryHref} className="font-semibold text-accent-600 hover:text-accent-700">
                 Send us an enquiry →
               </Link>
             </li>

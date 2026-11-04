@@ -25,7 +25,7 @@ export default function SolutionsPage() {
         eyebrow="Our solutions"
         title={
           <>
-            Technology for every part of <span className="text-brand-500">healthcare.</span>
+            Technology for every part of <span className="text-accent-500">healthcare.</span>
           </>
         }
         lead="We design, implement and support advanced digital systems that power modern healthcare environments, for hospitals, clinics and health institutions across Ghana."
@@ -63,7 +63,7 @@ export default function SolutionsPage() {
                       <span className="grid size-12 place-items-center rounded-2xl bg-charcoal-900 text-white">
                         <Icon aria-hidden className="size-[22px]" strokeWidth={1.75} />
                       </span>
-                      <span className="font-mono text-[13px] font-medium text-brand-600">0{i + 1}</span>
+                      <span className="font-mono text-[13px] font-medium text-accent-600">0{i + 1}</span>
                     </div>
                     <h2
                       id={`${s.slug}-title`}
@@ -85,7 +85,7 @@ export default function SolutionsPage() {
                     {s.icon === "emr" ? (
                       <Link
                         href={`/${product.slug}/`}
-                        className="group mt-8 inline-flex items-center gap-2 text-[15px] font-semibold text-brand-600 hover:text-brand-700"
+                        className="group mt-8 inline-flex items-center gap-2 text-[15px] font-semibold text-accent-600 hover:text-accent-700"
                       >
                         Discover {product.name}, our own EMR system
                         <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />

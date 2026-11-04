@@ -75,7 +75,7 @@ export const appointments = [
 export const attendance = [
   { name: "Attended", value: 286, color: "#17181b" },
   { name: "Upcoming", value: 41, color: "#c9c7c2" },
-  { name: "Missed", value: 15, color: "#ed1c24" },
+  { name: "Missed", value: 15, color: "#24429e" },
 ];
 
 export const monthly = [

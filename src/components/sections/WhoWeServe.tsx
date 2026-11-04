@@ -27,7 +27,7 @@ export function WhoWeServe({
               <li key={c.label}>
                 <Reveal delay={(i % 3) * 0.06} className="h-full">
                   <div className="group flex h-full flex-col gap-4 rounded-3xl border border-line bg-white p-5 transition-[box-shadow,transform] duration-500 ease-premium hover:-translate-y-0.5 hover:shadow-lift sm:flex-row sm:items-center sm:p-6">
-                    <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-cloud text-charcoal-900 transition-colors duration-500 group-hover:bg-charcoal-900 group-hover:text-brand-400">
+                    <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-cloud text-charcoal-900 transition-colors duration-500 group-hover:bg-charcoal-900 group-hover:text-accent-400">
                       <Icon aria-hidden className="size-[22px]" strokeWidth={1.75} />
                     </span>
                     <div>

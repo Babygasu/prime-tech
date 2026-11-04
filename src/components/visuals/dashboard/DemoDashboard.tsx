@@ -64,11 +64,11 @@ export const DASHBOARD_WIDTH = 1200;
 export const DASHBOARD_HEIGHT = 720;
 
 /* Data colours: charcoal carries the primary series, greys support it, and the
-   signature red marks only the single point that deserves attention. */
+   navy accent marks only the single point that deserves attention. */
 const PRIMARY = "#17181b";
 const SECONDARY = "#8d9097";
 const TERTIARY = "#c9c7c2";
-const ACCENT = "#ed1c24";
+const ACCENT = "#24429e";
 const GRID = "#efede9";
 const AXIS = { fontSize: 11, fill: "#8d9097" };
 
@@ -112,7 +112,7 @@ function Sidebar({ view }: { view: DashboardView }) {
     <aside className="flex w-[220px] shrink-0 flex-col border-r border-line bg-white px-4 py-5">
       <div className="flex items-center gap-2.5 px-2">
         <span className="grid size-8 place-items-center rounded-lg bg-charcoal-900">
-          <Activity className="size-4 text-brand-400" />
+          <Activity className="size-4 text-accent-400" />
         </span>
         <div className="leading-tight">
           <p className="font-display text-[14px] font-bold tracking-tight">Health HIS</p>
@@ -131,7 +131,7 @@ function Sidebar({ view }: { view: DashboardView }) {
                 active ? "bg-cloud font-semibold text-ink" : "text-body",
               )}
             >
-              {active && <span className="absolute -left-4 top-2 h-5 w-[3px] rounded-r bg-brand-500" />}
+              {active && <span className="absolute -left-4 top-2 h-5 w-[3px] rounded-r bg-accent-500" />}
               <it.icon className="size-[16px]" />
               {it.label}
             </li>
@@ -161,7 +161,7 @@ function Topbar({ title }: { title: string }) {
       </div>
       <span className="relative grid size-9 place-items-center rounded-lg border border-line text-body">
         <Bell className="size-4" />
-        <span className="absolute right-2 top-2 size-1.5 rounded-full bg-brand-500" />
+        <span className="absolute right-2 top-2 size-1.5 rounded-full bg-accent-500" />
       </span>
       <span className="grid size-9 place-items-center rounded-full bg-charcoal-900 text-[12px] font-semibold text-white">DA</span>
     </header>
@@ -282,7 +282,7 @@ function OverviewView() {
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <Card title="Recent registrations" action={<span className="text-[11px] font-medium text-brand-600">View all</span>}>
+        <Card title="Recent registrations" action={<span className="text-[11px] font-medium text-accent-600">View all</span>}>
           <ul className="divide-y divide-line">
             {recentRegistrations.slice(0, 3).map((r) => (
               <li key={r.id} className="flex items-center gap-3 py-2">
@@ -296,7 +296,7 @@ function OverviewView() {
             ))}
           </ul>
         </Card>
-        <Card title="Facility activity" action={<span className="flex items-center gap-1.5 text-[11px] font-medium text-muted"><span className="size-1.5 rounded-full bg-brand-500 motion-safe:animate-pulse" />Live</span>}>
+        <Card title="Facility activity" action={<span className="flex items-center gap-1.5 text-[11px] font-medium text-muted"><span className="size-1.5 rounded-full bg-accent-500 motion-safe:animate-pulse" />Live</span>}>
           <ul className="space-y-2.5">
             {facilities.slice(0, 3).map((f) => (
               <li key={f.name} className="flex items-center gap-3">
@@ -353,7 +353,7 @@ function RecordsView() {
           </thead>
           <tbody>
             {patients.map((p, i) => (
-              <tr key={p.id} className={cn("border-b border-line/70", i === 0 && "bg-brand-50/70 shadow-[inset_3px_0_0_var(--color-brand-500)]")}>
+              <tr key={p.id} className={cn("border-b border-line/70", i === 0 && "bg-accent-50/70 shadow-[inset_3px_0_0_var(--color-accent-500)]")}>
                 <td className="py-[11px] pl-1 font-mono text-[11.5px] text-muted">{p.id}</td>
                 <td className="py-[11px] font-medium">{p.name}</td>
                 <td className="py-[11px] text-body">{p.age} · {p.sex}</td>
@@ -460,8 +460,8 @@ function AppointmentsView() {
             </div>
           ))}
           <div className="pointer-events-none absolute left-[44px] right-0 flex items-center" style={{ top: 2.6 * rowH }}>
-            <span className="size-2 rounded-full bg-brand-500" />
-            <span className="h-px flex-1 bg-brand-500" />
+            <span className="size-2 rounded-full bg-accent-500" />
+            <span className="h-px flex-1 bg-accent-500" />
           </div>
         </div>
       </Card>
@@ -524,13 +524,13 @@ function ReportsView() {
               <p className="truncate text-[12.5px] font-semibold">{r.title}</p>
               <p className="mt-0.5 text-[11px] text-muted">{r.meta}</p>
               {r.state === "Generating" && (
-                <div className="mt-2 h-1 overflow-hidden rounded-full bg-cloud"><div className="h-full w-2/3 rounded-full bg-brand-500" /></div>
+                <div className="mt-2 h-1 overflow-hidden rounded-full bg-cloud"><div className="h-full w-2/3 rounded-full bg-accent-500" /></div>
               )}
             </div>
             {r.state === "Ready" ? (
               <span className="grid size-8 place-items-center rounded-lg border border-line text-body"><Download className="size-3.5" /></span>
             ) : (
-              <RefreshCw className="size-4 text-brand-500 motion-safe:animate-spin [animation-duration:3s]" />
+              <RefreshCw className="size-4 text-accent-500 motion-safe:animate-spin [animation-duration:3s]" />
             )}
           </div>
         ))}
@@ -554,7 +554,7 @@ function ReportsView() {
                     <span className="text-body">{ind.name}</span>
                     <span className="font-semibold tabular-nums">{ind.value}%</span>
                   </div>
-                  <div className="mt-1 h-1 overflow-hidden rounded-full bg-cloud"><div className={cn("h-full rounded-full", ind.value < ind.target ? "bg-brand-500" : "bg-charcoal-900")} style={{ width: `${ind.value}%` }} /></div>
+                  <div className="mt-1 h-1 overflow-hidden rounded-full bg-cloud"><div className={cn("h-full rounded-full", ind.value < ind.target ? "bg-warning" : "bg-charcoal-900")} style={{ width: `${ind.value}%` }} /></div>
                 </div>
               ))}
             </div>

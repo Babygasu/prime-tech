@@ -34,7 +34,7 @@ export default function AboutPage() {
         title={
           <>
             Health technology, <br className="hidden sm:block" />
-            made in <span className="text-brand-500">Ghana.</span>
+            made in <span className="text-accent-500">Ghana.</span>
           </>
         }
         lead="We specialise in health systems development and digital health infrastructure, providing reliable ICT solutions that strengthen healthcare delivery, improve data management and support efficient health administration."
@@ -109,7 +109,7 @@ export default function AboutPage() {
                     <span
                       className={
                         i === 0
-                          ? "grid size-11 place-items-center rounded-xl bg-white/[0.08] text-brand-400"
+                          ? "grid size-11 place-items-center rounded-xl bg-white/[0.08] text-accent-400"
                           : "grid size-11 place-items-center rounded-xl bg-cloud text-charcoal-900"
                       }
                     >
@@ -129,7 +129,7 @@ export default function AboutPage() {
 
           <Reveal delay={0.1}>
             <div className="mx-auto mt-5 flex max-w-5xl flex-col gap-4 rounded-3xl border border-line bg-mist p-8 sm:flex-row sm:items-center sm:gap-6 sm:p-10">
-              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-white text-brand-500 ring-1 ring-line">
+              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-white text-accent-500 ring-1 ring-line">
                 <MapPin aria-hidden className="size-5" strokeWidth={1.8} />
               </span>
               <div>

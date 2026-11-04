@@ -1,22 +1,26 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Prime-Techmate design tokens — derived from the official logo
-   (black + signature red #ED1C24).
+   Prime-Techmate design tokens
 
-   PRIMARY    charcoal   near-black brand colour: dark surfaces, primary data series
-   ACCENT     brand      signature red, used sparingly: CTAs, active states,
+   PRIMARY    charcoal   near-black brand colour (from the logo black):
+                         dark surfaces, headlines, primary data series
+   ACCENT     accent     navy blue, used sparingly: CTAs, active states,
                          highlights, single key data points
    NEUTRALS   warm greys for backgrounds, borders and secondary text
    STATUS     muted success / warning tones for dashboard states only
 
+   The official logo keeps its own red and black; red is not used as a
+   website accent.
+
    Contrast (WCAG 2.x, measured):
-   - brand-500 (#ED1C24, the logo red) vs white is 4.38:1 — below AA for small
-     text, so it is reserved for graphics, rules, dots and large display type.
-   - brand-600 (#C8161D) vs white is 5.85:1 — used for buttons with white
-     labels and for small red text/links.
+   - white on accent-600 (#1E3A8A) 10.4:1 — buttons; accent-600 on paper 10.0:1
+   - accent-500 (#24429E) is brighter so highlighted words stay distinct from
+     near-black headlines.
+   - on charcoal-950: accent-400 (#7B96D6) 6.6:1 — accents on dark sections
+     (navy itself is too dark to read on charcoal).
    - body on white 8.65:1 · muted on paper 5.19:1 · muted on mist 4.97:1
-   - on charcoal-950: charcoal-300 9.9:1 · charcoal-400 6.0:1 · brand-400 5.8:1
+   - charcoal-300 on charcoal-950 9.9:1 · charcoal-400 on charcoal-950 6.0:1
    - subtle (#9C9CA2) is decorative only (2.7:1), never for meaningful text.
 ------------------------------------------------------------------- */
 @theme {
@@ -29,13 +33,14 @@
   --color-charcoal-400: #8d9097;
   --color-charcoal-300: #b8bac0;
 
-  --color-brand-50: #fef4f3;
-  --color-brand-100: #fde3e2;
-  --color-brand-200: #f9c3c1;
-  --color-brand-400: #f2585d;
-  --color-brand-500: #ed1c24;
-  --color-brand-600: #c8161d;
-  --color-brand-700: #a11218;
+  --color-accent-50: #f1f4fb;
+  --color-accent-100: #e2e9f8;
+  --color-accent-200: #c7d3f0;
+  --color-accent-300: #a8bbe8;
+  --color-accent-400: #7b96d6;
+  --color-accent-500: #24429e;
+  --color-accent-600: #1e3a8a;
+  --color-accent-700: #172d6b;
 
   --color-ink: #141416;
   --color-body: #4b4b52;
@@ -97,10 +102,10 @@
     @apply text-pretty;
   }
   ::selection {
-    @apply bg-brand-100 text-charcoal-900;
+    @apply bg-accent-100 text-charcoal-900;
   }
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-brand-500;
+    @apply outline-2 outline-offset-2 outline-accent-500;
   }
 }
 

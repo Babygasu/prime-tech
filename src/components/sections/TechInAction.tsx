@@ -64,7 +64,7 @@ export function TechInAction() {
     <section id="technology" aria-labelledby="technology-title" className="relative overflow-hidden bg-charcoal-950 py-24 text-white sm:py-32">
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="bg-grid-dark absolute inset-0 [mask-image:radial-gradient(ellipse_60%_50%_at_70%_40%,black,transparent_80%)]" />
-        <div className="absolute right-[-10%] top-[10%] h-[560px] w-[760px] rounded-full bg-[radial-gradient(closest-side,rgb(237_28_36/0.14),transparent)] motion-safe:animate-drift" />
+        <div className="absolute right-[-10%] top-[10%] h-[560px] w-[760px] rounded-full bg-[radial-gradient(closest-side,rgb(123_150_214/0.14),transparent)] motion-safe:animate-drift" />
       </div>
 
       <Container className="relative">
@@ -123,7 +123,7 @@ export function TechInAction() {
                       <span
                         className={cn(
                           "grid size-9 place-items-center rounded-xl transition-colors duration-300",
-                          selected ? "bg-brand-600 text-white" : "bg-white/[0.06] text-charcoal-400 group-hover:text-white",
+                          selected ? "bg-accent-400 text-charcoal-950" : "bg-white/[0.06] text-charcoal-400 group-hover:text-white",
                         )}
                       >
                         <t.icon aria-hidden className="size-[18px]" />

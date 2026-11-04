@@ -28,8 +28,15 @@ export function Eyebrow({
         className,
       )}
     >
-      {/* Signature red rule: a small, consistent brand detail on every section label. */}
-      <span aria-hidden className={cn("h-[2px] w-6 shrink-0 rounded-full bg-brand-500", centered && "hidden sm:block")} />
+      {/* Navy accent rule: a small, consistent brand detail on every section label. */}
+      <span
+        aria-hidden
+        className={cn(
+          "h-[2px] w-6 shrink-0 rounded-full",
+          tone === "light" ? "bg-accent-500" : "bg-accent-400",
+          centered && "hidden sm:block",
+        )}
+      />
       {children}
     </p>
   );
@@ -80,13 +87,15 @@ const buttonBase =
   "group inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-[15px] font-semibold tracking-[-0.01em] transition-[background-color,color,border-color,box-shadow,transform] duration-300 ease-premium active:scale-[0.98]";
 
 /**
- * primary   red call to action (brand-600 keeps white labels above 4.5:1)
+ * primary   navy call to action (white on accent-600 is 10.4:1)
+ * light     white call to action on dark sections, where navy would disappear
  * dark      charcoal button for secondary emphasis on light backgrounds
  * secondary quiet outline button
  * ghostDark outline button on dark surfaces
  */
 const buttonVariants = {
-  primary: "bg-brand-600 text-white hover:bg-brand-700 shadow-[0_1px_0_rgb(255_255_255/0.12)_inset]",
+  primary: "bg-accent-600 text-white hover:bg-accent-700 shadow-[0_1px_0_rgb(255_255_255/0.12)_inset]",
+  light: "bg-white text-charcoal-950 hover:bg-accent-100",
   dark: "bg-charcoal-900 text-white hover:bg-charcoal-700",
   secondary: "border border-line bg-white text-ink hover:border-charcoal-900/25 hover:bg-mist",
   ghostDark: "border border-white/15 text-white hover:border-white/35 hover:bg-white/5",
@@ -128,7 +137,7 @@ export function DemoBadge({ children = "Illustrative concept · fictional data",
         tone === "light" ? "bg-cloud text-muted" : "bg-white/[0.06] text-charcoal-400 ring-1 ring-white/10",
       )}
     >
-      <span aria-hidden className="size-1.5 rounded-full bg-brand-500" />
+      <span aria-hidden className="size-1.5 rounded-full bg-accent-500" />
       {children}
     </span>
   );
