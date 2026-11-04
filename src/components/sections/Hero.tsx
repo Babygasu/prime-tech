@@ -48,25 +48,25 @@ export function Hero() {
           <motion.h1
             id="hero-title"
             {...enter(0.05)}
-            className="text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-ink sm:text-6xl sm:leading-[1.04] lg:text-[4.5rem]"
+            className="text-[2.1rem] font-bold leading-[1.08] tracking-[-0.035em] text-ink sm:text-5xl sm:leading-[1.06] lg:text-[3.5rem]"
           >
             Powering Healthcare <br className="hidden sm:block" />
             Through <span className="text-accent-500">Technology.</span>
           </motion.h1>
           <motion.p
             {...enter(0.15)}
-            className="mx-auto mt-4 max-w-[46rem] text-[16px] leading-relaxed text-body sm:text-lg sm:leading-relaxed"
+            className="mx-auto mt-4 max-w-[42rem] text-[15px] leading-relaxed text-body sm:text-base sm:leading-relaxed"
           >
             {hero.lead}
           </motion.p>
           <motion.div
             {...enter(0.25)}
-            className="mt-7 flex flex-col items-stretch justify-center gap-2.5 sm:flex-row sm:items-center"
+            className="mt-6 flex flex-col items-stretch justify-center gap-2.5 sm:flex-row sm:items-center"
           >
-            <ButtonLink href={hero.primaryCta.href} arrow className="h-11 px-5 text-[14px]">
+            <ButtonLink href={hero.primaryCta.href} size="sm" arrow>
               {hero.primaryCta.label}
             </ButtonLink>
-            <ButtonLink href={hero.secondaryCta.href} variant="secondary" className="h-11 px-5 text-[14px]">
+            <ButtonLink href={hero.secondaryCta.href} variant="secondary" size="sm">
               {hero.secondaryCta.label}
             </ButtonLink>
           </motion.div>

@@ -84,7 +84,13 @@ export function SectionHeading({
 }
 
 const buttonBase =
-  "group inline-flex h-12 items-center justify-center gap-2 rounded-full px-6 text-[15px] font-semibold tracking-[-0.01em] transition-[background-color,color,border-color,box-shadow,transform] duration-300 ease-premium active:scale-[0.98]";
+  "group inline-flex items-center justify-center gap-2 rounded-full font-semibold tracking-[-0.01em] transition-[background-color,color,border-color,box-shadow,transform] duration-300 ease-premium active:scale-[0.98]";
+
+/** md is the default; sm is a quieter size for places like the hero. */
+const buttonSizes = {
+  md: "h-12 px-6 text-[15px]",
+  sm: "h-10 px-[1.125rem] text-[13px]",
+} as const;
 
 /**
  * primary   navy call to action (white on accent-600 is 10.4:1)
@@ -105,27 +111,32 @@ export function ButtonLink({
   href,
   children,
   variant = "primary",
+  size = "md",
   arrow = false,
   className,
 }: {
   href: string;
   children: ReactNode;
   variant?: keyof typeof buttonVariants;
+  size?: keyof typeof buttonSizes;
   arrow?: boolean;
   className?: string;
 }) {
   return (
-    <Link href={href} className={cn(buttonBase, buttonVariants[variant], className)}>
+    <Link href={href} className={cn(buttonBase, buttonSizes[size], buttonVariants[variant], className)}>
       {children}
       {arrow ? (
-        <ArrowRight aria-hidden className="size-4 transition-transform duration-300 ease-premium group-hover:translate-x-0.5" />
+        <ArrowRight
+          aria-hidden
+          className={cn(size === "sm" ? "size-3.5" : "size-4", "transition-transform duration-300 ease-premium group-hover:translate-x-0.5")}
+        />
       ) : null}
     </Link>
   );
 }
 
 export function buttonClass(variant: keyof typeof buttonVariants = "primary", className?: string) {
-  return cn(buttonBase, buttonVariants[variant], className);
+  return cn(buttonBase, buttonSizes.md, buttonVariants[variant], className);
 }
 
 /** Small label used on every illustrative interface and placeholder. */
