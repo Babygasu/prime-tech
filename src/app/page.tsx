@@ -8,6 +8,7 @@ import { WhyUs } from "@/components/sections/WhyUs";
 import { Approach } from "@/components/sections/Approach";
 import { Projects } from "@/components/sections/Projects";
 import { Contact } from "@/components/sections/Contact";
+import { photos } from "@/components/ui/Photo";
 
 export default function HomePage() {
   return (
@@ -17,7 +18,7 @@ export default function HomePage() {
       <Solutions />
       <ProductSpotlight />
       <TechInAction />
-      <WhoWeServe />
+      <WhoWeServe photo={photos.nurseDesktop} />
       <WhyUs />
       <Approach />
       <Projects />

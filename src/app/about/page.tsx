@@ -4,7 +4,7 @@ import { about, mission, site, vision } from "@/content/site";
 import { Container, SectionHeading } from "@/components/ui/primitives";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
-import { NetworkIllustration } from "@/components/visuals/NetworkIllustration";
+import { Photo, photos } from "@/components/ui/Photo";
 import { WhoWeServe } from "@/components/sections/WhoWeServe";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { Approach } from "@/components/sections/Approach";
@@ -75,12 +75,7 @@ export default function AboutPage() {
               </Reveal>
             </div>
             <Reveal delay={0.1}>
-              <figure className="relative rounded-[28px] border border-line bg-white p-4 sm:p-8">
-                <NetworkIllustration />
-                <figcaption className="mt-4 text-center text-[12px] text-muted">
-                  Connected care: information moving securely between facilities.
-                </figcaption>
-              </figure>
+              <Photo photo={photos.cliniciansTablet} imgClassName="aspect-[4/3]" />
             </Reveal>
           </div>
         </Container>

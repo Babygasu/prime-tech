@@ -6,7 +6,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { BrowserFrame, ScaledCanvas } from "@/components/visuals/Frame";
 import { DASHBOARD_HEIGHT, DASHBOARD_WIDTH, DemoDashboard } from "@/components/visuals/dashboard/DemoDashboard";
-import { VisualFrame, WorkflowVisual } from "@/components/visuals/SolutionVisual";
+import { Photo, photos } from "@/components/ui/Photo";
 import { WhoWeServe } from "@/components/sections/WhoWeServe";
 import { CtaBand } from "@/components/sections/CtaBand";
 
@@ -74,9 +74,7 @@ export default function ApplifyPage() {
               </p>
             </Reveal>
             <Reveal delay={0.1}>
-              <VisualFrame badge="Illustrative concept · not an Applify EMR screenshot">
-                <WorkflowVisual />
-              </VisualFrame>
+              <Photo photo={photos.cliniciansDashboard} imgClassName="aspect-[3/2]" />
             </Reveal>
           </div>
         </Container>
