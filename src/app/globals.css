@@ -3,15 +3,14 @@
 /* ------------------------------------------------------------------
    Prime-Techmate design tokens
 
-   PRIMARY    charcoal   near-black brand colour (from the logo black):
-                         dark surfaces, headlines, primary data series
-   ACCENT     accent     navy blue, used sparingly: CTAs, active states,
-                         highlights, single key data points
+   Matches the official logo: navy (#2B3990) with signature red (#ED1C24).
+
+   NAVY       accent/navy  working brand colour: CTAs, links, active states,
+                           dashboard data, deep-navy dark sections
+   SIGNAL     signal       logo red, small signature details only
+   INK        charcoal     near-black for headlines and text
    NEUTRALS   warm greys for backgrounds, borders and secondary text
    STATUS     muted success / warning tones for dashboard states only
-
-   The official logo keeps its own red and black; red is not used as a
-   website accent.
 
    Contrast (WCAG 2.x, measured):
    - white on accent-600 (#1E3A8A) 10.4:1 — buttons; accent-600 on paper 10.0:1

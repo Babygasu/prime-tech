@@ -38,7 +38,7 @@ const groups: { title: string; note: string; swatches: Swatch[] }[] = [
   },
   {
     title: "Text & ink · Charcoal",
-    note: "From the black in the logo. Headlines and dark text.",
+    note: "Near-black for headlines and dark text, keeping reading comfortable.",
     swatches: [
       { name: "Charcoal 900", token: "charcoal-900", hex: "#17181B", role: "Dark UI text & icons", dark: true },
       { name: "Charcoal 600", token: "charcoal-600", hex: "#44464C", role: "Section labels", dark: true },
@@ -111,7 +111,7 @@ export default function BrandPage() {
           <SectionHeading
             eyebrow="Design system · internal"
             title="Prime-Techmate colour system"
-            lead="Navy blue as the working brand colour, the logo red as a small signature accent, charcoal for headlines, and warm neutrals for calm, premium backgrounds. The logo itself keeps its original red and black."
+            lead="Navy blue as the working brand colour, the logo red as a small signature accent, charcoal for headlines, and warm neutrals for calm, premium backgrounds, matching the official navy-and-red logo."
           />
           <div className="rounded-3xl border border-line bg-white p-6">
             <Logo className="h-14" />
