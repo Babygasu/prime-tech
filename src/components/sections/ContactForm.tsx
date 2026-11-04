@@ -3,7 +3,7 @@
 import { useState, type FormEvent, type InputHTMLAttributes, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, ChevronDown, CircleCheck, LoaderCircle } from "lucide-react";
-import { finalCta, solutions } from "@/content/site";
+import { finalCta, product, solutions } from "@/content/site";
 import { cn } from "@/lib/cn";
 
 type Fields = { name: string; organisation: string; email: string; phone: string; interest: string; message: string };
@@ -142,8 +142,9 @@ export function ContactForm() {
                   className={cn(inputClass, "appearance-none pr-10")}
                 >
                   <option value="">Select an area (optional)</option>
+                  <option>{product.name}</option>
                   {solutions.map((s) => (
-                    <option key={s.title}>{s.title}</option>
+                    <option key={s.slug}>{s.title}</option>
                   ))}
                   <option>Something else</option>
                 </select>

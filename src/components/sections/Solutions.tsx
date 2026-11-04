@@ -13,17 +13,17 @@ export function Solutions() {
           <SectionHeading
             align="center"
             eyebrow="Our solutions"
-            title={<span id="solutions-title">Technology that strengthens every part of healthcare.</span>}
-            lead="From the systems clinicians use every day to the infrastructure behind them, we deliver solutions shaped around how your organisation works."
+            title={<span id="solutions-title">Technology that strengthens healthcare delivery.</span>}
+            lead="We design, implement and support the digital systems that power modern healthcare environments, from patient records to the networks behind them."
           />
         </Reveal>
 
-        <ul className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+        <ul className="mx-auto mt-16 grid max-w-5xl gap-4 md:grid-cols-2 lg:gap-5">
           {solutions.map((s, i) => {
             const Icon = solutionIcons[s.icon];
             return (
               <li key={s.slug}>
-                <Reveal delay={(i % 3) * 0.07} className="h-full">
+                <Reveal delay={(i % 2) * 0.07} className="h-full">
                   <Link
                     href={`/solutions/#${s.slug}`}
                     className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-white p-7 transition-[transform,box-shadow,border-color] duration-500 ease-premium hover:-translate-y-1 hover:border-teal-500/30 hover:shadow-lift sm:p-8"
@@ -41,8 +41,8 @@ export function Solutions() {
                         className="size-5 text-subtle opacity-0 transition-[opacity,transform,color] duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-teal-600 group-hover:opacity-100"
                       />
                     </span>
-                    <h3 className="mt-7 text-xl font-bold tracking-[-0.02em] text-ink">{s.title}</h3>
-                    <p className="mt-3 text-[15px] leading-relaxed text-body">{s.description}</p>
+                    <h3 className="mt-7 text-xl font-bold tracking-[-0.02em] text-ink sm:text-[22px]">{s.title}</h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-body sm:text-base">{s.description}</p>
                   </Link>
                 </Reveal>
               </li>

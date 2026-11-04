@@ -1,12 +1,47 @@
-import { ChartColumn, HeartPulse, Hospital, MonitorSmartphone, Server, Workflow, type LucideProps } from "lucide-react";
+import {
+  Baby,
+  Building2,
+  ChartColumn,
+  FileHeart,
+  FlaskConical,
+  Hospital,
+  House,
+  Network,
+  Pill,
+  ReceiptText,
+  ShieldCheck,
+  Stethoscope,
+  UserRound,
+  Users,
+  type LucideProps,
+} from "lucide-react";
 import type { ComponentType } from "react";
-import type { SolutionIcon } from "@/content/site";
+import type { CapabilityIcon, ClientIcon, SolutionIcon } from "@/content/site";
 
-export const solutionIcons: Record<SolutionIcon, ComponentType<LucideProps>> = {
-  his: HeartPulse,
+type Icon = ComponentType<LucideProps>;
+
+export const solutionIcons: Record<SolutionIcon, Icon> = {
+  emr: FileHeart,
+  hmis: ChartColumn,
+  network: Network,
+  claims: ReceiptText,
+};
+
+export const capabilityIcons: Record<CapabilityIcon, Icon> = {
+  registration: UserRound,
+  consultation: Stethoscope,
+  lab: FlaskConical,
+  pharmacy: Pill,
+  billing: ReceiptText,
+  reports: ChartColumn,
+  security: ShieldCheck,
+};
+
+export const clientIcons: Record<ClientIcon, Icon> = {
   hospital: Hospital,
-  integration: Workflow,
-  infrastructure: Server,
-  analytics: ChartColumn,
-  digital: MonitorSmartphone,
+  chps: House,
+  maternity: Baby,
+  clinic: Stethoscope,
+  private: Building2,
+  organisation: Users,
 };

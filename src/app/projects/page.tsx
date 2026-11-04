@@ -38,11 +38,11 @@ export default function ProjectsPage() {
 
       <section aria-label="Project list" className="pb-24 sm:pb-32">
         <Container>
-          <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="grid gap-5 md:grid-cols-2">
             {solutions.map((s, i) => (
               <li key={s.slug}>
-                <Reveal delay={(i % 3) * 0.08} className="h-full">
-                  <ProjectCard category={s.title} />
+                <Reveal delay={(i % 2) * 0.08} className="h-full">
+                  <ProjectCard category={s.shortTitle} />
                 </Reveal>
               </li>
             ))}

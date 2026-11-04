@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
-import { enquiryHref, navigation, site, solutions } from "@/content/site";
+import { enquiryHref, navigation, product, site, solutions } from "@/content/site";
 import { Logo } from "@/components/brand/Logo";
 import { Container } from "@/components/ui/primitives";
 
@@ -14,8 +14,9 @@ export function Footer() {
           <div className="max-w-sm">
             <Logo />
             <p className="mt-5 text-[15px] leading-relaxed text-body">
-              A Ghanaian technology solutions company specialising in health systems development and digital
-              health infrastructure, with over {site.experienceYears} years of industry experience.
+              A Ghana-based technology solutions company specialising in health systems development and digital
+              health infrastructure, with over {site.experienceYears} years of industry experience. Serving clients
+              across Ghana.
             </p>
           </div>
 
@@ -33,10 +34,15 @@ export function Footer() {
             {solutions.map((s) => (
               <li key={s.slug}>
                 <Link href={`/solutions/#${s.slug}`} className="text-body transition-colors hover:text-ink">
-                  {s.title}
+                  {s.shortTitle}
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href={`/${product.slug}/`} className="text-body transition-colors hover:text-ink">
+                {product.name}
+              </Link>
+            </li>
           </FooterColumn>
 
           <FooterColumn title="Contact">

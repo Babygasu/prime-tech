@@ -52,7 +52,7 @@ export function Navbar() {
           <Logo />
         </Link>
 
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden items-center gap-0.5 xl:flex">
           {navigation.map((item) => {
             const isActive = active === item.id;
             return (
@@ -90,7 +90,7 @@ export function Navbar() {
           </Link>
           <button
             type="button"
-            className="inline-flex size-10 items-center justify-center rounded-full text-ink transition-colors hover:bg-cloud lg:hidden"
+            className="inline-flex size-10 items-center justify-center rounded-full text-ink transition-colors hover:bg-cloud xl:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -109,7 +109,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "100dvh" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden bg-white lg:hidden"
+            className="overflow-hidden bg-white xl:hidden"
           >
             <ul className="flex flex-col px-4 pt-4 sm:px-6">
               {navigation.map((item, i) => (

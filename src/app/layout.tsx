@@ -17,11 +17,13 @@ export const metadata: Metadata = {
   title: { default: title, template: "%s | Prime-Techmate" },
   description: site.description,
   keywords: [
-    "health information systems Ghana",
-    "hospital management system",
+    "electronic medical records Ghana",
+    "EMR system Ghana",
+    "Applify EMR",
+    "HMIS Ghana",
+    "health insurance claims training",
+    "healthcare network infrastructure",
     "digital health infrastructure",
-    "healthcare ICT solutions",
-    "systems integration",
     "Accra",
   ],
   openGraph: {

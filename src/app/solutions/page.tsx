@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Check } from "lucide-react";
-import { solutions } from "@/content/site";
+import Link from "next/link";
+import { ArrowRight, Check } from "lucide-react";
+import { product, solutions } from "@/content/site";
 import { solutionIcons } from "@/components/brand/solutionIcons";
 import { Container } from "@/components/ui/primitives";
 import { PageHero } from "@/components/ui/PageHero";
@@ -13,7 +14,7 @@ import { cn } from "@/lib/cn";
 export const metadata: Metadata = {
   title: "Solutions",
   description:
-    "Health information systems, hospital management, systems integration, ICT infrastructure, data analytics and digital health solutions from Prime-Techmate.",
+    "Electronic Medical Records, Health Management Information Systems, network infrastructure and health insurance claims support and training from Prime-Techmate.",
   alternates: { canonical: "/solutions/" },
 };
 
@@ -27,7 +28,7 @@ export default function SolutionsPage() {
             Technology for every part of <span className="text-teal-600">healthcare.</span>
           </>
         }
-        lead="We design, implement and support the systems and infrastructure healthcare organisations rely on, from patient records to the networks behind them."
+        lead="We design, implement and support advanced digital systems that power modern healthcare environments, for hospitals, clinics and health institutions across Ghana."
       >
         <nav aria-label="Solutions on this page" className="no-scrollbar -mx-4 mt-10 overflow-x-auto px-4 sm:mx-0 sm:px-0">
           <ul className="flex w-max gap-2 sm:w-auto sm:flex-wrap">
@@ -40,7 +41,7 @@ export default function SolutionsPage() {
                     className="inline-flex h-10 items-center gap-2 rounded-full border border-line bg-white px-4 text-[14px] font-medium text-body transition-colors duration-300 hover:border-teal-500/40 hover:text-ink"
                   >
                     <Icon aria-hidden className="size-4 text-teal-600" />
-                    {s.title}
+                    {s.shortTitle}
                   </a>
                 </li>
               );
@@ -81,6 +82,15 @@ export default function SolutionsPage() {
                         </li>
                       ))}
                     </ul>
+                    {s.icon === "emr" ? (
+                      <Link
+                        href={`/${product.slug}/`}
+                        className="group mt-8 inline-flex items-center gap-2 text-[15px] font-semibold text-teal-700 hover:text-teal-600"
+                      >
+                        Discover {product.name}, our own EMR system
+                        <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                      </Link>
+                    ) : null}
                   </Reveal>
                   <Reveal delay={0.1} className={cn(flip && "lg:order-1")}>
                     <SolutionVisual kind={s.icon} />

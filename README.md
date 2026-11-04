@@ -22,7 +22,8 @@ src/
   app/                  routes, metadata, OG image, sitemap, robots
     page.tsx            homepage (composes sections)
     about/              About Us: story, principles, why us, approach
-    solutions/          all six solutions with illustrative visuals + demo dashboard
+    solutions/          the four core services with illustrative visuals + demo dashboard
+    applify-emr/        Applify EMR product page
     projects/           placeholder project cards + case-study format
     team/               team page (placeholder profiles)
     contact/            contact page with enquiry form
@@ -72,11 +73,12 @@ as deployed Prime-Techmate products until real screenshots are supplied.
       address, and a US address on the contact page). These are intentionally **not shown** until verified.
 - [ ] **Full street address** — only "Spintex Road, Accra" is shown.
 - [ ] **Social media URLs** — the old LinkedIn link pointed to `#`.
-- [ ] **Service descriptions and highlights** in `content/site.ts` — drafted from the brief; confirm they match real capabilities.
-- [ ] **Mission / Vision / Value** on the About page — carried over from the current website; confirm wording.
+- [x] **Company content** — services, Applify EMR, mission, vision, "why choose us" and client types now come
+      from the company profile supplied by Prime-Techmate.
+- [ ] **Applify EMR screenshots** — the product page uses clearly labelled illustrative mockups; replace them with
+      real Applify EMR screenshots when available.
 - [ ] **Projects** — three clearly marked placeholder cards; replace with verified projects only.
 - [ ] **Team profiles** — `/team` shows placeholders.
-- [ ] **APPLIFY EMR** — mentioned on the old Solutions page; confirm whether it is a real product before featuring it.
 - [ ] **Contact form — first live test** — see "Contact form" below. Send one enquiry from the live site and
       check it arrives (including the spam folder).
 - [ ] **Production domain** — `site.url` currently uses the Hostinger preview URL (affects SEO metadata).

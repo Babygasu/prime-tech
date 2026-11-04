@@ -1,28 +1,30 @@
 import type { Metadata } from "next";
-import { Compass, Eye, ShieldCheck, type LucideProps } from "lucide-react";
-import type { ComponentType } from "react";
-import { principles, site } from "@/content/site";
+import { Eye, MapPin, Target } from "lucide-react";
+import { about, mission, site, vision } from "@/content/site";
 import { Container, SectionHeading } from "@/components/ui/primitives";
 import { PageHero } from "@/components/ui/PageHero";
 import { Reveal } from "@/components/motion/Reveal";
 import { NetworkIllustration } from "@/components/visuals/NetworkIllustration";
+import { WhoWeServe } from "@/components/sections/WhoWeServe";
 import { WhyUs } from "@/components/sections/WhyUs";
 import { Approach } from "@/components/sections/Approach";
 import { CtaBand } from "@/components/sections/CtaBand";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: `Prime-Techmate is a Ghanaian healthcare technology and ICT solutions company with over ${site.experienceYears} years of industry experience, headquartered on Spintex Road, Accra.`,
+  description: `Prime-Techmate is a Ghana-based health technology company with over ${site.experienceYears} years of experience, headquartered on Spintex Road, Accra, and serving healthcare institutions nationwide.`,
   alternates: { canonical: "/about/" },
 };
-
-const principleIcons: ComponentType<LucideProps>[] = [Compass, Eye, ShieldCheck];
 
 export default function AboutPage() {
   const facts = [
     { value: `${site.experienceYears}+`, label: "Years of industry experience" },
     { value: "Accra", label: "Headquartered on Spintex Road" },
-    { value: "Ghana", label: "Serving organisations nationwide" },
+    { value: "Ghana", label: "Nationwide service delivery" },
+  ];
+  const statements = [
+    { label: "Our mission", text: mission, icon: Target },
+    { label: "Our vision", text: vision, icon: Eye },
   ];
 
   return (
@@ -31,11 +33,11 @@ export default function AboutPage() {
         eyebrow="About Prime-Techmate"
         title={
           <>
-            A Ghanaian healthcare <br className="hidden sm:block" />
-            technology <span className="text-teal-600">company.</span>
+            Health technology, <br className="hidden sm:block" />
+            made in <span className="text-teal-600">Ghana.</span>
           </>
         }
-        lead="We specialise in health systems development and digital health infrastructure, helping healthcare organisations deliver care, manage information and run administration more efficiently."
+        lead="We specialise in health systems development and digital health infrastructure, providing reliable ICT solutions that strengthen healthcare delivery, improve data management and support efficient health administration."
       />
 
       <section aria-labelledby="story-title" className="bg-mist py-24 sm:py-32">
@@ -45,18 +47,19 @@ export default function AboutPage() {
               <Reveal>
                 <SectionHeading
                   eyebrow="Who we are"
-                  title={<span id="story-title">Technology that works for the people delivering care.</span>}
+                  title={<span id="story-title">{about.title}</span>}
                 />
               </Reveal>
               <Reveal delay={0.08}>
-                <p className="mt-6 text-lg leading-relaxed text-body">
-                  For more than {site.experienceYears} years, Prime-Techmate has designed, implemented and supported ICT
-                  solutions for healthcare. Our work spans the systems that capture and share health information, the
-                  infrastructure that keeps them running, and the data that helps organisations plan.
-                </p>
+                {about.paragraphs.map((p, i) => (
+                  <p key={i} className={i === 0 ? "mt-6 text-lg leading-relaxed text-body" : "mt-4 text-lg leading-relaxed text-body"}>
+                    {p}
+                  </p>
+                ))}
                 <p className="mt-4 text-lg leading-relaxed text-body">
-                  We are a technology company, not a healthcare provider. Our role is to give hospitals, clinics and
-                  health administrators dependable tools, and to stay alongside them as their needs grow.
+                  We design, implement and support the digital systems that power modern healthcare environments,
+                  helping healthcare institutions, organisations and agencies improve operational efficiency and
+                  patient care.
                 </p>
               </Reveal>
               <Reveal delay={0.14}>
@@ -83,36 +86,62 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section aria-labelledby="principles-title" className="py-24 sm:py-32">
+      <section aria-labelledby="purpose-title" className="py-24 sm:py-32">
         <Container>
           <Reveal>
             <SectionHeading
               align="center"
-              eyebrow="Our principles"
-              title={<span id="principles-title">What guides our work.</span>}
+              eyebrow="Mission & vision"
+              title={<span id="purpose-title">What drives our work.</span>}
             />
           </Reveal>
-          <ul className="mt-14 grid gap-4 md:grid-cols-3 lg:gap-5">
-            {principles.map((p, i) => {
-              const Icon = principleIcons[i];
-              return (
-                <li key={p.label}>
-                  <Reveal delay={i * 0.08} className="h-full">
-                    <article className="flex h-full flex-col rounded-3xl border border-line bg-white p-8 transition-shadow duration-500 hover:shadow-lift">
-                      <span className="grid size-11 place-items-center rounded-xl bg-teal-50 text-teal-700">
-                        <Icon aria-hidden className="size-5" strokeWidth={1.8} />
-                      </span>
-                      <h3 className="mt-6 text-[13px] font-semibold uppercase tracking-[0.16em] text-teal-700">{p.label}</h3>
-                      <p className="mt-3 text-lg leading-relaxed text-ink">{p.text}</p>
-                    </article>
-                  </Reveal>
-                </li>
-              );
-            })}
+          <ul className="mx-auto mt-14 grid max-w-5xl gap-4 md:grid-cols-2 lg:gap-5">
+            {statements.map((s, i) => (
+              <li key={s.label}>
+                <Reveal delay={i * 0.08} className="h-full">
+                  <article
+                    className={
+                      i === 0
+                        ? "relative flex h-full flex-col overflow-hidden rounded-3xl bg-navy-900 p-8 text-white sm:p-10"
+                        : "flex h-full flex-col rounded-3xl border border-line bg-white p-8 sm:p-10"
+                    }
+                  >
+                    <span
+                      className={
+                        i === 0
+                          ? "grid size-11 place-items-center rounded-xl bg-white/[0.08] text-teal-300"
+                          : "grid size-11 place-items-center rounded-xl bg-teal-50 text-teal-700"
+                      }
+                    >
+                      <s.icon aria-hidden className="size-5" strokeWidth={1.8} />
+                    </span>
+                    <h3 className={i === 0 ? "mt-8 text-[13px] font-semibold uppercase tracking-[0.16em] text-teal-300" : "mt-8 text-[13px] font-semibold uppercase tracking-[0.16em] text-teal-700"}>
+                      {s.label}
+                    </h3>
+                    <p className={i === 0 ? "mt-3 font-display text-xl font-semibold leading-snug tracking-tight sm:text-2xl" : "mt-3 font-display text-xl font-semibold leading-snug tracking-tight text-ink sm:text-2xl"}>
+                      {s.text}
+                    </p>
+                  </article>
+                </Reveal>
+              </li>
+            ))}
           </ul>
+
+          <Reveal delay={0.1}>
+            <div className="mx-auto mt-5 flex max-w-5xl flex-col gap-4 rounded-3xl border border-line bg-mist p-8 sm:flex-row sm:items-center sm:gap-6 sm:p-10">
+              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-white text-teal-700 ring-1 ring-line">
+                <MapPin aria-hidden className="size-5" strokeWidth={1.8} />
+              </span>
+              <div>
+                <h3 className="text-[13px] font-semibold uppercase tracking-[0.16em] text-teal-700">Our reach</h3>
+                <p className="mt-2 text-lg leading-relaxed text-ink">{about.reach}</p>
+              </div>
+            </div>
+          </Reveal>
         </Container>
       </section>
 
+      <WhoWeServe className="bg-mist" />
       <WhyUs />
       <Approach />
       <CtaBand />

@@ -1,4 +1,4 @@
-import { site } from "@/content/site";
+import { about, site } from "@/content/site";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { Reveal } from "@/components/motion/Reveal";
 import { NetworkIllustration } from "@/components/visuals/NetworkIllustration";
@@ -7,7 +7,7 @@ export function About() {
   const facts = [
     { value: `${site.experienceYears}+`, label: "Years of industry experience" },
     { value: "Accra", label: "Headquartered on Spintex Road" },
-    { value: "Ghana", label: "Serving organisations nationwide" },
+    { value: "Ghana", label: "Nationwide service delivery" },
   ];
   return (
     <section id="about" aria-labelledby="about-title" className="bg-mist py-24 sm:py-32">
@@ -17,18 +17,15 @@ export function About() {
             <Reveal>
               <Eyebrow>About Prime-Techmate</Eyebrow>
               <h2 id="about-title" className="mt-5 text-[2rem] font-bold leading-[1.1] tracking-[-0.03em] text-ink sm:text-[2.75rem] lg:text-5xl">
-                Healthcare technology, built on more than {site.experienceYears} years of experience.
+                {about.title}
               </h2>
             </Reveal>
             <Reveal delay={0.08}>
-              <p className="mt-6 text-lg leading-relaxed text-body">
-                Prime-Techmate is a Ghanaian technology solutions company specialising in health systems development
-                and digital health infrastructure.
-              </p>
-              <p className="mt-4 text-lg leading-relaxed text-body">
-                We design, implement and support ICT solutions that help healthcare organisations deliver care,
-                manage information and run administration more efficiently.
-              </p>
+              {about.paragraphs.map((p, i) => (
+                <p key={i} className={i === 0 ? "mt-6 text-lg leading-relaxed text-body" : "mt-4 text-lg leading-relaxed text-body"}>
+                  {p}
+                </p>
+              ))}
             </Reveal>
             <Reveal delay={0.14}>
               <dl className="mt-10 grid grid-cols-3 divide-x divide-line border-y border-line">
