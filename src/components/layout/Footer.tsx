@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
-import { navigation, site, solutions } from "@/content/site";
+import { enquiryHref, navigation, site, solutions } from "@/content/site";
 import { Logo } from "@/components/brand/Logo";
 import { Container } from "@/components/ui/primitives";
 
@@ -31,8 +31,8 @@ export function Footer() {
 
           <FooterColumn title="Solutions">
             {solutions.map((s) => (
-              <li key={s.title}>
-                <Link href="/#solutions" className="text-body transition-colors hover:text-ink">
+              <li key={s.slug}>
+                <Link href={`/solutions/#${s.slug}`} className="text-body transition-colors hover:text-ink">
                   {s.title}
                 </Link>
               </li>
@@ -53,7 +53,7 @@ export function Footer() {
             ) : null}
             {site.contact.phone ? <li className="text-body">{site.contact.phone}</li> : null}
             <li>
-              <Link href="/#contact" className="font-semibold text-teal-700 hover:text-teal-600">
+              <Link href={enquiryHref} className="font-semibold text-teal-700 hover:text-teal-600">
                 Send us an enquiry →
               </Link>
             </li>

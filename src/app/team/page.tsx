@@ -42,7 +42,7 @@ export default function TeamPage() {
         </ul>
 
         <div className="mt-14 flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href="/#contact" arrow>
+          <ButtonLink href="/contact/" arrow>
             Talk to Our Team
           </ButtonLink>
           <ButtonLink href="/" variant="secondary">

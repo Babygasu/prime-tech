@@ -26,14 +26,17 @@ export const site = {
 
 export type NavItem = { label: string; href: string; id: string };
 
+/** `id` matches the first URL segment of the page ("" = home). */
 export const navigation: NavItem[] = [
-  { label: "Home", href: "/", id: "top" },
-  { label: "About Us", href: "/#about", id: "about" },
-  { label: "Solutions", href: "/#solutions", id: "solutions" },
-  { label: "Projects", href: "/#projects", id: "projects" },
+  { label: "Home", href: "/", id: "" },
+  { label: "About Us", href: "/about/", id: "about" },
+  { label: "Solutions", href: "/solutions/", id: "solutions" },
+  { label: "Projects", href: "/projects/", id: "projects" },
   { label: "Our Team", href: "/team/", id: "team" },
-  { label: "Contact", href: "/#contact", id: "contact" },
+  { label: "Contact", href: "/contact/", id: "contact" },
 ];
+
+export const enquiryHref = "/contact/";
 
 export const hero = {
   eyebrow: "Healthcare technology · ICT solutions · Ghana",
@@ -51,43 +54,104 @@ export type SolutionIcon =
   | "analytics"
   | "digital";
 
-// TODO(confirm): service descriptions are drafts aligned with the brief.
-export const solutions: { icon: SolutionIcon; title: string; description: string }[] = [
+export type Solution = {
+  slug: string;
+  icon: SolutionIcon;
+  title: string;
+  description: string;
+  /** What the service typically covers. Drafts: confirm against real capabilities. */
+  highlights: string[];
+};
+
+// TODO(confirm): service descriptions and highlights are drafts aligned with the brief.
+export const solutions: Solution[] = [
   {
+    slug: "health-information-systems",
     icon: "his",
     title: "Health Information Systems",
     description:
       "Systems that capture, store and share health information securely, so the right data is available to the right people when it is needed.",
+    highlights: [
+      "Electronic patient records",
+      "Secure, role-based access to information",
+      "Information shared between departments and facilities",
+    ],
   },
   {
+    slug: "hospital-management-systems",
     icon: "hospital",
     title: "Hospital Management Systems",
     description:
       "Registration, records, appointments, billing and administration brought together in one coordinated workflow.",
+    highlights: [
+      "Patient registration and appointments",
+      "Clinical, pharmacy and laboratory workflows",
+      "Billing and administrative reporting",
+    ],
   },
   {
+    slug: "systems-integration",
     icon: "integration",
     title: "Systems Integration",
     description:
       "Connecting existing applications and facilities so information moves reliably between them, without duplicate data entry.",
+    highlights: [
+      "Connecting new and existing applications",
+      "Data exchange between facilities",
+      "Less duplicate entry and fewer manual errors",
+    ],
   },
   {
+    slug: "ict-infrastructure",
     icon: "infrastructure",
     title: "ICT Infrastructure",
     description:
       "Networks, hardware and hosting environments designed, installed and maintained to keep critical systems running.",
+    highlights: [
+      "Network design and installation",
+      "Hardware supply and setup",
+      "Hosting, backup and maintenance",
+    ],
   },
   {
+    slug: "data-management-analytics",
     icon: "analytics",
     title: "Data Management & Analytics",
     description:
       "Turning routine health data into clear dashboards and reports that support planning and better decisions.",
+    highlights: [
+      "Dashboards for managers and administrators",
+      "Routine and statutory reporting",
+      "Data quality and data management",
+    ],
   },
   {
+    slug: "digital-health-solutions",
     icon: "digital",
     title: "Digital Health Solutions",
     description:
       "Practical digital tools that extend healthcare services and make information easier to reach for staff and patients.",
+    highlights: [
+      "Web and mobile access to services",
+      "Digital tools for healthcare staff",
+      "Solutions shaped around local needs",
+    ],
+  },
+];
+
+// TODO(confirm): carried over from the "Our Core Principles" section of the current website.
+export const principles = [
+  {
+    label: "Mission",
+    text: "To pioneer purpose-driven technology that solves complex local challenges and accelerates digital transformation across essential industries.",
+  },
+  {
+    label: "Vision",
+    text: "To be the leading technological enabler for emerging economies, recognised for integrity and impact.",
+  },
+  {
+    label: "Value",
+    text: "We commit to the highest ethical standards, with transparent practices and secure data handling in every solution we deliver.",
   },
 ];
 

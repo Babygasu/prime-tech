@@ -5,16 +5,16 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, Menu, X } from "lucide-react";
-import { navigation } from "@/content/site";
+import { enquiryHref, navigation } from "@/content/site";
 import { Logo } from "@/components/brand/Logo";
 import { cn } from "@/lib/cn";
 
 export function Navbar() {
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  // Highlight the nav item for the current page (first URL segment; "" = home).
+  const active = pathname.split("/")[1] ?? "";
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("top");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -23,26 +23,10 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Highlight the nav item for the section currently in view (home only).
+  // Close the mobile menu after navigating.
   useEffect(() => {
-    if (!isHome) {
-      setActive(pathname.startsWith("/team") ? "team" : "");
-      return;
-    }
-    // Observe every section so non-nav sections (e.g. "technology") clear the highlight.
-    const navIds = new Set(navigation.map((n) => n.id));
-    const els = Array.from(document.querySelectorAll<HTMLElement>("main section[id]"));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActive(navIds.has(entry.target.id) ? entry.target.id : "");
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    els.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, [isHome, pathname]);
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -98,7 +82,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <Link
-            href="/#contact"
+            href={enquiryHref}
             className="group hidden h-10 items-center gap-1.5 rounded-full bg-navy-900 px-5 text-[14px] font-semibold text-white transition-colors duration-300 hover:bg-navy-700 sm:inline-flex"
           >
             Make an Enquiry
@@ -138,7 +122,11 @@ export function Navbar() {
                   <Link
                     href={item.href}
                     onClick={() => setOpen(false)}
-                    className="flex items-center justify-between border-b border-line py-4 font-display text-2xl font-semibold tracking-tight text-ink"
+                    aria-current={active === item.id ? "page" : undefined}
+                    className={cn(
+                      "flex items-center justify-between border-b border-line py-4 font-display text-2xl font-semibold tracking-tight",
+                      active === item.id ? "text-teal-700" : "text-ink",
+                    )}
                   >
                     {item.label}
                     <ArrowRight aria-hidden className="size-5 text-subtle" />
@@ -148,7 +136,7 @@ export function Navbar() {
             </ul>
             <div className="px-4 pt-8 sm:px-6">
               <Link
-                href="/#contact"
+                href={enquiryHref}
                 onClick={() => setOpen(false)}
                 className="flex h-12 items-center justify-center rounded-full bg-navy-900 text-[15px] font-semibold text-white"
               >

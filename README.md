@@ -21,13 +21,18 @@ directly to the existing Hostinger static hosting.
 src/
   app/                  routes, metadata, OG image, sitemap, robots
     page.tsx            homepage (composes sections)
-    team/page.tsx       team page (placeholder profiles)
+    about/              About Us: story, principles, why us, approach
+    solutions/          all six solutions with illustrative visuals + demo dashboard
+    projects/           placeholder project cards + case-study format
+    team/               team page (placeholder profiles)
+    contact/            contact page with enquiry form
+    not-found.tsx       404 page
   content/site.ts       ALL copy and company facts — edit text here
   components/
     layout/             Navbar, Footer
-    sections/           Hero, About, Solutions, TechInAction, Approach, WhyUs, Projects, Contact
-    visuals/            DemoDashboard (4 views), HeroVisual, NetworkIllustration, frames
-    ui/                 shared primitives (Container, SectionHeading, ButtonLink, DemoBadge)
+    sections/           Hero, About, Solutions, TechInAction, Approach, WhyUs, Projects, Contact, CtaBand
+    visuals/            DemoDashboard (4 views), HeroVisual, NetworkIllustration, SolutionVisual, frames
+    ui/                 shared primitives (Container, SectionHeading, ButtonLink, DemoBadge, PageHero)
     motion/             Reveal + reduced-motion provider
 ```
 
@@ -55,7 +60,8 @@ as deployed Prime-Techmate products until real screenshots are supplied.
       address, and a US address on the contact page). These are intentionally **not shown** until verified.
 - [ ] **Full street address** — only "Spintex Road, Accra" is shown.
 - [ ] **Social media URLs** — the old LinkedIn link pointed to `#`.
-- [ ] **Service descriptions** in `content/site.ts` — drafted from the brief; confirm they match real capabilities.
+- [ ] **Service descriptions and highlights** in `content/site.ts` — drafted from the brief; confirm they match real capabilities.
+- [ ] **Mission / Vision / Value** on the About page — carried over from the current website; confirm wording.
 - [ ] **Projects** — three clearly marked placeholder cards; replace with verified projects only.
 - [ ] **Team profiles** — `/team` shows placeholders.
 - [ ] **APPLIFY EMR** — mentioned on the old Solutions page; confirm whether it is a real product before featuring it.
