@@ -24,7 +24,7 @@ export default function ApplifyPage() {
         eyebrow="Our product"
         title={
           <>
-            Applify <span className="text-accent-500">EMR.</span>
+            Applify <span className="text-signal-500">EMR.</span>
           </>
         }
         lead={product.summary}
@@ -98,7 +98,7 @@ export default function ApplifyPage() {
                 <li key={c.title} className={i === product.capabilities.length - 1 ? "sm:col-span-2 lg:col-span-1" : undefined}>
                   <Reveal delay={(i % 4) * 0.06} className="h-full">
                     <article className="group flex h-full flex-col rounded-3xl border border-line bg-white p-7 transition-[transform,box-shadow,border-color] duration-500 ease-premium hover:-translate-y-1 hover:border-charcoal-900/15 hover:shadow-lift">
-                      <span className="grid size-11 place-items-center rounded-xl bg-cloud text-charcoal-900 transition-colors duration-500 group-hover:bg-charcoal-900 group-hover:text-accent-400">
+                      <span className="grid size-11 place-items-center rounded-xl bg-cloud text-charcoal-900 transition-colors duration-500 group-hover:bg-accent-600 group-hover:text-white">
                         <Icon aria-hidden className="size-5" strokeWidth={1.8} />
                       </span>
                       <h3 className="mt-6 text-lg font-bold tracking-[-0.02em] text-ink">{c.title}</h3>

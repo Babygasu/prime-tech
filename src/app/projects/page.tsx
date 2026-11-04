@@ -26,7 +26,7 @@ export default function ProjectsPage() {
         eyebrow="Projects & experience"
         title={
           <>
-            Work that supports <span className="text-accent-500">healthcare delivery.</span>
+            Work that supports <span className="text-signal-500">healthcare delivery.</span>
           </>
         }
         lead="A selection of the projects and implementations behind our experience. Verified project details are being prepared and will be published here."

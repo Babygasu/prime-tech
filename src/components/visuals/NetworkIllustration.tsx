@@ -45,7 +45,7 @@ export function NetworkIllustration() {
           return (
             <g key={n.label}>
               <path d={d} fill="none" stroke="#17181b" strokeOpacity="0.16" strokeWidth="1.5" strokeDasharray="4 5" />
-              <circle r="3.5" fill="#24429e" className="motion-dot">
+              <circle r="3.5" fill="#ed1c24" className="motion-dot">
                 <animateMotion
                   dur={`${3.6 + (i % 3) * 0.6}s`}
                   begin={`${i * 0.55}s`}
@@ -65,7 +65,7 @@ export function NetworkIllustration() {
       <div className="absolute -translate-x-1/2 -translate-y-1/2" style={{ left: pct(HUB.x, W), top: pct(HUB.y, H) }}>
         <div className="relative grid place-items-center">
           <span aria-hidden className="absolute size-full animate-pulse-ring rounded-2xl bg-accent-500/20 sm:rounded-3xl" />
-          <div className="relative grid size-16 place-items-center rounded-2xl bg-charcoal-900 shadow-lift sm:size-20 sm:rounded-3xl">
+          <div className="relative grid size-16 place-items-center rounded-2xl bg-accent-600 shadow-lift sm:size-20 sm:rounded-3xl">
             <Database aria-hidden className="size-6 text-white sm:size-8" />
           </div>
         </div>

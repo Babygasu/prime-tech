@@ -74,8 +74,8 @@ export function Navbar() {
                     className="absolute inset-0 rounded-full bg-cloud"
                     transition={{ type: "spring", stiffness: 380, damping: 32 }}
                   >
-                    {/* Navy active marker travels with the pill. */}
-                    <span className="absolute bottom-[3px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-accent-500" />
+                    {/* Red signature marker travels with the pill. */}
+                    <span className="absolute bottom-[3px] left-1/2 size-1 -translate-x-1/2 rounded-full bg-signal-500" />
                   </motion.span>
                 ) : null}
               </li>

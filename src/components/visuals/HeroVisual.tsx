@@ -73,7 +73,7 @@ export function HeroVisual() {
               <motion.span
                 key={i}
                 className="flex-1 rounded-t-[3px]"
-                style={{ background: i === 5 ? "#24429e" : "#e7e5e1" }}
+                style={{ background: i === 5 ? "#ed1c24" : "#c7d3f0" }}
                 initial={{ height: 0 }}
                 animate={{ height: `${h}%` }}
                 transition={{ duration: 0.9, ease, delay: 1.5 + i * 0.06 }}

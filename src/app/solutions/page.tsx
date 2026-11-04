@@ -25,7 +25,7 @@ export default function SolutionsPage() {
         eyebrow="Our solutions"
         title={
           <>
-            Technology for every part of <span className="text-accent-500">healthcare.</span>
+            Technology for every part of <span className="text-signal-500">healthcare.</span>
           </>
         }
         lead="We design, implement and support advanced digital systems that power modern healthcare environments, for hospitals, clinics and health institutions across Ghana."
@@ -60,7 +60,7 @@ export default function SolutionsPage() {
                 <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
                   <Reveal className={cn(flip && "lg:order-2")}>
                     <div className="flex items-center gap-4">
-                      <span className="grid size-12 place-items-center rounded-2xl bg-charcoal-900 text-white">
+                      <span className="grid size-12 place-items-center rounded-2xl bg-accent-600 text-white">
                         <Icon aria-hidden className="size-[22px]" strokeWidth={1.75} />
                       </span>
                       <span className="font-mono text-[13px] font-medium text-accent-600">0{i + 1}</span>

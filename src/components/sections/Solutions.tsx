@@ -33,7 +33,7 @@ export function Solutions() {
                       className="pointer-events-none absolute -right-16 -top-16 size-40 rounded-full bg-accent-500/0 blur-2xl transition-colors duration-700 group-hover:bg-accent-500/[0.07]"
                     />
                     <span className="flex items-start justify-between">
-                      <span className="grid size-12 place-items-center rounded-2xl bg-cloud text-charcoal-900 transition-colors duration-500 group-hover:bg-charcoal-900 group-hover:text-accent-400">
+                      <span className="grid size-12 place-items-center rounded-2xl bg-cloud text-charcoal-900 transition-colors duration-500 group-hover:bg-accent-600 group-hover:text-white">
                         <Icon aria-hidden className="size-[22px]" strokeWidth={1.75} />
                       </span>
                       <ArrowUpRight

@@ -25,7 +25,7 @@ export function Approach() {
           {/* Connecting line (desktop) */}
           <div aria-hidden className="absolute left-6 right-[calc(25%-3rem)] top-6 hidden h-px bg-line lg:block">
             <motion.div
-              className="h-full origin-left bg-gradient-to-r from-accent-500 to-charcoal-700"
+              className="h-full origin-left bg-gradient-to-r from-signal-500 to-accent-600"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true, margin: "0px 0px -20% 0px" }}

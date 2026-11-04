@@ -16,27 +16,32 @@ type Swatch = { name: string; token: string; hex: string; role: string; dark?: b
 
 const groups: { title: string; note: string; swatches: Swatch[] }[] = [
   {
-    title: "Primary · Charcoal",
-    note: "From the black in the logo. Headlines, dark sections, primary data series.",
+    title: "Primary · Navy",
+    note: "The working brand colour: buttons, links, selected states, dashboard data and dark sections.",
     swatches: [
-      { name: "Charcoal 950", token: "charcoal-950", hex: "#0E0F11", role: "Dark sections", dark: true },
-      { name: "Charcoal 900", token: "charcoal-900", hex: "#17181B", role: "Primary brand colour", dark: true },
-      { name: "Charcoal 700", token: "charcoal-700", hex: "#2D2F33", role: "Hover on dark", dark: true },
-      { name: "Charcoal 500", token: "charcoal-500", hex: "#5D6067", role: "Secondary data", dark: true },
-      { name: "Charcoal 400", token: "charcoal-400", hex: "#8D9097", role: "Text on dark" },
-      { name: "Charcoal 300", token: "charcoal-300", hex: "#B8BAC0", role: "Labels on dark" },
+      { name: "Accent 600", token: "accent-600", hex: "#1E3A8A", role: "Buttons, links, primary data", dark: true },
+      { name: "Accent 700", token: "accent-700", hex: "#172D6B", role: "Button hover", dark: true },
+      { name: "Navy 950", token: "navy-950", hex: "#0C1734", role: "Dark sections", dark: true },
+      { name: "Navy 900", token: "navy-900", hex: "#132150", role: "Dark feature cards", dark: true },
+      { name: "Navy 300", token: "navy-300", hex: "#A9B6D6", role: "Text on navy" },
+      { name: "Accent 50", token: "accent-50", hex: "#F1F4FB", role: "Selected row tint" },
     ],
   },
   {
-    title: "Accent · Navy",
-    note: "Used sparingly: calls to action, active states, highlights, one key data point.",
+    title: "Signature · Red",
+    note: "The logo red, kept to small signature details so it stays special.",
     swatches: [
-      { name: "Accent 600", token: "accent-600", hex: "#1E3A8A", role: "Navy · buttons, links", dark: true },
-      { name: "Accent 700", token: "accent-700", hex: "#172D6B", role: "Button hover", dark: true },
-      { name: "Accent 500", token: "accent-500", hex: "#24429E", role: "Highlights & key data", dark: true },
-      { name: "Accent 400", token: "accent-400", hex: "#7B96D6", role: "Accent on dark surfaces" },
-      { name: "Accent 100", token: "accent-100", hex: "#E2E9F8", role: "Light button hover" },
-      { name: "Accent 50", token: "accent-50", hex: "#F1F4FB", role: "Selected row tint" },
+      { name: "Signal 500", token: "signal-500", hex: "#ED1C24", role: "Logo red · highlights & key data", dark: true },
+      { name: "Signal 600", token: "signal-600", hex: "#C8161D", role: "Small red text if needed", dark: true },
+      { name: "Signal 400", token: "signal-400", hex: "#F2585D", role: "Red on navy surfaces", dark: true },
+    ],
+  },
+  {
+    title: "Text & ink · Charcoal",
+    note: "From the black in the logo. Headlines and dark text.",
+    swatches: [
+      { name: "Charcoal 900", token: "charcoal-900", hex: "#17181B", role: "Dark UI text & icons", dark: true },
+      { name: "Charcoal 600", token: "charcoal-600", hex: "#44464C", role: "Section labels", dark: true },
     ],
   },
   {
@@ -62,7 +67,7 @@ const groups: { title: string; note: string; swatches: Swatch[] }[] = [
   },
   {
     title: "Status (dashboard only)",
-    note: "Muted tones so states never compete with the navy accent.",
+    note: "Muted tones so states never compete with navy or red.",
     swatches: [
       { name: "Success", token: "success", hex: "#2F7A58", role: "Online, approved, positive change", dark: true },
       { name: "Success soft", token: "success-soft", hex: "#EAF4EE", role: "Success chip background" },
@@ -77,15 +82,16 @@ const contrast: [string, string, string, string][] = [
   ["Accent 600 on paper (links)", "#1E3A8A", "#FCFBF9", "10.02 : 1 · AAA"],
   ["Body on white", "#4B4B52", "#FFFFFF", "8.65 : 1 · AAA"],
   ["Muted on paper", "#6A6A71", "#FCFBF9", "5.19 : 1 · AA"],
-  ["Charcoal 300 on Charcoal 950", "#B8BAC0", "#0E0F11", "9.88 : 1 · AAA"],
-  ["Accent 400 on Charcoal 950", "#7B96D6", "#0E0F11", "6.55 : 1 · AA"],
+  ["Navy 300 on Navy 950", "#A9B6D6", "#0C1734", "8.71 : 1 · AAA"],
+  ["Signal 400 on Navy 950", "#F2585D", "#0C1734", "5.33 : 1 · AA"],
+  ["Logo red on paper (large type only)", "#ED1C24", "#FCFBF9", "4.24 : 1 · AA large"],
 ];
 
 const accentDo = [
-  "Primary call-to-action buttons",
-  "Active navigation and selected tabs",
   "One highlighted word in a page headline",
   "The small rule beside section labels",
+  "The dot under the active menu item",
+  "Location pins and moving data dots",
   "A single key data point in a chart (today, missed appointments)",
   "Notification and live indicators",
 ];
@@ -105,7 +111,7 @@ export default function BrandPage() {
           <SectionHeading
             eyebrow="Design system · internal"
             title="Prime-Techmate colour system"
-            lead="Charcoal from the official logo as the primary brand colour, navy blue as a controlled accent, and warm neutrals for calm, premium backgrounds. The logo itself keeps its original red and black."
+            lead="Navy blue as the working brand colour, the logo red as a small signature accent, charcoal for headlines, and warm neutrals for calm, premium backgrounds. The logo itself keeps its original red and black."
           />
           <div className="rounded-3xl border border-line bg-white p-6">
             <Logo className="h-14" />
@@ -136,7 +142,7 @@ export default function BrandPage() {
 
         <section className="mt-20 grid gap-5 lg:grid-cols-2">
           <div className="rounded-3xl border border-line bg-white p-8">
-            <h2 className="text-xl font-bold tracking-tight text-ink">Where navy is used</h2>
+            <h2 className="text-xl font-bold tracking-tight text-ink">Where red is used</h2>
             <ul className="mt-5 space-y-3">
               {accentDo.map((r) => (
                 <li key={r} className="flex items-start gap-3 text-[15px] text-ink">
@@ -149,7 +155,7 @@ export default function BrandPage() {
             </ul>
           </div>
           <div className="rounded-3xl border border-line bg-white p-8">
-            <h2 className="text-xl font-bold tracking-tight text-ink">Where navy is avoided</h2>
+            <h2 className="text-xl font-bold tracking-tight text-ink">Where red is avoided</h2>
             <ul className="mt-5 space-y-3">
               {accentDont.map((r) => (
                 <li key={r} className="flex items-start gap-3 text-[15px] text-body">
@@ -169,7 +175,7 @@ export default function BrandPage() {
             <div className="rounded-3xl border border-line bg-white p-8">
               <Eyebrow>Section label</Eyebrow>
               <p className="mt-4 font-display text-4xl font-extrabold tracking-[-0.04em] text-ink">
-                Powering Healthcare Through <span className="text-accent-500">Technology.</span>
+                Powering Healthcare Through <span className="text-signal-500">Technology.</span>
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <ButtonLink href="/brand/" arrow>Primary</ButtonLink>
@@ -183,14 +189,14 @@ export default function BrandPage() {
                 <span className="rounded-full bg-cloud px-2.5 py-1 text-[12px] font-medium text-muted">Discharged</span>
               </div>
             </div>
-            <div className="relative overflow-hidden rounded-3xl bg-charcoal-950 p-8 text-white">
+            <div className="relative overflow-hidden rounded-3xl bg-navy-950 p-8 text-white">
               <div aria-hidden className="absolute -right-24 -top-24 size-80 rounded-full bg-[radial-gradient(closest-side,rgb(123_150_214/0.18),transparent)]" />
               <div className="relative">
                 <Eyebrow tone="dark">On dark</Eyebrow>
                 <p className="mt-4 font-display text-4xl font-extrabold tracking-[-0.04em]">
-                  14<span className="text-accent-400">+</span> years
+                  14<span className="text-signal-400">+</span> years
                 </p>
-                <p className="mt-3 max-w-sm text-[15px] text-charcoal-400">Secondary text on charcoal uses Charcoal 400 for comfortable contrast.</p>
+                <p className="mt-3 max-w-sm text-[15px] text-navy-300">Secondary text on navy uses Navy 300 for comfortable contrast.</p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <ButtonLink href="/brand/" variant="light" arrow>Light</ButtonLink>
                   <ButtonLink href="/brand/" variant="ghostDark">Ghost</ButtonLink>
@@ -202,32 +208,32 @@ export default function BrandPage() {
 
         <section className="mt-20">
           <h2 className="text-2xl font-bold tracking-tight text-ink">Data colours</h2>
-          <p className="mt-1 text-[15px] text-body">Charcoal leads, greys support, navy marks only what needs attention.</p>
+          <p className="mt-1 text-[15px] text-body">Navy leads, light blues and greys support, red marks only what needs attention.</p>
           <div className="mt-6 rounded-3xl border border-line bg-white p-8">
             <div className="flex h-40 items-end gap-3">
               {[54, 62, 58, 70, 66, 78, 74, 88].map((h, i) => (
                 <div key={i} className="flex flex-1 items-end gap-1">
-                  <span className="flex-1 rounded-t-md bg-charcoal-900" style={{ height: `${h}%` }} />
+                  <span className="flex-1 rounded-t-md bg-accent-600" style={{ height: `${h}%` }} />
                   <span className="flex-1 rounded-t-md bg-[#c9c7c2]" style={{ height: `${h * 0.6}%` }} />
                 </div>
               ))}
               <div className="flex flex-1 items-end gap-1">
-                <span className="flex-1 rounded-t-md bg-accent-500" style={{ height: "96%" }} />
+                <span className="flex-1 rounded-t-md bg-signal-500" style={{ height: "96%" }} />
                 <span className="flex-1 rounded-t-md bg-[#c9c7c2]" style={{ height: "58%" }} />
               </div>
             </div>
             <div className="mt-4 flex flex-wrap gap-4 text-[12px] text-muted">
-              <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-charcoal-900" />Primary series · #17181B</span>
+              <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-accent-600" />Primary series · #1E3A8A</span>
               <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#8d9097]" />Secondary · #8D9097</span>
               <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-[#c9c7c2]" />Tertiary · #C9C7C2</span>
-              <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-accent-500" />Highlight · #24429E (navy)</span>
+              <span className="flex items-center gap-1.5"><span className="size-2 rounded-full bg-signal-500" />Highlight · #ED1C24 (logo red)</span>
             </div>
           </div>
         </section>
 
         <section className="mt-20">
           <h2 className="text-2xl font-bold tracking-tight text-ink">Contrast checks</h2>
-          <p className="mt-1 text-[15px] text-body">Measured against WCAG 2.1. On dark sections the lighter Accent 400 is used, because navy is too dark to read on charcoal.</p>
+          <p className="mt-1 text-[15px] text-body">Measured against WCAG 2.1. Navy and red each pass on their intended backgrounds; the logo red is kept to graphics and large type.</p>
           <ul className="mt-6 divide-y divide-line overflow-hidden rounded-3xl border border-line bg-white">
             {contrast.map(([label, fg, bg, ratio]) => (
               <li key={label} className="flex items-center gap-4 px-6 py-4">

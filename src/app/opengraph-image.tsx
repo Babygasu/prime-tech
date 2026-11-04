@@ -30,10 +30,10 @@ export default async function OpengraphImage() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={logoSrc} width={312} height={70} alt="" />
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ display: "flex", width: 48, height: 4, borderRadius: 4, background: "#24429e", marginBottom: 32 }} />
+          <div style={{ display: "flex", width: 48, height: 4, borderRadius: 4, background: "#ed1c24", marginBottom: 32 }} />
           <div style={{ fontSize: 76, fontWeight: 800, letterSpacing: -3, lineHeight: 1.05 }}>Powering Healthcare</div>
           <div style={{ display: "flex", fontSize: 76, fontWeight: 800, letterSpacing: -3, lineHeight: 1.05 }}>
-            Through&nbsp;<span style={{ color: "#24429e" }}>Technology.</span>
+            Through&nbsp;<span style={{ color: "#ed1c24" }}>Technology.</span>
           </div>
           <div style={{ marginTop: 28, fontSize: 28, color: "#6a6a71" }}>
             Health systems and digital health infrastructure · Accra, Ghana

@@ -42,6 +42,19 @@
   --color-accent-600: #1e3a8a;
   --color-accent-700: #172d6b;
 
+  /* Deep navy surfaces for dark sections, with text tints tuned for them. */
+  --color-navy-950: #0c1734;
+  --color-navy-900: #132150;
+  --color-navy-800: #1b2c63;
+  --color-navy-400: #8193bf;
+  --color-navy-300: #a9b6d6;
+
+  /* Signal red from the logo: small signature details only. */
+  --color-signal-50: #fef4f3;
+  --color-signal-400: #f2585d;
+  --color-signal-500: #ed1c24;
+  --color-signal-600: #c8161d;
+
   --color-ink: #141416;
   --color-body: #4b4b52;
   --color-muted: #6a6a71;

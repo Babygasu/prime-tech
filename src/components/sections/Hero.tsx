@@ -26,7 +26,7 @@ export function Hero() {
               className="mt-6 text-[2.75rem] font-extrabold leading-[1.02] tracking-[-0.045em] text-ink sm:text-7xl lg:text-[5.5rem]"
             >
               Powering Healthcare <br className="hidden sm:block" />
-              Through <span className="text-accent-500">Technology.</span>
+              Through <span className="text-signal-500">Technology.</span>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>

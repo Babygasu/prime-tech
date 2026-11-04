@@ -23,7 +23,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         title={
           <>
-            Let&apos;s talk about <span className="text-accent-500">your project.</span>
+            Let&apos;s talk about <span className="text-signal-500">your project.</span>
           </>
         }
         lead="Whether you have a clear brief or are still exploring ideas, we are happy to start the conversation."

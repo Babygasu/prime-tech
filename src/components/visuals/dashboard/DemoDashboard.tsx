@@ -63,12 +63,12 @@ export type DashboardView = "overview" | "records" | "appointments" | "reports";
 export const DASHBOARD_WIDTH = 1200;
 export const DASHBOARD_HEIGHT = 720;
 
-/* Data colours: charcoal carries the primary series, greys support it, and the
-   navy accent marks only the single point that deserves attention. */
-const PRIMARY = "#17181b";
+/* Data colours: navy carries the primary series, greys support it, and the
+   signature red marks only the single point that deserves attention. */
+const PRIMARY = "#1e3a8a";
 const SECONDARY = "#8d9097";
 const TERTIARY = "#c9c7c2";
-const ACCENT = "#24429e";
+const ACCENT = "#ed1c24";
 const GRID = "#efede9";
 const AXIS = { fontSize: 11, fill: "#8d9097" };
 
@@ -111,8 +111,8 @@ function Sidebar({ view }: { view: DashboardView }) {
   return (
     <aside className="flex w-[220px] shrink-0 flex-col border-r border-line bg-white px-4 py-5">
       <div className="flex items-center gap-2.5 px-2">
-        <span className="grid size-8 place-items-center rounded-lg bg-charcoal-900">
-          <Activity className="size-4 text-accent-400" />
+        <span className="grid size-8 place-items-center rounded-lg bg-accent-600">
+          <Activity className="size-4 text-signal-400" />
         </span>
         <div className="leading-tight">
           <p className="font-display text-[14px] font-bold tracking-tight">Health HIS</p>
@@ -161,9 +161,9 @@ function Topbar({ title }: { title: string }) {
       </div>
       <span className="relative grid size-9 place-items-center rounded-lg border border-line text-body">
         <Bell className="size-4" />
-        <span className="absolute right-2 top-2 size-1.5 rounded-full bg-accent-500" />
+        <span className="absolute right-2 top-2 size-1.5 rounded-full bg-signal-500" />
       </span>
-      <span className="grid size-9 place-items-center rounded-full bg-charcoal-900 text-[12px] font-semibold text-white">DA</span>
+      <span className="grid size-9 place-items-center rounded-full bg-accent-600 text-[12px] font-semibold text-white">DA</span>
     </header>
   );
 }
@@ -296,7 +296,7 @@ function OverviewView() {
             ))}
           </ul>
         </Card>
-        <Card title="Facility activity" action={<span className="flex items-center gap-1.5 text-[11px] font-medium text-muted"><span className="size-1.5 rounded-full bg-accent-500 motion-safe:animate-pulse" />Live</span>}>
+        <Card title="Facility activity" action={<span className="flex items-center gap-1.5 text-[11px] font-medium text-muted"><span className="size-1.5 rounded-full bg-signal-500 motion-safe:animate-pulse" />Live</span>}>
           <ul className="space-y-2.5">
             {facilities.slice(0, 3).map((f) => (
               <li key={f.name} className="flex items-center gap-3">
@@ -307,7 +307,7 @@ function OverviewView() {
                     <StatusChip status={f.status} />
                   </div>
                   <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-cloud">
-                    <div className="h-full rounded-full bg-charcoal-700" style={{ width: `${f.load}%` }} />
+                    <div className="h-full rounded-full bg-accent-600" style={{ width: `${f.load}%` }} />
                   </div>
                 </div>
               </li>
@@ -336,7 +336,7 @@ function RecordsView() {
         action={
           <div className="flex gap-2">
             <span className="rounded-lg border border-line px-2.5 py-1 text-[11px] text-body">All facilities ▾</span>
-            <span className="rounded-lg bg-charcoal-900 px-2.5 py-1 text-[11px] font-medium text-white">+ New patient</span>
+            <span className="rounded-lg bg-accent-600 px-2.5 py-1 text-[11px] font-medium text-white">+ New patient</span>
           </div>
         }
       >
@@ -369,7 +369,7 @@ function RecordsView() {
       <div className="flex min-h-0 flex-col gap-4">
         <Card>
           <div className="flex items-center gap-3">
-            <span className="grid size-11 place-items-center rounded-full bg-charcoal-900 font-display text-[14px] font-bold text-white">AM</span>
+            <span className="grid size-11 place-items-center rounded-full bg-accent-600 font-display text-[14px] font-bold text-white">AM</span>
             <div className="leading-tight">
               <p className="font-display text-[15px] font-bold">{selected.name}</p>
               <p className="whitespace-nowrap text-[11px] text-muted">{selected.id} · {selected.sex}, {selected.age}</p>
@@ -395,7 +395,7 @@ function RecordsView() {
             <span className="absolute bottom-2 left-[14px] top-2 w-px bg-line" />
             {timeline.map((t) => (
               <li key={t.label} className="relative flex items-center gap-3">
-                <span className={cn("relative grid size-[22px] place-items-center rounded-full ring-4 ring-white", t.done ? "bg-charcoal-900 text-white" : "bg-cloud text-subtle")}>
+                <span className={cn("relative grid size-[22px] place-items-center rounded-full ring-4 ring-white", t.done ? "bg-accent-600 text-white" : "bg-cloud text-subtle")}>
                   <t.icon className="size-3" />
                 </span>
                 <span className={cn("flex-1 text-[12px]", t.done ? "font-medium" : "text-muted")}>{t.label}</span>
@@ -414,7 +414,7 @@ function AppointmentsView() {
   const hours = [8, 9, 10, 11, 12, 13, 14];
   const rowH = 64;
   const toneClass: Record<string, string> = {
-    primary: "border-charcoal-900 bg-cloud text-ink",
+    primary: "border-accent-600 bg-accent-50 text-accent-700",
     secondary: "border-charcoal-400 bg-white text-ink ring-1 ring-inset ring-line",
     muted: "border-line bg-mist text-muted",
   };
@@ -460,8 +460,8 @@ function AppointmentsView() {
             </div>
           ))}
           <div className="pointer-events-none absolute left-[44px] right-0 flex items-center" style={{ top: 2.6 * rowH }}>
-            <span className="size-2 rounded-full bg-accent-500" />
-            <span className="h-px flex-1 bg-accent-500" />
+            <span className="size-2 rounded-full bg-signal-500" />
+            <span className="h-px flex-1 bg-signal-500" />
           </div>
         </div>
       </Card>
@@ -554,7 +554,7 @@ function ReportsView() {
                     <span className="text-body">{ind.name}</span>
                     <span className="font-semibold tabular-nums">{ind.value}%</span>
                   </div>
-                  <div className="mt-1 h-1 overflow-hidden rounded-full bg-cloud"><div className={cn("h-full rounded-full", ind.value < ind.target ? "bg-warning" : "bg-charcoal-900")} style={{ width: `${ind.value}%` }} /></div>
+                  <div className="mt-1 h-1 overflow-hidden rounded-full bg-cloud"><div className={cn("h-full rounded-full", ind.value < ind.target ? "bg-warning" : "bg-accent-600")} style={{ width: `${ind.value}%` }} /></div>
                 </div>
               ))}
             </div>

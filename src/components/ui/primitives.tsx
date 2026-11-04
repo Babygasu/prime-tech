@@ -24,16 +24,16 @@ export function Eyebrow({
     <p
       className={cn(
         "inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.2em] sm:text-xs",
-        tone === "light" ? "text-charcoal-600" : "text-charcoal-300",
+        tone === "light" ? "text-charcoal-600" : "text-navy-300",
         className,
       )}
     >
-      {/* Navy accent rule: a small, consistent brand detail on every section label. */}
+      {/* Red signature rule (from the logo): a small, consistent brand detail on every section label. */}
       <span
         aria-hidden
         className={cn(
           "h-[2px] w-6 shrink-0 rounded-full",
-          tone === "light" ? "bg-accent-500" : "bg-accent-400",
+          tone === "light" ? "bg-signal-500" : "bg-signal-400",
           centered && "hidden sm:block",
         )}
       />
@@ -72,7 +72,7 @@ export function SectionHeading({
         <p
           className={cn(
             "mt-5 text-base leading-relaxed sm:text-lg",
-            tone === "light" ? "text-body" : "text-charcoal-400",
+            tone === "light" ? "text-body" : "text-navy-400",
             align === "center" && "mx-auto max-w-2xl",
           )}
         >
@@ -95,7 +95,7 @@ const buttonBase =
  */
 const buttonVariants = {
   primary: "bg-accent-600 text-white hover:bg-accent-700 shadow-[0_1px_0_rgb(255_255_255/0.12)_inset]",
-  light: "bg-white text-charcoal-950 hover:bg-accent-100",
+  light: "bg-white text-navy-950 hover:bg-accent-100",
   dark: "bg-charcoal-900 text-white hover:bg-charcoal-700",
   secondary: "border border-line bg-white text-ink hover:border-charcoal-900/25 hover:bg-mist",
   ghostDark: "border border-white/15 text-white hover:border-white/35 hover:bg-white/5",
@@ -134,10 +134,10 @@ export function DemoBadge({ children = "Illustrative concept · fictional data",
     <span
       className={cn(
         "inline-flex items-center gap-2 rounded-full px-3 py-1 text-[11px] font-medium tracking-wide",
-        tone === "light" ? "bg-cloud text-muted" : "bg-white/[0.06] text-charcoal-400 ring-1 ring-white/10",
+        tone === "light" ? "bg-cloud text-muted" : "bg-white/[0.06] text-navy-300 ring-1 ring-white/10",
       )}
     >
-      <span aria-hidden className="size-1.5 rounded-full bg-accent-500" />
+      <span aria-hidden className="size-1.5 rounded-full bg-signal-500" />
       {children}
     </span>
   );

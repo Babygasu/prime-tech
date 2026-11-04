@@ -73,9 +73,9 @@ export const appointments = [
 ];
 
 export const attendance = [
-  { name: "Attended", value: 286, color: "#17181b" },
+  { name: "Attended", value: 286, color: "#1e3a8a" },
   { name: "Upcoming", value: 41, color: "#c9c7c2" },
-  { name: "Missed", value: 15, color: "#24429e" },
+  { name: "Missed", value: 15, color: "#ed1c24" },
 ];
 
 export const monthly = [
@@ -88,9 +88,9 @@ export const monthly = [
 ];
 
 export const facilityMix = [
-  { name: "Hospital", value: 46, color: "#17181b" },
-  { name: "Polyclinic", value: 27, color: "#5d6067" },
-  { name: "Health centre", value: 18, color: "#a3a5ab" },
+  { name: "Hospital", value: 46, color: "#1e3a8a" },
+  { name: "Polyclinic", value: 27, color: "#5b6fa8" },
+  { name: "Health centre", value: 18, color: "#a9b6d6" },
   { name: "Clinic", value: 9, color: "#dedcd7" },
 ];
 
