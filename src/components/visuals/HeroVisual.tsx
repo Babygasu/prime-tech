@@ -1,129 +1,71 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import { cn } from "@/lib/cn";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { CircleCheck, Info, RefreshCw, UserPlus } from "lucide-react";
-import { BrowserFrame, ScaledCanvas } from "./Frame";
+import { motion, useReducedMotion } from "motion/react";
+import { Info } from "lucide-react";
+import { ScaledCanvas } from "./Frame";
 import { DASHBOARD_HEIGHT, DASHBOARD_WIDTH, DemoDashboard } from "./dashboard/DemoDashboard";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 /**
- * Hero composition: an illustrative dashboard that tilts into place as the
- * visitor scrolls, with floating interface cards layered in front for depth.
+ * Hero product shot: the illustrative dashboard presented like a SaaS app
+ * window — soft bezel, rounded top corners, subtle border — rising gently
+ * into place. Its cards, figures and charts animate in once it is visible.
  */
 export function HeroVisual() {
-  const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const rotateX = useTransform(scrollYProgress, [0.1, 0.5], [12, 0]);
-  const scale = useTransform(scrollYProgress, [0.1, 0.5], [0.94, 1]);
-  const cardsY = useTransform(scrollYProgress, [0, 1], [40, -60]);
 
   return (
-    <div ref={ref} className="relative mx-auto mt-14 w-full max-w-[1200px] px-4 sm:mt-20 sm:px-6 lg:px-8">
-      <div style={{ perspective: 1800 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 70 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, ease, delay: 0.25 }}
-        >
-          <motion.div style={reduce ? undefined : { rotateX, scale, transformOrigin: "50% 0%" }}>
-            <BrowserFrame>
-              <ScaledCanvas
-                width={DASHBOARD_WIDTH}
-                height={DASHBOARD_HEIGHT}
-                label="Illustrative healthcare facility dashboard with patient visit trends, departmental activity, recent registrations and facility status. Fictional sample data."
-              >
-                <DemoDashboard view="overview" />
-              </ScaledCanvas>
-            </BrowserFrame>
-          </motion.div>
-        </motion.div>
-      </div>
+    <div className="relative mx-auto mt-10 w-full max-w-[1240px] px-4 sm:mt-9 sm:px-6 lg:px-8">
+      {/* Ambient glow that lifts the window off the page */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-[8%] top-16 bottom-10 -z-10 rounded-[48px] bg-[radial-gradient(closest-side,rgb(36_66_158/0.16),transparent)] blur-2xl"
+      />
 
-      {/* Floating cards (desktop) */}
-      <motion.div aria-hidden style={reduce ? undefined : { y: cardsY }} className="pointer-events-none absolute inset-0 hidden lg:block">
-        <FloatCard className="-left-6 top-[34%] xl:-left-16" delay={0.9} floatDelay="0s">
-          <IconTile><UserPlus className="size-4" /></IconTile>
-          <div className="leading-tight">
-            <p className="text-[13px] font-semibold text-ink">New patient registered</p>
-            <p className="mt-0.5 text-[12px] text-muted">A. M. · General OPD · just now</p>
+      <motion.div
+        initial={reduce ? false : { opacity: 0, y: 48 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.1, ease, delay: 0.35 }}
+      >
+        {/* Bezel */}
+        <div className="rounded-t-[22px] rounded-b-[16px] border border-charcoal-900/[0.08] bg-white/60 p-1.5 shadow-frame ring-1 ring-white/70 backdrop-blur-sm sm:rounded-t-[26px] sm:p-2">
+          <div className="overflow-hidden rounded-t-[16px] rounded-b-[10px] border border-line bg-white sm:rounded-t-[20px]">
+            <WindowBar />
+            <ScaledCanvas
+              width={DASHBOARD_WIDTH}
+              height={DASHBOARD_HEIGHT}
+              compactRegion={{ x: 236, y: 0, w: 470, h: 430 }}
+              label="Illustrative healthcare facility dashboard with patient visit trends, departmental activity, recent registrations and facility status. Fictional sample data, not a deployed product."
+            >
+              <DemoDashboard view="overview" animated />
+            </ScaledCanvas>
           </div>
-        </FloatCard>
-
-        <FloatCard className="-right-4 top-[10%] xl:-right-14" delay={1.1} floatDelay="-3s">
-          <IconTile><RefreshCw className="size-4" /></IconTile>
-          <div className="leading-tight">
-            <p className="text-[13px] font-semibold text-ink">Lab results synchronised</p>
-            <p className="mt-0.5 flex items-center gap-1 text-[12px] text-muted">
-              <CircleCheck className="size-3.5 text-success" /> Added to patient record
-            </p>
-          </div>
-        </FloatCard>
-
-        <FloatCard className="-right-4 bottom-[14%] w-[230px] xl:-right-14" delay={1.3} floatDelay="-6s" stacked>
-          <div className="flex w-full items-center justify-between">
-            <p className="text-[12px] font-semibold text-ink">Appointments this week</p>
-            <span className="text-[11px] font-semibold text-success">+12%</span>
-          </div>
-          <div className="mt-3 flex h-12 w-full items-end gap-1.5">
-            {[40, 62, 48, 75, 66, 88, 58].map((h, i) => (
-              <motion.span
-                key={i}
-                className="flex-1 rounded-t-[3px]"
-                style={{ background: i === 5 ? "#ed1c24" : "#c7d3f0" }}
-                initial={{ height: 0 }}
-                animate={{ height: `${h}%` }}
-                transition={{ duration: 0.9, ease, delay: 1.5 + i * 0.06 }}
-              />
-            ))}
-          </div>
-        </FloatCard>
+        </div>
       </motion.div>
 
       <p className="mt-5 flex items-center justify-center gap-1.5 text-center text-[12px] text-muted">
         <Info aria-hidden className="size-3.5 shrink-0" />
-        Illustrative concept with fictional data. Not a representation of a deployed product.
+        Illustrative demo with fictional data. Not a representation of a deployed product.
       </p>
     </div>
   );
 }
 
-function IconTile({ children }: { children: ReactNode }) {
-  return <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-cloud text-charcoal-900">{children}</span>;
-}
-
-function FloatCard({
-  children,
-  className,
-  delay,
-  floatDelay,
-  stacked = false,
-}: {
-  children: ReactNode;
-  className?: string;
-  delay: number;
-  floatDelay: string;
-  stacked?: boolean;
-}) {
+/** App window top bar. The demo label sits here so it is visible at first glance. */
+function WindowBar() {
   return (
-    <motion.div
-      className={cn("absolute", className)}
-      initial={{ opacity: 0, y: 20, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.9, ease, delay }}
-    >
-      <div
-        className={cn(
-          "flex gap-3 rounded-2xl border border-white/60 bg-white/90 p-3.5 pr-5 shadow-lift backdrop-blur-md motion-safe:animate-float",
-          stacked ? "flex-col" : "items-center",
-        )}
-        style={{ animationDelay: floatDelay }}
-      >
-        {children}
-      </div>
-    </motion.div>
+    <div className="flex h-9 items-center gap-2 border-b border-line bg-mist/70 px-3 sm:h-11 sm:px-4">
+      <span aria-hidden className="flex gap-1.5">
+        <span className="size-2 rounded-full bg-charcoal-300/60 sm:size-2.5" />
+        <span className="size-2 rounded-full bg-charcoal-300/60 sm:size-2.5" />
+        <span className="size-2 rounded-full bg-charcoal-300/60 sm:size-2.5" />
+      </span>
+      <span className="mx-auto inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-2.5 py-0.5 text-[10px] font-medium text-muted sm:px-3 sm:text-[11px]">
+        <span aria-hidden className="size-1.5 rounded-full bg-signal-500" />
+        Illustrative demo<span className="hidden sm:inline"> · fictional data</span>
+      </span>
+      <span aria-hidden className="w-[42px] sm:w-[54px]" />
+    </div>
   );
 }

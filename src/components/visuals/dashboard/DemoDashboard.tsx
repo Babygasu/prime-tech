@@ -5,8 +5,8 @@
  * Rendered at a fixed 1200×720 design size; wrap in <ScaledCanvas>.
  */
 
-import { useId, type ComponentType, type ReactNode } from "react";
-import { useReducedMotion } from "motion/react";
+import { createContext, useContext, useEffect, useId, useRef, type ComponentType, type CSSProperties, type ReactNode } from "react";
+import { animate, motion, useInView, useReducedMotion } from "motion/react";
 import {
   Area,
   AreaChart,
@@ -74,7 +74,97 @@ const AXIS = { fontSize: 11, fill: "#8d9097" };
 
 type Icon = ComponentType<LucideProps>;
 
-export function DemoDashboard({ view = "overview" }: { view?: DashboardView }) {
+/* --------------------------------------------------------------- motion
+   When `animated` is on (hero only), cards reveal in a gentle stagger, KPI
+   figures count up and bars grow into place once the dashboard is in view.
+   Everything is static for reduced-motion visitors and in other showcases. */
+
+const EASE = [0.22, 1, 0.36, 1] as const;
+const AnimatedCtx = createContext(false);
+
+function useAnimated() {
+  const animated = useContext(AnimatedCtx);
+  const reduce = useReducedMotion();
+  return animated && !reduce;
+}
+
+/** Container that staggers its <Reveal> children once it scrolls into view. */
+function Stagger({ className, children, delay = 0 }: { className?: string; children: ReactNode; delay?: number }) {
+  const on = useAnimated();
+  if (!on) return <div className={className}>{children}</div>;
+  return (
+    <motion.div
+      className={className}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08, delayChildren: delay } } }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function Reveal({ className, children }: { className?: string; children: ReactNode }) {
+  const on = useAnimated();
+  if (!on) return <div className={className}>{children}</div>;
+  return (
+    <motion.div
+      className={className}
+      variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } } }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/** Counts a figure such as "128", "76%" or "99.4%" up from zero when visible. */
+function CountUp({ value }: { value: string }) {
+  const on = useAnimated();
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  useEffect(() => {
+    const el = ref.current;
+    const m = value.match(/^([\d.]+)(.*)$/);
+    if (!on || !el || !m) return;
+    const target = parseFloat(m[1]);
+    const decimals = (m[1].split(".")[1] ?? "").length;
+    el.textContent = (0).toFixed(decimals) + m[2];
+    if (!inView) return;
+    const controls = animate(0, target, {
+      duration: 1.4,
+      ease: EASE,
+      delay: 0.3,
+      onUpdate: (v) => {
+        el.textContent = v.toFixed(decimals) + m[2];
+      },
+    });
+    return () => controls.stop();
+  }, [on, inView, value]);
+  return (
+    <span ref={ref} className="tabular-nums">
+      {value}
+    </span>
+  );
+}
+
+/** Progress bar that grows to its width when visible. */
+function GrowBar({ width, className, style }: { width: number; className?: string; style?: CSSProperties }) {
+  const on = useAnimated();
+  if (!on) return <div className={className} style={{ ...style, width: `${width}%` }} />;
+  return (
+    <motion.div
+      className={className}
+      style={style}
+      initial={{ width: 0 }}
+      whileInView={{ width: `${width}%` }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.1, ease: EASE, delay: 0.5 }}
+    />
+  );
+}
+
+export function DemoDashboard({ view = "overview", animated = false }: { view?: DashboardView; animated?: boolean }) {
   const titles: Record<DashboardView, string> = {
     overview: "Facility overview",
     records: "Patient records",
@@ -82,6 +172,7 @@ export function DemoDashboard({ view = "overview" }: { view?: DashboardView }) {
     reports: "Reports & analytics",
   };
   return (
+    <AnimatedCtx.Provider value={animated}>
     <div className="flex h-[720px] w-[1200px] bg-mist font-sans text-[13px] text-ink">
       <Sidebar view={view} />
       <div className="flex min-w-0 flex-1 flex-col">
@@ -94,6 +185,7 @@ export function DemoDashboard({ view = "overview" }: { view?: DashboardView }) {
         </div>
       </div>
     </div>
+    </AnimatedCtx.Provider>
   );
 }
 
@@ -170,7 +262,7 @@ function Topbar({ title }: { title: string }) {
 
 function Card({ title, action, className, children }: { title?: string; action?: ReactNode; className?: string; children: ReactNode }) {
   return (
-    <section className={cn("rounded-xl border border-line bg-white p-4", className)}>
+    <section className={cn("rounded-xl border border-line bg-white p-4 transition-[box-shadow,transform,border-color] duration-300 ease-out hover:-translate-y-px hover:border-charcoal-900/10 hover:shadow-soft", className)}>
       {title && (
         <div className="mb-3 flex items-center justify-between">
           <h4 className="font-sans text-[13px] font-semibold">{title}</h4>
@@ -197,7 +289,7 @@ function Legend({ items }: { items: { label: string; color: string }[] }) {
 
 function Kpi({ label, value, delta, icon: I }: { label: string; value: string; delta?: string; icon: Icon }) {
   return (
-    <div className="rounded-xl border border-line bg-white p-4">
+    <div className="h-full rounded-xl border border-line bg-white p-4 transition-[box-shadow,transform,border-color] duration-300 ease-out hover:-translate-y-px hover:border-charcoal-900/10 hover:shadow-soft">
       <div className="flex items-center justify-between text-[12px] text-muted">
         {label}
         <span className="grid size-7 place-items-center rounded-lg bg-cloud text-charcoal-700">
@@ -205,7 +297,7 @@ function Kpi({ label, value, delta, icon: I }: { label: string; value: string; d
         </span>
       </div>
       <div className="mt-2 flex items-end justify-between">
-        <span className="font-display text-[26px] font-bold leading-none tracking-tight">{value}</span>
+        <span className="font-display text-[26px] font-bold leading-none tracking-tight"><CountUp value={value} /></span>
         {delta && <span className="rounded-full bg-success-soft px-2 py-0.5 text-[11px] font-semibold text-success">{delta}</span>}
       </div>
     </div>
@@ -227,18 +319,21 @@ function StatusChip({ status }: { status: string }) {
 function OverviewView() {
   const gid = useId().replace(/:/g, "");
   const reduce = useReducedMotion();
+  const animatedIn = useAnimated();
   const maxDept = Math.max(...departments.map((d) => d.value));
   return (
-    <div className="grid h-full grid-rows-[auto_1fr_auto] gap-4">
+    <Stagger className="grid h-full grid-rows-[auto_1fr_auto] gap-4" delay={0.5}>
       <div className="grid grid-cols-4 gap-4">
-        <Kpi label="Registrations today" value="128" delta="+8%" icon={UserPlus} />
-        <Kpi label="Appointments" value="342" delta="+3%" icon={CalendarDays} />
-        <Kpi label="Bed occupancy" value="76%" icon={BedDouble} />
-        <Kpi label="Records synchronised" value="99.4%" icon={RefreshCw} />
+        <Reveal><Kpi label="Registrations today" value="128" delta="+8%" icon={UserPlus} /></Reveal>
+        <Reveal><Kpi label="Appointments" value="342" delta="+3%" icon={CalendarDays} /></Reveal>
+        <Reveal><Kpi label="Bed occupancy" value="76%" icon={BedDouble} /></Reveal>
+        <Reveal><Kpi label="Records synchronised" value="99.4%" icon={RefreshCw} /></Reveal>
       </div>
 
       <div className="grid min-h-0 grid-cols-[1.75fr_1fr] gap-4">
+        <Reveal className="min-h-0">
         <Card
+          className="h-full"
           title="Patient visits · last 14 days"
           action={<Legend items={[{ label: "Outpatient", color: PRIMARY }, { label: "Follow-up", color: SECONDARY }]} />}
         >
@@ -252,13 +347,15 @@ function OverviewView() {
             <CartesianGrid vertical={false} stroke={GRID} />
             <XAxis dataKey="d" tickLine={false} axisLine={false} tick={AXIS} />
             <YAxis tickLine={false} axisLine={false} tick={AXIS} width={44} />
-            <Area type="monotone" dataKey="opd" stroke={PRIMARY} strokeWidth={2.2} fill={`url(#opd-${gid})`} isAnimationActive={!reduce} animationDuration={1400} />
-            <Area type="monotone" dataKey="fu" stroke={SECONDARY} strokeWidth={2} strokeDasharray="4 4" fill="transparent" isAnimationActive={!reduce} animationDuration={1400} />
+            <Area type="monotone" dataKey="opd" stroke={PRIMARY} strokeWidth={2.2} fill={`url(#opd-${gid})`} isAnimationActive={!reduce} animationBegin={animatedIn ? 900 : 0} animationDuration={1400} />
+            <Area type="monotone" dataKey="fu" stroke={SECONDARY} strokeWidth={2} strokeDasharray="4 4" fill="transparent" isAnimationActive={!reduce} animationBegin={animatedIn ? 1000 : 0} animationDuration={1400} />
             <ReferenceDot x="14" y={254} r={4.5} fill={ACCENT} stroke="#fff" strokeWidth={2} ifOverflow="visible" />
           </AreaChart>
         </Card>
+        </Reveal>
 
-        <Card title="Visits by department" action={<span className="text-[11px] text-muted">This week</span>}>
+        <Reveal className="min-h-0">
+        <Card className="h-full" title="Visits by department" action={<span className="text-[11px] text-muted">This week</span>}>
           <ul className="space-y-3.5 pt-1">
             {departments.map((d, i) => (
               <li key={d.name}>
@@ -267,22 +364,22 @@ function OverviewView() {
                   <span className="font-semibold tabular-nums">{d.value}</span>
                 </div>
                 <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-cloud">
-                  <div
-                    className="h-full origin-left rounded-full"
-                    style={{
-                      width: `${(d.value / maxDept) * 100}%`,
-                      background: i === 0 ? PRIMARY : i === 1 ? SECONDARY : TERTIARY,
-                    }}
+                  <GrowBar
+                    width={(d.value / maxDept) * 100}
+                    className="h-full rounded-full"
+                    style={{ background: i === 0 ? PRIMARY : i === 1 ? SECONDARY : TERTIARY }}
                   />
                 </div>
               </li>
             ))}
           </ul>
         </Card>
+        </Reveal>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <Card title="Recent registrations" action={<span className="text-[11px] font-medium text-accent-600">View all</span>}>
+        <Reveal>
+        <Card className="h-full" title="Recent registrations" action={<span className="text-[11px] font-medium text-accent-600">View all</span>}>
           <ul className="divide-y divide-line">
             {recentRegistrations.slice(0, 3).map((r) => (
               <li key={r.id} className="flex items-center gap-3 py-2">
@@ -296,7 +393,9 @@ function OverviewView() {
             ))}
           </ul>
         </Card>
-        <Card title="Facility activity" action={<span className="flex items-center gap-1.5 text-[11px] font-medium text-muted"><span className="size-1.5 rounded-full bg-signal-500 motion-safe:animate-pulse" />Live</span>}>
+        </Reveal>
+        <Reveal>
+        <Card className="h-full" title="Facility activity" action={<span className="flex items-center gap-1.5 text-[11px] font-medium text-muted"><span className="size-1.5 rounded-full bg-signal-500 motion-safe:animate-pulse" />Live</span>}>
           <ul className="space-y-2.5">
             {facilities.slice(0, 3).map((f) => (
               <li key={f.name} className="flex items-center gap-3">
@@ -307,15 +406,16 @@ function OverviewView() {
                     <StatusChip status={f.status} />
                   </div>
                   <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-cloud">
-                    <div className="h-full rounded-full bg-accent-600" style={{ width: `${f.load}%` }} />
+                    <GrowBar width={f.load} className="h-full rounded-full bg-accent-600" />
                   </div>
                 </div>
               </li>
             ))}
           </ul>
         </Card>
+        </Reveal>
       </div>
-    </div>
+    </Stagger>
   );
 }
 

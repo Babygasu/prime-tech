@@ -41,7 +41,6 @@ export const navigation: NavItem[] = [
 export const enquiryHref = "/contact/";
 
 export const hero = {
-  eyebrow: "Health systems · Digital health infrastructure · Ghana",
   title: "Powering Healthcare Through Technology.",
   lead: "We develop innovative digital health solutions that strengthen healthcare delivery, streamline operations and improve the management of health information.",
   primaryCta: { label: "Explore Our Solutions", href: "/#solutions" },
