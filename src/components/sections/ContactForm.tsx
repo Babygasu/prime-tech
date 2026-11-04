@@ -20,24 +20,34 @@ function validate(f: Fields): Errors {
   return e;
 }
 
+/** Mail handler deployed with the site on Hostinger (see public/contact.php). */
+const ENDPOINT = "/contact.php";
+
+/** PHP does not run on the local dev server, so submissions are simulated there. */
+function isLocalPreview() {
+  return ["localhost", "127.0.0.1", "[::1]"].includes(window.location.hostname);
+}
+
 /**
- * Enquiry form with client-side validation.
- * TODO(confirm): delivery is not wired up yet. Connect to an email service
- * (e.g. Formspree, Resend, or a Hostinger mail handler) once the official
- * enquiry email address is confirmed.
+ * Enquiry form with client-side validation. On the live site it posts to
+ * public/contact.php, which emails the enquiry to the company inbox.
  */
 export function ContactForm() {
   const [fields, setFields] = useState<Fields>(empty);
   const [errors, setErrors] = useState<Errors>({});
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
+  const [sendError, setSendError] = useState<string | null>(null);
+  const [simulated, setSimulated] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
 
   const set = (k: keyof Fields) => (e: { target: { value: string } }) => {
     setFields((f) => ({ ...f, [k]: e.target.value }));
     if (errors[k]) setErrors((er) => ({ ...er, [k]: undefined }));
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSendError(null);
     const found = validate(fields);
     setErrors(found);
     if (Object.keys(found).length) {
@@ -46,7 +56,32 @@ export function ContactForm() {
       return;
     }
     setState("sending");
-    window.setTimeout(() => setState("done"), 700);
+
+    if (isLocalPreview()) {
+      window.setTimeout(() => {
+        setSimulated(true);
+        setState("done");
+      }, 700);
+      return;
+    }
+
+    try {
+      const body = new FormData();
+      (Object.keys(fields) as (keyof Fields)[]).forEach((k) => body.append(k, fields[k]));
+      body.append("website", honeypot);
+      const res = await fetch(ENDPOINT, { method: "POST", body, headers: { Accept: "application/json" } });
+      const data = (await res.json().catch(() => null)) as { ok?: boolean; error?: string; fields?: Errors } | null;
+      if (res.ok && data?.ok) {
+        setSimulated(false);
+        setState("done");
+        return;
+      }
+      if (data?.fields) setErrors(data.fields);
+      setSendError(data?.error ?? "Your message could not be sent. Please try again later.");
+    } catch {
+      setSendError("Your message could not be sent. Please check your connection and try again.");
+    }
+    setState("idle");
   };
 
   return (
@@ -65,14 +100,21 @@ export function ContactForm() {
               <CircleCheck className="size-7" />
             </span>
             <h3 className="mt-5 text-2xl font-bold tracking-tight">Thank you, {fields.name.split(" ")[0]}.</h3>
-            <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-body">
-              Your enquiry has been prepared. <strong className="font-semibold text-ink">Preview mode:</strong> form
-              delivery is not connected yet, so no message has been sent.
-            </p>
+            {simulated ? (
+              <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-body">
+                <strong className="font-semibold text-ink">Local preview:</strong> no message was sent. Enquiries are
+                only emailed from the live website.
+              </p>
+            ) : (
+              <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-body">
+                Your enquiry has been sent. A member of our team will be in touch with you soon.
+              </p>
+            )}
             <button
               type="button"
               onClick={() => {
                 setFields(empty);
+                setSimulated(false);
                 setState("idle");
               }}
               className="mt-6 text-[14px] font-semibold text-teal-700 hover:text-teal-600"
@@ -115,6 +157,7 @@ export function ContactForm() {
               </label>
               <textarea
                 id="cf-message"
+                name="message"
                 rows={4}
                 value={fields.message}
                 onChange={set("message")}
@@ -124,6 +167,26 @@ export function ContactForm() {
               />
               {errors.message ? <ErrorText id="cf-message-error">{errors.message}</ErrorText> : null}
             </div>
+
+            {/* Honeypot for spam bots: hidden from people and assistive technology. */}
+            <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+              <label htmlFor="cf-website">Website</label>
+              <input
+                id="cf-website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+            </div>
+
+            {sendError ? (
+              <p role="alert" className="rounded-xl bg-[#fef3f2] px-4 py-3 text-[14px] text-[#b42318] sm:col-span-2">
+                {sendError}
+              </p>
+            ) : null}
 
             <div className="flex flex-col gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-[12px] text-muted">* Required fields</p>

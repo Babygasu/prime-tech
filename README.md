@@ -47,6 +47,18 @@ src/
 
 Typography: **Manrope** (headlines) + **Inter** (body), loaded via `next/font`.
 
+## Contact form
+
+The enquiry form posts to `public/contact.php`, a small PHP script that runs on Hostinger and emails each
+enquiry to **info@centreghana.com** (change `RECIPIENT` at the top of the file). `npm run build` copies it into
+`out/`, so it is uploaded together with the site.
+
+- The visitor's address is set as **Reply-To**, so replying in your inbox answers them directly.
+- Spam protection: a hidden honeypot field, a same-site check, and a limit of 5 enquiries per visitor per 10 minutes.
+- On `localhost` the form only simulates sending (PHP does not run on the Next.js dev server).
+- Messages are sent from `noreply@<your domain>`. Once the site is on its final domain, create that mailbox
+  (or an alias) in Hostinger's email settings, which helps the messages avoid spam folders.
+
 ## Illustrative content
 
 All dashboard and interface visuals are **demonstration concepts with fictional data** (see
@@ -65,8 +77,8 @@ as deployed Prime-Techmate products until real screenshots are supplied.
 - [ ] **Projects** — three clearly marked placeholder cards; replace with verified projects only.
 - [ ] **Team profiles** — `/team` shows placeholders.
 - [ ] **APPLIFY EMR** — mentioned on the old Solutions page; confirm whether it is a real product before featuring it.
-- [ ] **Contact form delivery** — validates input but does not send yet (shows a "preview mode" notice).
-      Connect to an email/form service once the enquiry address is confirmed.
+- [ ] **Contact form — first live test** — see "Contact form" below. Send one enquiry from the live site and
+      check it arrives (including the spam folder).
 - [ ] **Production domain** — `site.url` currently uses the Hostinger preview URL (affects SEO metadata).
 
 Removed from the old site because they were unverifiable template content: insurer logos (Humana, Aetna,
