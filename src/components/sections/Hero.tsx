@@ -41,7 +41,7 @@ export function Hero() {
             className="text-[2.4rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-ink sm:text-6xl sm:leading-[1.04] lg:text-[4.5rem]"
           >
             Powering Healthcare <br className="hidden sm:block" />
-            Through <span className="text-signal-500">Technology.</span>
+            Through <span className="text-accent-500">Technology.</span>
           </motion.h1>
           <motion.p
             {...enter(0.15)}
