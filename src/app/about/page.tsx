@@ -65,10 +65,10 @@ export default function AboutPage() {
               <Reveal delay={0.14}>
                 <dl className="mt-10 grid grid-cols-3 divide-x divide-line border-y border-line">
                   {facts.map((f) => (
-                    <div key={f.label} className="px-3 py-5 first:pl-0 sm:px-5">
+                    <div key={f.label} className="px-2 py-4 first:pl-0 sm:px-5 sm:py-5">
                       <dt className="sr-only">{f.label}</dt>
-                      <dd className="font-display text-2xl font-bold tracking-tight text-charcoal-900 sm:text-3xl">{f.value}</dd>
-                      <dd className="mt-1 text-[12px] leading-snug text-muted sm:text-[13px]">{f.label}</dd>
+                      <dd className="font-display text-xl font-bold tracking-tight text-charcoal-900 min-[360px]:text-2xl sm:text-3xl">{f.value}</dd>
+                      <dd className="mt-1 text-[11px] leading-snug text-muted min-[360px]:text-[12px] sm:text-[13px]">{f.label}</dd>
                     </div>
                   ))}
                 </dl>

@@ -19,24 +19,31 @@ export function WhoWeServe({
   className?: string;
 }) {
   const list = (
-    <ul className={cn("grid grid-cols-2 gap-3 sm:gap-4", photo ? "content-start" : "mx-auto mt-14 max-w-5xl lg:grid-cols-3")}>
+    <ul
+      className={cn(
+        "grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 sm:gap-4",
+        photo ? "content-start" : "mx-auto mt-10 max-w-5xl sm:mt-14 lg:grid-cols-3"
+      )}
+    >
       {clientTypes.map((c, i) => {
         const Icon = clientIcons[c.icon];
         return (
           <li key={c.label}>
-            <Reveal delay={(i % 3) * 0.06} className="h-full">
+            <Reveal delay={(i % 3) * 0.05} className="h-full">
               <div
                 className={cn(
-                  "group flex h-full flex-col gap-4 rounded-3xl border border-line bg-white p-5 transition-[box-shadow,transform] duration-500 ease-premium hover:-translate-y-0.5 hover:shadow-lift",
+                  "group flex h-full items-center gap-3.5 rounded-2xl border border-line bg-white p-4 shadow-soft transition-[box-shadow,transform] duration-500 ease-premium hover:-translate-y-0.5 hover:shadow-lift sm:rounded-3xl sm:p-5",
                   !photo && "sm:flex-row sm:items-center sm:p-6",
                 )}
               >
-                <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-cloud text-charcoal-900 transition-colors duration-500 group-hover:bg-accent-600 group-hover:text-white">
-                  <Icon aria-hidden className="size-[22px]" strokeWidth={1.75} />
+                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-cloud text-charcoal-900 transition-colors duration-500 group-hover:bg-accent-600 group-hover:text-white sm:size-12 sm:rounded-2xl">
+                  <Icon aria-hidden className="size-5 sm:size-[22px]" strokeWidth={1.75} />
                 </span>
-                <div>
-                  <p className="font-display text-[17px] font-bold tracking-tight text-ink sm:text-lg">{c.label}</p>
-                  {"note" in c ? <p className="mt-0.5 text-[12px] leading-snug text-muted sm:text-[13px]">{c.note}</p> : null}
+                <div className="min-w-0">
+                  <p className="font-display text-[16px] font-bold tracking-tight text-ink sm:text-[17px]">{c.label}</p>
+                  {"note" in c ? (
+                    <p className="mt-0.5 text-[12px] leading-snug text-muted sm:text-[13px]">{c.note}</p>
+                  ) : null}
                 </div>
               </div>
             </Reveal>

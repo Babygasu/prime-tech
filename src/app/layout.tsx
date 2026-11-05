@@ -6,6 +6,7 @@ import { site } from "@/content/site";
 import { MotionProvider } from "@/components/motion/Reveal";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Chatbot } from "@/components/chatbot/Chatbot";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
@@ -60,7 +61,7 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-GH" className={inter.variable}>
+    <html lang="en-GH" data-scroll-behavior="smooth" className={inter.variable}>
       <body>
         <a
           href="#main"
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Navbar />
           <main id="main">{children}</main>
           <Footer />
+          <Chatbot />
         </MotionProvider>
       </body>
     </html>

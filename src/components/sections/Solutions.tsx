@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play, Plus } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ButtonLink, Container, Eyebrow } from "@/components/ui/primitives";
 import { Reveal } from "@/components/motion/Reveal";
@@ -66,6 +66,8 @@ export function Solutions() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const isHovered = useRef(false);
 
   // Mouse drag-to-scroll state
   const isDown = useRef(false);
@@ -97,13 +99,7 @@ export function Solutions() {
     setActiveIndex(closestIndex);
   }, []);
 
-  useEffect(() => {
-    checkScroll();
-    window.addEventListener("resize", checkScroll, { passive: true });
-    return () => window.removeEventListener("resize", checkScroll);
-  }, [checkScroll]);
-
-  const scrollToSlide = (index: number) => {
+  const scrollToSlide = useCallback((index: number) => {
     const el = trackRef.current;
     if (!el) return;
     const cards = el.querySelectorAll<HTMLElement>("[data-card-index]");
@@ -113,7 +109,32 @@ export function Solutions() {
       const targetLeft = target.offsetLeft - trackPaddingLeft;
       el.scrollTo({ left: Math.max(0, targetLeft), behavior: "smooth" });
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsPlaying(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!isPlaying) return;
+    const timer = setInterval(() => {
+      if (isHovered.current || isDown.current) return;
+      setActiveIndex((prev) => {
+        const next = (prev + 1) % services.length;
+        scrollToSlide(next);
+        return next;
+      });
+    }, 5500);
+    return () => clearInterval(timer);
+  }, [isPlaying, scrollToSlide]);
+
+  useEffect(() => {
+    checkScroll();
+    window.addEventListener("resize", checkScroll, { passive: true });
+    return () => window.removeEventListener("resize", checkScroll);
+  }, [checkScroll]);
 
   const scrollPrev = () => {
     scrollToSlide(Math.max(0, activeIndex - 1));
@@ -187,10 +208,16 @@ export function Solutions() {
         <div
           ref={trackRef}
           onScroll={checkScroll}
+          onMouseEnter={() => {
+            isHovered.current = true;
+          }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseUp}
+          onMouseLeave={() => {
+            isHovered.current = false;
+            handleMouseUp();
+          }}
           className={cn(
             "no-scrollbar flex gap-4 overflow-x-auto scroll-smooth py-3 sm:gap-6",
             "snap-x snap-mandatory",
@@ -247,12 +274,12 @@ export function Solutions() {
                         </p>
                       </div>
 
-                      {/* Right side: Circular Arrow Button */}
+                      {/* Right side: Circular White Plus Button (editorial reference) */}
                       <div
                         aria-hidden="true"
-                        className="grid size-11 shrink-0 place-items-center rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white transition-all duration-300 group-hover:scale-105 group-hover:border-accent-500 group-hover:bg-accent-600 sm:size-12"
+                        className="grid size-10 shrink-0 place-items-center rounded-full bg-white text-charcoal-950 shadow-soft transition-all duration-300 group-hover:scale-110 sm:size-11"
                       >
-                        <ArrowRight className="size-5 transition-transform duration-300 ease-premium group-hover:translate-x-0.5" />
+                        <Plus className="size-5 transition-transform duration-300 ease-premium group-hover:rotate-90" strokeWidth={2.25} />
                       </div>
                     </div>
                   </div>
@@ -263,45 +290,61 @@ export function Solutions() {
         </div>
       </div>
 
-      {/* Carousel Controls (Dots + Circular Navigation Buttons) */}
+      {/* Carousel Controls (Autoplay pause/play on left, dots in middle, prev/next on right) */}
       <Container className="mt-8 flex items-center justify-between sm:mt-10">
-        {/* Slide Indicator Dots */}
-        <div className="flex items-center gap-2" role="tablist" aria-label="Slide indicators">
-          {services.map((s, idx) => (
-            <button
-              key={s.id}
-              type="button"
-              role="tab"
-              aria-selected={activeIndex === idx}
-              aria-label={`Go to slide ${idx + 1}: ${s.heading}`}
-              onClick={() => scrollToSlide(idx)}
-              className={cn(
-                "h-2 rounded-full transition-all duration-300 ease-premium",
-                activeIndex === idx ? "w-8 bg-accent-600" : "w-2 bg-charcoal-300/60 hover:bg-charcoal-400"
-              )}
-            />
-          ))}
+        {/* Left: Pause / Play toggle */}
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setIsPlaying((p) => !p)}
+            aria-label={isPlaying ? "Pause carousel" : "Play carousel"}
+            className="grid size-10 place-items-center rounded-full border border-line bg-white text-ink shadow-soft transition-all duration-300 hover:border-charcoal-900/30 hover:bg-mist active:scale-95 sm:size-11"
+          >
+            {isPlaying ? (
+              <Pause aria-hidden="true" className="size-4 text-charcoal-700" />
+            ) : (
+              <Play aria-hidden="true" className="size-4 translate-x-0.5 text-charcoal-700" />
+            )}
+          </button>
+
+          {/* Slide Indicator Dots */}
+          <div className="flex items-center gap-2" role="tablist" aria-label="Slide indicators">
+            {services.map((s, idx) => (
+              <button
+                key={s.id}
+                type="button"
+                role="tab"
+                aria-selected={activeIndex === idx}
+                aria-label={`Go to slide ${idx + 1}: ${s.heading}`}
+                onClick={() => scrollToSlide(idx)}
+                className={cn(
+                  "h-2 rounded-full transition-all duration-300 ease-premium",
+                  activeIndex === idx ? "w-8 bg-accent-600" : "w-2 bg-charcoal-300/60 hover:bg-charcoal-400"
+                )}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* Minimal Circular Previous and Next Buttons */}
-        <div className="flex items-center gap-2.5">
+        {/* Right: Circular Previous and Next Buttons */}
+        <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={scrollPrev}
             disabled={!canScrollLeft}
             aria-label="Previous slide"
-            className="grid size-11 place-items-center rounded-full border border-line bg-white text-ink shadow-soft transition-all duration-300 hover:border-charcoal-900/30 hover:bg-mist active:scale-95 disabled:pointer-events-none disabled:opacity-30 sm:size-12"
+            className="grid size-10 place-items-center rounded-full border border-line bg-white text-ink shadow-soft transition-all duration-300 hover:border-charcoal-900/30 hover:bg-mist active:scale-95 disabled:pointer-events-none disabled:opacity-30 sm:size-11"
           >
-            <ChevronLeft aria-hidden="true" className="size-5" />
+            <ChevronLeft aria-hidden="true" className="size-5 text-charcoal-700" />
           </button>
           <button
             type="button"
             onClick={scrollNext}
             disabled={!canScrollRight}
             aria-label="Next slide"
-            className="grid size-11 place-items-center rounded-full border border-line bg-white text-ink shadow-soft transition-all duration-300 hover:border-charcoal-900/30 hover:bg-mist active:scale-95 disabled:pointer-events-none disabled:opacity-30 sm:size-12"
+            className="grid size-10 place-items-center rounded-full border border-line bg-white text-ink shadow-soft transition-all duration-300 hover:border-charcoal-900/30 hover:bg-mist active:scale-95 disabled:pointer-events-none disabled:opacity-30 sm:size-11"
           >
-            <ChevronRight aria-hidden="true" className="size-5" />
+            <ChevronRight aria-hidden="true" className="size-5 text-charcoal-700" />
           </button>
         </div>
       </Container>
