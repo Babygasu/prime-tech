@@ -19,7 +19,7 @@ export function Logo({ className, priority = false }: { className?: string; prio
       width={927}
       height={208}
       fetchPriority={priority ? "high" : undefined}
-      className={cn("h-9 w-auto select-none", className)}
+      className={cn("w-auto select-none", className ?? "h-9")}
       draggable={false}
     />
   );

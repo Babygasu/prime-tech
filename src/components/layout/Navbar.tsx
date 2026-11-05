@@ -13,6 +13,7 @@ export function Navbar() {
   const pathname = usePathname();
   // Highlight the nav item for the current page (first URL segment; "" = home).
   const active = pathname.split("/")[1] ?? "";
+  const navItems = navigation.filter((item) => item.id !== "contact");
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -47,13 +48,13 @@ export function Navbar() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <nav aria-label="Main" className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-4 sm:px-6 lg:px-8">
+      <nav aria-label="Main" className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-4 sm:h-[72px] sm:px-6 lg:px-8">
         <Link href="/" aria-label="Prime-Techmate home" className="rounded-lg" onClick={() => setOpen(false)}>
-          <Logo priority className="h-10" />
+          <Logo priority className="h-8 sm:h-10" />
         </Link>
 
         <ul className="hidden items-center gap-0.5 xl:flex">
-          {navigation.map((item) => {
+          {navItems.map((item) => {
             const isActive = active === item.id;
             return (
               <li key={item.id} className="relative">
@@ -93,7 +94,7 @@ export function Navbar() {
           </Link>
           <button
             type="button"
-            className="inline-flex size-10 items-center justify-center rounded-full text-ink transition-colors hover:bg-cloud xl:hidden"
+            className="inline-flex size-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-full text-ink transition-colors hover:bg-cloud xl:hidden"
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -115,7 +116,7 @@ export function Navbar() {
             className="overflow-hidden bg-white xl:hidden"
           >
             <ul className="flex flex-col px-4 pt-4 sm:px-6">
-              {navigation.map((item, i) => (
+              {navItems.map((item, i) => (
                 <motion.li
                   key={item.id}
                   initial={{ opacity: 0, y: 12 }}
