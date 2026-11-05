@@ -37,6 +37,13 @@ export function Approach() {
             const Icon = icons[i];
             return (
               <li key={step.title} className="relative">
+                {/* Mobile vertical timeline connector */}
+                {i < approach.length - 1 && (
+                  <div
+                    aria-hidden
+                    className="absolute left-6 top-12 -bottom-8 w-px -translate-x-1/2 bg-line lg:hidden"
+                  />
+                )}
                 <Reveal delay={0.15 + i * 0.12}>
                   <div className="relative flex items-center gap-4 lg:block">
                     <span className="relative z-10 grid size-12 place-items-center rounded-2xl border border-line bg-white text-charcoal-900 shadow-soft">
@@ -44,8 +51,8 @@ export function Approach() {
                     </span>
                     <span className="font-mono text-[13px] font-medium text-accent-600 lg:mt-7 lg:block">0{i + 1}</span>
                   </div>
-                  <h3 className="mt-5 text-2xl font-bold tracking-[-0.02em] text-ink lg:mt-3">{step.title}</h3>
-                  <p className="mt-3 max-w-xs text-[15px] leading-relaxed text-body">{step.description}</p>
+                  <h3 className="mt-4 text-xl font-bold tracking-[-0.02em] text-ink sm:text-2xl lg:mt-3">{step.title}</h3>
+                  <p className="mt-2 max-w-xs text-[14px] leading-relaxed text-body sm:mt-3 sm:text-[15px]">{step.description}</p>
                 </Reveal>
               </li>
             );

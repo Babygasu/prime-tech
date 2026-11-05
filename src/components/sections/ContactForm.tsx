@@ -211,7 +211,7 @@ export function ContactForm() {
 }
 
 const inputClass =
-  "mt-1.5 h-12 w-full rounded-xl border border-line bg-mist px-4 text-[15px] text-ink outline-none transition-colors placeholder:text-subtle focus:border-charcoal-900 focus:bg-white";
+  "mt-1.5 h-12 w-full rounded-xl border border-line bg-mist px-4 text-[16px] sm:text-[15px] text-ink outline-none transition-colors placeholder:text-subtle focus:border-charcoal-900 focus:bg-white";
 const errorClass = "border-[#d92d20] bg-white";
 
 function Field({

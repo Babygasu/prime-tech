@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 
 export default function TeamPage() {
   return (
-    <section className="pb-24 pt-36 sm:pb-32 sm:pt-44">
+    <section className="pb-20 pt-28 sm:pb-32 sm:pt-44">
       <Container>
         <Reveal>
           <div className="max-w-2xl">
             <Eyebrow>Our team</Eyebrow>
-            <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.04em] text-ink sm:text-6xl">
+            <h1 className="mt-4 text-[2.1rem] font-extrabold leading-[1.06] tracking-[-0.04em] text-ink min-[360px]:text-[2.4rem] sm:mt-5 sm:text-6xl">
               The people behind Prime-Techmate.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-body">

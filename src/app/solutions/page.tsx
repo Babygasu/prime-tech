@@ -38,7 +38,7 @@ export default function SolutionsPage() {
                 <li key={s.slug}>
                   <a
                     href={`#${s.slug}`}
-                    className="inline-flex h-10 items-center gap-2 rounded-full border border-line bg-white px-4 text-[14px] font-medium text-body transition-colors duration-300 hover:border-charcoal-900/20 hover:text-ink"
+                    className="inline-flex min-h-[44px] items-center gap-2 rounded-full border border-line bg-white px-4 text-[14px] font-medium text-body transition-colors duration-300 hover:border-charcoal-900/20 hover:text-ink active:bg-mist"
                   >
                     <Icon aria-hidden className="size-4 text-charcoal-600" />
                     {s.shortTitle}
