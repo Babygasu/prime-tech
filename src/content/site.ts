@@ -41,14 +41,14 @@ export const navigation: NavItem[] = [
 export const enquiryHref = "/contact/";
 
 export const hero = {
-  title: "Powering Healthcare Through Technology.",
-  lead: "We develop innovative digital health solutions that strengthen healthcare delivery, streamline operations and improve the management of health information.",
+  title: "Smarter Healthcare. Better Patient Outcomes.",
+  lead: "Simplify hospital operations, streamline patient information, and deliver more connected care with our digital health solutions.",
   primaryCta: { label: "Explore Our Solutions", href: "/#solutions" },
   secondaryCta: { label: "Talk to Our Team", href: "/#contact" },
 };
 
 export const about = {
-  title: "Reliable health technology, built on more than 14 years of experience.",
+  title: "14+ years of building reliable healthcare technology.",
   paragraphs: [
     "Prime-Techmate is a Ghana-based technology solutions company specialising in health systems development and digital health infrastructure.",
     "We provide innovative and reliable ICT solutions that strengthen healthcare delivery, improve data management and support efficient health administration across Ghana.",

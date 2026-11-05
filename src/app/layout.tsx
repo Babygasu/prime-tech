@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
-import { Inter, Manrope } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
 import { MotionProvider } from "@/components/motion/Reveal";
@@ -8,7 +8,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
+
 
 const title = "Prime-Techmate | Healthcare Technology & ICT Solutions in Ghana";
 
@@ -60,7 +60,7 @@ const organizationJsonLd = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-GH" className={`${inter.variable} ${manrope.variable}`}>
+    <html lang="en-GH" className={inter.variable}>
       <body>
         <a
           href="#main"

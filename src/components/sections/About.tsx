@@ -1,5 +1,5 @@
 import { about, site } from "@/content/site";
-import { Container, Eyebrow } from "@/components/ui/primitives";
+import { Container } from "@/components/ui/primitives";
 import { Reveal } from "@/components/motion/Reveal";
 import { NetworkIllustration } from "@/components/visuals/NetworkIllustration";
 
@@ -9,28 +9,35 @@ export function About() {
     { value: "Accra", label: "Headquartered on Spintex Road" },
     { value: "Ghana", label: "Nationwide service delivery" },
   ];
+
   return (
-    <section id="about" aria-labelledby="about-title" className="bg-mist py-24 sm:py-32">
+    <section id="about" aria-labelledby="about-title" className="bg-mist py-20 sm:py-28 lg:py-32">
       <Container>
-        <div className="grid items-center gap-14 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16 xl:gap-20">
           <div>
             <Reveal>
-              <Eyebrow>About Prime-Techmate</Eyebrow>
-              <h2 id="about-title" className="mt-5 text-[2rem] font-bold leading-[1.1] tracking-[-0.03em] text-ink sm:text-[2.75rem] lg:text-5xl">
+              <h2
+                id="about-title"
+                className="max-w-[32rem] text-[28px] font-bold leading-[1.15] tracking-[-0.03em] text-ink min-[360px]:text-[32px] sm:text-4xl sm:leading-[1.14] lg:text-[40px] lg:leading-[1.16]"
+              >
                 {about.title}
               </h2>
             </Reveal>
+
             <Reveal delay={0.08}>
-              {about.paragraphs.map((p, i) => (
-                <p key={i} className={i === 0 ? "mt-6 text-lg leading-relaxed text-body" : "mt-4 text-lg leading-relaxed text-body"}>
-                  {p}
-                </p>
-              ))}
+              <div className="mt-4 max-w-[34rem] space-y-3 sm:mt-5">
+                {about.paragraphs.map((p, i) => (
+                  <p key={i} className="text-[17px] leading-relaxed text-body sm:text-[18px] sm:leading-relaxed">
+                    {p}
+                  </p>
+                ))}
+              </div>
             </Reveal>
+
             <Reveal delay={0.14}>
-              <dl className="mt-10 grid grid-cols-3 divide-x divide-line border-y border-line">
+              <dl className="mt-6 grid max-w-[34rem] grid-cols-3 divide-x divide-line border-y border-line py-1 sm:mt-8">
                 {facts.map((f) => (
-                  <div key={f.label} className="px-3 py-5 first:pl-0 sm:px-5">
+                  <div key={f.label} className="py-3.5 px-3 first:pl-0 sm:px-4 sm:py-4">
                     <dt className="sr-only">{f.label}</dt>
                     <dd className="font-display text-2xl font-bold tracking-tight text-charcoal-900 sm:text-3xl">{f.value}</dd>
                     <dd className="mt-1 text-[12px] leading-snug text-muted sm:text-[13px]">{f.label}</dd>
@@ -41,9 +48,9 @@ export function About() {
           </div>
 
           <Reveal delay={0.1}>
-            <figure className="relative rounded-[28px] border border-line bg-white p-4 sm:p-8">
+            <figure className="relative rounded-[28px] border border-line bg-white p-4 shadow-soft sm:p-7">
               <NetworkIllustration />
-              <figcaption className="mt-4 text-center text-[12px] text-muted">
+              <figcaption className="mt-3.5 text-center text-[12px] text-muted">
                 Connected care: information moving securely between facilities.
               </figcaption>
             </figure>
