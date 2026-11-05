@@ -136,7 +136,12 @@ export function Chatbot() {
         body: JSON.stringify({ messages: apiPayload }),
       });
 
-      const data = await res.json().catch(() => null);
+      let data: { success?: boolean; message?: string; error?: string } | null = null;
+      try {
+        data = await res.json();
+      } catch {
+        data = null;
+      }
 
       if (res.ok && data?.success && data?.message) {
         const assistantMsg: MessageItem = {
@@ -148,7 +153,73 @@ export function Chatbot() {
         setMessages((prev) => [...prev, assistantMsg]);
       } else {
         const errMsg =
-          data?.error || "We encountered an issue getting a response. Please try again or reach out to our team.";
+          data?.error ||
+          (res.status === 404
+            ? "Chat service route is not available. Please verify serverless deployment on Vercel."
+            : res.status === 429
+            ? "You are sending messages too quickly. Please pause for a moment and try again."
+            : res.status === 503
+            ? "Our assistant is temporarily busy or unconfigured. Please try again or reach out to our team."
+            : "We encountered an issue getting a response. Please try again or reach out to our team.");
+        setError(errMsg);
+      }
+    } catch {
+      setError("Network connection issue. Please check your internet connection and try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const retryLastMessage = async () => {
+    if (isLoading) return;
+    setError(null);
+
+    // Filter out welcome message
+    const apiPayload = messages
+      .filter((m) => !m.isWelcome)
+      .map((m) => ({
+        role: m.role,
+        content: m.content,
+      }));
+
+    if (apiPayload.length === 0 || apiPayload[apiPayload.length - 1].role !== "user") {
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: apiPayload }),
+      });
+
+      let data: { success?: boolean; message?: string; error?: string } | null = null;
+      try {
+        data = await res.json();
+      } catch {
+        data = null;
+      }
+
+      if (res.ok && data?.success && data?.message) {
+        const assistantMsg: MessageItem = {
+          id: `model-${Date.now()}`,
+          role: "model",
+          content: data.message,
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, assistantMsg]);
+      } else {
+        const errMsg =
+          data?.error ||
+          (res.status === 404
+            ? "Chat service route is not available. Please verify serverless deployment on Vercel."
+            : res.status === 429
+            ? "You are sending messages too quickly. Please pause for a moment and try again."
+            : res.status === 503
+            ? "Our assistant is temporarily busy or unconfigured. Please try again or reach out to our team."
+            : "We encountered an issue getting a response. Please try again or reach out to our team.");
         setError(errMsg);
       }
     } catch {
@@ -399,8 +470,9 @@ export function Chatbot() {
                           <p>{error}</p>
                           <button
                             type="button"
-                            onClick={() => handleSend(messages[messages.length - 1]?.content)}
-                            className="mt-2 font-semibold text-accent-600 underline underline-offset-2 hover:text-accent-700"
+                            onClick={retryLastMessage}
+                            disabled={isLoading}
+                            className="mt-2 font-semibold text-accent-600 underline underline-offset-2 hover:text-accent-700 disabled:opacity-50"
                           >
                             Retry query
                           </button>

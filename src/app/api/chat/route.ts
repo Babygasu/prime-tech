@@ -44,13 +44,13 @@ export async function POST(req: NextRequest) {
     }
 
     // 2. Validate API Key
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY?.trim();
     if (!apiKey) {
       console.error("[Chat API] GEMINI_API_KEY is not configured in server environment.");
       return NextResponse.json(
         {
           success: false,
-          error: "The virtual assistant is temporarily unavailable. Please contact our team via the enquiry form.",
+          error: "The virtual assistant is unconfigured on this deployment. Please add GEMINI_API_KEY in Vercel Project Settings > Environment Variables.",
         },
         { status: 503 }
       );
