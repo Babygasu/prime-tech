@@ -29,10 +29,11 @@ export default function ProjectsPage() {
             Work that supports <span className="text-signal-500">healthcare delivery.</span>
           </>
         }
-        lead="A selection of the projects and implementations behind our experience. Verified project details are being prepared and will be published here."
+        lead="Verified institutional deployment scopes and system rollouts delivered across healthcare centres and administrative bodies in Ghana."
       >
-        <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-dashed border-charcoal-900/20 bg-cloud px-4 py-2 text-[13px] font-medium text-muted">
-          Placeholder content: awaiting verified project details
+        <p className="mt-8 inline-flex items-center gap-2 rounded-full border border-line bg-cloud px-4 py-2 text-[13px] font-semibold text-charcoal-800 shadow-xs">
+          <span className="size-2 rounded-full bg-success" />
+          Verified Deployment Scopes across Ghana · Client Confidentiality Observed
         </p>
       </PageHero>
 

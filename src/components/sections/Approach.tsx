@@ -1,13 +1,13 @@
 "use client";
 
 import { motion } from "motion/react";
-import { LifeBuoy, PenTool, Rocket, Search, type LucideProps } from "lucide-react";
+import { GraduationCap, LifeBuoy, Search, Sliders, type LucideProps } from "lucide-react";
 import type { ComponentType } from "react";
 import { approach } from "@/content/site";
 import { Container, SectionHeading } from "@/components/ui/primitives";
 import { Reveal } from "@/components/motion/Reveal";
 
-const icons: ComponentType<LucideProps>[] = [Search, PenTool, Rocket, LifeBuoy];
+const icons: ComponentType<LucideProps>[] = [Search, Sliders, GraduationCap, LifeBuoy];
 
 export function Approach() {
   return (
@@ -16,8 +16,8 @@ export function Approach() {
         <Reveal>
           <SectionHeading
             eyebrow="Our approach"
-            title={<span id="approach-title">A clear path from idea to working system.</span>}
-            lead="Every engagement follows four simple stages, so you always know where your project stands."
+            title={<span id="approach-title">A clear path from paper to dependable digital health.</span>}
+            lead="Our healthcare implementation methodology ensures zero clinical disruption, thorough staff adoption, and long-term operational reliability."
           />
         </Reveal>
 

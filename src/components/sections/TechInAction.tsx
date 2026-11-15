@@ -154,29 +154,163 @@ export function TechInAction() {
 
           <Reveal delay={0.08}>
             <div id="tech-panel" role="tabpanel" aria-labelledby={`tab-${active}`} className="relative">
-              <BrowserFrame className="border-white/10">
-                <ScaledCanvas
-                  width={DASHBOARD_WIDTH}
-                  height={DASHBOARD_HEIGHT}
-                  label={`Illustrative ${current.label.toLowerCase()} screen with fictional sample data.`}
-                >
-                  <AnimatePresence mode="wait" initial={false}>
-                    <motion.div
-                      key={active}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <DemoDashboard view={active} />
-                    </motion.div>
-                  </AnimatePresence>
-                </ScaledCanvas>
-              </BrowserFrame>
+              {/* Desktop view: Scaled full dashboard canvas */}
+              <div className="hidden lg:block">
+                <BrowserFrame className="border-white/10">
+                  <ScaledCanvas
+                    width={DASHBOARD_WIDTH}
+                    height={DASHBOARD_HEIGHT}
+                    label={`Illustrative ${current.label.toLowerCase()} screen with fictional sample data.`}
+                  >
+                    <AnimatePresence mode="wait" initial={false}>
+                      <motion.div
+                        key={active}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -8 }}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      >
+                        <DemoDashboard view={active} />
+                      </motion.div>
+                    </AnimatePresence>
+                  </ScaledCanvas>
+                </BrowserFrame>
+              </div>
+
+              {/* Mobile-native responsive view: Clean, high-legibility interface card */}
+              <div className="block lg:hidden">
+                <AnimatePresence mode="wait" initial={false}>
+                  <motion.div
+                    key={active}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    <MobileDashboardView view={active} />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
           </Reveal>
         </div>
       </Container>
     </section>
+  );
+}
+
+function MobileDashboardView({ view }: { view: DashboardView }) {
+  if (view === "overview") {
+    return (
+      <div className="space-y-3 rounded-2xl border border-white/10 bg-navy-900/95 p-4.5 text-white shadow-soft">
+        <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+          <span className="text-[12px] font-bold uppercase tracking-wider text-accent-300">Executive Facility Pulse</span>
+          <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-semibold text-emerald-400">
+            <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            Live Sync
+          </span>
+        </div>
+        <div className="grid grid-cols-2 gap-2.5">
+          <div className="rounded-xl bg-white/[0.05] p-3 border border-white/5">
+            <p className="text-[11px] text-navy-300">Active Visits Today</p>
+            <p className="mt-1 text-xl font-bold text-white">142</p>
+          </div>
+          <div className="rounded-xl bg-white/[0.05] p-3 border border-white/5">
+            <p className="text-[11px] text-navy-300">Bed Occupancy</p>
+            <p className="mt-1 text-xl font-bold text-white">78%</p>
+          </div>
+          <div className="rounded-xl bg-white/[0.05] p-3 border border-white/5">
+            <p className="text-[11px] text-navy-300">Claims Verified</p>
+            <p className="mt-1 text-xl font-bold text-emerald-400">98.4%</p>
+          </div>
+          <div className="rounded-xl bg-white/[0.05] p-3 border border-white/5">
+            <p className="text-[11px] text-navy-300">Connected Units</p>
+            <p className="mt-1 text-xl font-bold text-white">6 Online</p>
+          </div>
+        </div>
+        <p className="text-[11px] text-navy-300 pt-1">
+          * Illustrative demonstration data simulating multi-department hospital sync.
+        </p>
+      </div>
+    );
+  }
+  if (view === "records") {
+    return (
+      <div className="space-y-3 rounded-2xl border border-white/10 bg-navy-900/95 p-4.5 text-white shadow-soft">
+        <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+          <div className="flex items-center gap-2">
+            <span className="grid size-7 place-items-center rounded-full bg-accent-600 text-xs font-bold">KO</span>
+            <div>
+              <p className="text-[13px] font-bold text-white">Kwame Osei</p>
+              <p className="text-[10px] text-navy-300">NHIS #1092-4410 · Male, 41y</p>
+            </div>
+          </div>
+          <span className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-accent-300">OPD Encounter</span>
+        </div>
+        <div className="space-y-2 text-[12px]">
+          <div className="flex justify-between rounded-lg bg-white/[0.04] p-2.5">
+            <span className="text-navy-300">Latest Vitals:</span>
+            <span className="font-semibold text-white">BP 124/82 · Temp 37.1°C</span>
+          </div>
+          <div className="flex justify-between rounded-lg bg-white/[0.04] p-2.5">
+            <span className="text-navy-300">Clinical Diagnosis:</span>
+            <span className="font-semibold text-white">Hypertension (Under Review)</span>
+          </div>
+          <div className="flex justify-between rounded-lg bg-white/[0.04] p-2.5">
+            <span className="text-navy-300">Medication Order:</span>
+            <span className="font-semibold text-accent-300">Amlodipine 5mg Daily</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (view === "appointments") {
+    return (
+      <div className="space-y-3 rounded-2xl border border-white/10 bg-navy-900/95 p-4.5 text-white shadow-soft">
+        <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+          <span className="text-[12px] font-bold uppercase tracking-wider text-accent-300">Today's Clinic Roster</span>
+          <span className="text-[11px] text-navy-300">Morning Session</span>
+        </div>
+        <div className="space-y-2">
+          {[
+            { doctor: "Dr. K. Asante", clinic: "General OPD", queue: "18 Patients", room: "Room 1" },
+            { doctor: "Dr. A. Mensah", clinic: "Antenatal Care", queue: "12 Patients", room: "Maternity" },
+            { doctor: "Dr. E. Boateng", clinic: "Child Welfare", queue: "15 Patients", room: "Room 4" },
+          ].map((d) => (
+            <div key={d.doctor} className="flex items-center justify-between rounded-xl bg-white/[0.04] p-2.5">
+              <div>
+                <p className="text-[12.5px] font-bold text-white">{d.doctor}</p>
+                <p className="text-[11px] text-navy-300">{d.clinic} · {d.room}</p>
+              </div>
+              <span className="rounded-md bg-accent-600/30 px-2 py-0.5 text-[11px] font-semibold text-accent-200">
+                {d.queue}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="space-y-3 rounded-2xl border border-white/10 bg-navy-900/95 p-4.5 text-white shadow-soft">
+      <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+        <span className="text-[12px] font-bold uppercase tracking-wider text-accent-300">Reporting & Indicators</span>
+        <span className="rounded-full bg-emerald-500/20 px-2 py-0.5 text-[10px] font-semibold text-emerald-300">GHS Format</span>
+      </div>
+      <div className="space-y-2 text-[12px]">
+        <div className="flex justify-between rounded-lg bg-white/[0.04] p-2.5">
+          <span className="text-navy-300">Monthly OPD Volume:</span>
+          <span className="font-bold text-white">3,420 Visits</span>
+        </div>
+        <div className="flex justify-between rounded-lg bg-white/[0.04] p-2.5">
+          <span className="text-navy-300">Electronic Claims Rate:</span>
+          <span className="font-bold text-emerald-400">99.1% Reconciled</span>
+        </div>
+        <div className="flex justify-between rounded-lg bg-white/[0.04] p-2.5">
+          <span className="text-navy-300">Avg. Consultation Time:</span>
+          <span className="font-bold text-accent-300">14.2 minutes</span>
+        </div>
+      </div>
+    </div>
   );
 }

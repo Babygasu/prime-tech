@@ -1,15 +1,23 @@
 "use client";
 
 import {
+  Activity,
+  ArrowRight,
+  CheckCircle2,
   CircleCheck,
   CreditCard,
+  FileText,
   FlaskConical,
   GraduationCap,
   HardDrive,
   Lock,
   Pill,
+  Play,
+  RotateCcw,
   Router,
+  ShieldCheck,
   Stethoscope,
+  UserCheck,
   UserRound,
   Wifi,
 } from "lucide-react";
@@ -20,7 +28,7 @@ import { cn } from "@/lib/cn";
 
 /**
  * Small illustrative interface compositions for the Solutions page and homepage.
- * Includes interactive patient journey demonstration.
+ * Includes interactive connected patient journey demonstration.
  */
 export function SolutionVisual({ kind }: { kind: SolutionIcon }) {
   const Visual = visuals[kind];
@@ -33,12 +41,12 @@ export function SolutionVisual({ kind }: { kind: SolutionIcon }) {
 
 export function VisualFrame({ children, badge }: { children: ReactNode; badge?: ReactNode }) {
   return (
-    <figure className="relative overflow-hidden rounded-[28px] border border-line bg-mist p-5 sm:p-8">
+    <figure className="relative overflow-hidden rounded-[28px] border border-line bg-mist p-4 sm:p-7">
       <div aria-hidden className="bg-grid absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_70%_70%_at_50%_40%,black,transparent_85%)]" />
-      <div className="relative grid min-h-[280px] place-items-center sm:min-h-[320px]">
+      <div className="relative w-full">
         {children}
       </div>
-      <figcaption className="relative mt-5 flex justify-center">
+      <figcaption className="relative mt-4 flex justify-center">
         <DemoBadge>{badge}</DemoBadge>
       </figcaption>
     </figure>
@@ -55,7 +63,7 @@ function Bar({ w, className }: { w: string; className?: string }) {
 
 function RecordVisual() {
   return (
-    <div className="relative w-full max-w-[360px]">
+    <div className="relative mx-auto w-full max-w-[360px]">
       <Card className="p-5">
         <div className="flex items-center gap-3">
           <span className="grid size-11 place-items-center rounded-full bg-accent-600 font-display text-sm font-bold text-white">AK</span>
@@ -89,46 +97,122 @@ function RecordVisual() {
   );
 }
 
-const workflowSteps = [
+export type PatientStage = {
+  id: string;
+  shortLabel: string;
+  department: string;
+  icon: typeof UserCheck;
+  highlight: string;
+  dataSnippet: {
+    title: string;
+    metrics: { label: string; val: string; status?: "normal" | "alert" | "verified" }[];
+    clinicalNote: string;
+    handoff: string;
+  };
+};
+
+export const PATIENT_STAGES: PatientStage[] = [
   {
-    icon: UserRound,
-    label: "Registration",
-    desc: "Digital patient intake, demographic capture, and identification record created.",
+    id: "triage",
+    shortLabel: "1. Triage",
+    department: "OPD Triage & Registration",
+    icon: UserCheck,
+    highlight: "Digital patient intake & instant vitals capture",
+    dataSnippet: {
+      title: "Vitals & Intake Summary",
+      metrics: [
+        { label: "Blood Pressure", val: "120/80 mmHg", status: "normal" },
+        { label: "Temperature", val: "38.2°C", status: "alert" },
+        { label: "Pulse", val: "84 bpm", status: "normal" },
+        { label: "NHIS Status", val: "Active (Verified)", status: "verified" },
+      ],
+      clinicalNote: "Electronic folder created. Patient presenting with fever & chills. Assigned to Room 2.",
+      handoff: "Vitals instantly routed to Doctor's clinical dashboard. Zero paper folder transit delay.",
+    },
   },
   {
+    id: "consultation",
+    shortLabel: "2. Doctor",
+    department: "Clinical Consultation",
     icon: Stethoscope,
-    label: "Consultation",
-    desc: "Doctor documents vitals, clinical examination, and treatment plan.",
+    highlight: "Prescriber charting with pre-populated OPD vitals",
+    dataSnippet: {
+      title: "Doctor SOAP Charting",
+      metrics: [
+        { label: "Clinician", val: "Dr. K. Asante", status: "normal" },
+        { label: "Presumptive Dx", val: "Suspected Malaria", status: "alert" },
+        { label: "Ordered Test", val: "Malaria RDT", status: "normal" },
+        { label: "ICD-10 Code", val: "B54 (Unspecified)", status: "normal" },
+      ],
+      clinicalNote: "Patient has 3-day history of febrile illness. Ordered immediate rapid diagnostic test before prescribing.",
+      handoff: "Diagnostic lab requisition dispatched electronically to bench in real-time.",
+    },
   },
   {
+    id: "lab",
+    shortLabel: "3. Lab",
+    department: "Diagnostic Laboratory",
     icon: FlaskConical,
-    label: "Laboratory",
-    desc: "Diagnostic lab requests ordered and test results linked directly to file.",
+    highlight: "Electronic bench queue & auto-updating results",
+    dataSnippet: {
+      title: "Laboratory Results",
+      metrics: [
+        { label: "Specimen", val: "Capillary Blood", status: "normal" },
+        { label: "Test Type", val: "Malaria RDT", status: "normal" },
+        { label: "Result", val: "POSITIVE (+)", status: "alert" },
+        { label: "Turnaround", val: "14 minutes", status: "verified" },
+      ],
+      clinicalNote: "Plasmodium falciparum antigen detected. Result validated by Senior Biomedical Scientist.",
+      handoff: "Result auto-populated into patient folder; Doctor notified immediately for treatment confirmation.",
+    },
   },
   {
+    id: "pharmacy",
+    shortLabel: "4. Pharmacy",
+    department: "Pharmacy & Dispensing",
     icon: Pill,
-    label: "Pharmacy",
-    desc: "Prescriptions dispensed, dosage tracked, and medication stock updated.",
+    highlight: "E-Prescription dispensing & automated stock decrement",
+    dataSnippet: {
+      title: "Dispensary & Inventory",
+      metrics: [
+        { label: "Medication", val: "Artemether-Lumefantrine", status: "normal" },
+        { label: "Dosage", val: "20/120mg x 3 days", status: "normal" },
+        { label: "Stock Batch", val: "#ACT-9021", status: "verified" },
+        { label: "Inventory Log", val: "-1 Unit Deducted", status: "verified" },
+      ],
+      clinicalNote: "Medication verified against patient allergy records. Dosing instructions explained in Twi & English.",
+      handoff: "Pharmacy dispensing logged; items automatically batched into insurance claim queue.",
+    },
   },
   {
+    id: "billing",
+    shortLabel: "5. Claims",
+    department: "NHIS Claims & Billing",
     icon: CreditCard,
-    label: "Billing & claims",
-    desc: "Services reconciled with automated NHIS and private insurance claims processing.",
+    highlight: "Automated tariff compilation & zero paper vetting",
+    dataSnippet: {
+      title: "Electronic Claim Reconciliation",
+      metrics: [
+        { label: "Claim ID", val: "CLM-GH-2409-18", status: "normal" },
+        { label: "Consultation", val: "GHS 25.00", status: "verified" },
+        { label: "Lab Diagnostic", val: "GHS 18.00", status: "verified" },
+        { label: "Medication ACT", val: "GHS 32.50", status: "verified" },
+      ],
+      clinicalNote: "GHS & NHIA tariff codes matched 100%. Encounter validated and queued for electronic batch submission.",
+      handoff: "Clean claim generated with complete audit trail. Rejection risk reduced to near zero.",
+    },
   },
 ];
 
 /**
- * Animated and interactive patient journey demonstration.
- * Animates through clinical stages sequentially upon entering viewport,
- * and allows visitors to click/tap stages to inspect individual steps.
+ * Interactive 5-Stage Patient Journey Simulator (Elation Health & Linear inspiration).
+ * Demonstrates real-time clinical continuity across departments in a Ghanaian health facility.
  */
 export function WorkflowVisual() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0); // 0 = reg active, 1 = consult, 2 = lab, 3 = pharm, 4 = billing
-  const [selectedStep, setSelectedStep] = useState<number | null>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const [isUserInteracted, setIsUserInteracted] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -146,125 +230,164 @@ export function WorkflowVisual() {
     return () => observer.disconnect();
   }, [inView]);
 
+  // Sequential progression when in view, unless paused by user interaction
   useEffect(() => {
-    if (!inView || isUserInteracted || hasAnimated) return;
+    if (!inView || isPaused) return;
 
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) {
-      setCurrentStep(4);
-      setHasAnimated(true);
-      return;
-    }
+    if (mq.matches) return;
 
-    const t1 = setTimeout(() => setCurrentStep(1), 650);
-    const t2 = setTimeout(() => setCurrentStep(2), 1300);
-    const t3 = setTimeout(() => setCurrentStep(3), 1950);
-    const t4 = setTimeout(() => {
-      setCurrentStep(4);
-      setHasAnimated(true);
-    }, 2600);
+    const timer = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % PATIENT_STAGES.length);
+    }, 3800);
 
-    return () => {
-      clearTimeout(t1);
-      clearTimeout(t2);
-      clearTimeout(t3);
-      clearTimeout(t4);
-    };
-  }, [inView, isUserInteracted, hasAnimated]);
+    return () => clearInterval(timer);
+  }, [inView, isPaused]);
 
-  const handleStepClick = (index: number) => {
-    setIsUserInteracted(true);
-    setSelectedStep(index);
+  const handleStageSelect = (idx: number) => {
+    setIsPaused(true);
+    setActiveStep(idx);
   };
 
-  const activeIdx = selectedStep !== null ? selectedStep : currentStep;
-  const activeDetail = workflowSteps[activeIdx] ?? workflowSteps[4];
+  const stage = PATIENT_STAGES[activeStep];
+  const StageIcon = stage.icon;
 
   return (
-    <div ref={containerRef} className="w-full max-w-[400px]">
-      <Card className="p-5 sm:p-6">
-        <div className="flex items-center justify-between border-b border-line pb-3">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">Patient journey</p>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-50 border border-accent-200/60 px-2 py-0.5 text-[10.5px] font-semibold text-accent-700">
-            <span className="size-1.5 rounded-full bg-accent-600 animate-pulse" />
-            Interactive
-          </span>
+    <div ref={containerRef} className="w-full">
+      <Card className="overflow-hidden border-charcoal-900/[0.12] shadow-lift">
+        {/* Patient Encounter Header */}
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line bg-mist/90 px-4 py-3 sm:px-5">
+          <div className="flex items-center gap-2.5">
+            <span className="grid size-8 place-items-center rounded-full bg-accent-600 font-display text-[12px] font-bold text-white shadow-xs">
+              AM
+            </span>
+            <div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[13px] font-bold text-ink sm:text-[14px]">Akua Mensah</span>
+                <span className="text-[11px] text-muted">· 32y F</span>
+              </div>
+              <p className="font-mono text-[10.5px] text-muted">NHIS #2409-1834 · Outpatient Care</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="inline-flex items-center gap-1 rounded-full bg-success-soft px-2 py-0.5 text-[10.5px] font-semibold text-success">
+              <ShieldCheck className="size-3" /> NHIS Verified
+            </span>
+            <button
+              type="button"
+              onClick={() => setIsPaused((p) => !p)}
+              title={isPaused ? "Auto-play journey" : "Pause simulation"}
+              className="rounded-lg p-1 text-muted hover:bg-white hover:text-ink transition-colors"
+            >
+              {isPaused ? <Play className="size-3.5" /> : <RotateCcw className="size-3.5" />}
+            </button>
+          </div>
         </div>
 
-        <ol className="mt-3.5 space-y-2" role="list">
-          {workflowSteps.map((s, i) => {
-            const isCompleted = i < currentStep || (currentStep === 4 && i < 4);
-            const isActive = activeIdx === i;
-
+        {/* 5 Departmental Stage Tabs */}
+        <div className="no-scrollbar flex overflow-x-auto border-b border-line bg-cloud/50 p-1.5 gap-1">
+          {PATIENT_STAGES.map((s, idx) => {
+            const isCurrent = activeStep === idx;
+            const isCompleted = idx < activeStep;
             return (
-              <li key={s.label}>
-                <button
-                  type="button"
-                  onClick={() => handleStepClick(i)}
-                  aria-label={`${s.label}: ${isCompleted ? "Completed" : isActive ? "Active step" : "Pending step"}`}
-                  className={cn(
-                    "group flex w-full items-center gap-3 rounded-xl p-2.5 text-left transition-all duration-300",
-                    "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500",
-                    isActive
-                      ? "border border-accent-200 bg-accent-50/90 shadow-sm"
-                      : isCompleted
-                        ? "border border-transparent bg-mist/70 hover:bg-cloud/60"
-                        : "border border-transparent bg-white/40 opacity-70 hover:opacity-100"
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => handleStageSelect(idx)}
+                className={cn(
+                  "flex-1 min-w-[70px] whitespace-nowrap rounded-xl py-1.5 px-2 text-center transition-all duration-200",
+                  isCurrent
+                    ? "bg-white font-bold text-accent-700 shadow-soft ring-1 ring-accent-200"
+                    : isCompleted
+                      ? "text-ink/80 hover:bg-white/60 font-medium"
+                      : "text-muted hover:text-ink font-medium"
+                )}
+              >
+                <div className="flex items-center justify-center gap-1">
+                  {isCompleted ? (
+                    <CheckCircle2 className="size-3 text-success shrink-0" />
+                  ) : (
+                    <span
+                      className={cn(
+                        "size-1.5 rounded-full shrink-0",
+                        isCurrent ? "bg-accent-600 animate-pulse" : "bg-charcoal-300"
+                      )}
+                    />
                   )}
-                >
-                  <span
-                    className={cn(
-                      "grid size-8 shrink-0 place-items-center rounded-lg transition-all duration-300",
-                      isActive
-                        ? "bg-accent-600 text-white shadow-sm"
-                        : isCompleted
-                          ? "bg-accent-50 text-accent-700 ring-1 ring-accent-200/60"
-                          : "bg-cloud text-charcoal-400"
-                    )}
-                  >
-                    <s.icon aria-hidden="true" className="size-4" />
-                  </span>
-
-                  <span
-                    className={cn(
-                      "text-[13.5px] transition-colors duration-300",
-                      isActive
-                        ? "font-semibold text-ink"
-                        : isCompleted
-                          ? "font-medium text-ink"
-                          : "text-muted"
-                    )}
-                  >
-                    {s.label}
-                  </span>
-
-                  <span className="ml-auto shrink-0">
-                    {isCompleted ? (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-medium text-success">
-                        <CircleCheck className="size-4" />
-                        <span className="hidden sm:inline">Done</span>
-                      </span>
-                    ) : isActive ? (
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-accent-100/90 px-2 py-0.5 text-[10.5px] font-semibold text-accent-700">
-                        <span className="size-1.5 rounded-full bg-accent-600 animate-pulse" />
-                        Active
-                      </span>
-                    ) : (
-                      <span className="text-[11px] text-muted">Pending</span>
-                    )}
-                  </span>
-                </button>
-              </li>
+                  <span className="text-[11px] sm:text-[12px]">{s.shortLabel}</span>
+                </div>
+              </button>
             );
           })}
-        </ol>
+        </div>
 
-        {/* Step details context note */}
-        <div className="mt-3.5 rounded-xl border border-line bg-mist/60 p-3 transition-all duration-300">
-          <p className="text-[12px] leading-relaxed text-body">
-            <strong className="font-semibold text-ink">{activeDetail.label}: </strong>
-            {activeDetail.desc}
-          </p>
+        {/* Stage Content & Live Continuity View */}
+        <div className="p-4 sm:p-5">
+          {/* Active Department Header */}
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-center gap-2.5">
+              <span className="grid size-9 place-items-center rounded-xl bg-accent-50 text-accent-700 ring-1 ring-accent-200/60 shadow-xs">
+                <StageIcon className="size-4.5" />
+              </span>
+              <div>
+                <h4 className="text-[14px] font-bold text-ink sm:text-[15px]">{stage.department}</h4>
+                <p className="text-[11.5px] text-muted">{stage.highlight}</p>
+              </div>
+            </div>
+
+            <span className="rounded-full bg-accent-100/80 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-accent-800">
+              Stage {activeStep + 1} of 5
+            </span>
+          </div>
+
+          {/* Departmental Clinical Record Snippet */}
+          <div className="mt-3.5 rounded-xl border border-line bg-mist/60 p-3 sm:p-3.5">
+            <div className="flex items-center justify-between border-b border-line/70 pb-2">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-charcoal-700">
+                {stage.dataSnippet.title}
+              </span>
+              <span className="flex items-center gap-1 text-[10.5px] font-semibold text-accent-700">
+                <Activity className="size-3" /> Live Encounters
+              </span>
+            </div>
+
+            {/* Metrics Grid */}
+            <div className="mt-2.5 grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {stage.dataSnippet.metrics.map((m) => (
+                <div key={m.label} className="rounded-lg bg-white p-2 border border-line/60">
+                  <p className="text-[9.5px] font-medium text-muted uppercase tracking-wider">{m.label}</p>
+                  <p
+                    className={cn(
+                      "mt-0.5 text-[12px] font-bold tracking-tight sm:text-[13px]",
+                      m.status === "alert"
+                        ? "text-signal-600"
+                        : m.status === "verified"
+                          ? "text-success"
+                          : "text-ink"
+                    )}
+                  >
+                    {m.val}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Clinical Note Snippet */}
+            <div className="mt-2.5 flex items-start gap-2 rounded-lg bg-white/70 p-2 text-[11.5px] leading-relaxed text-body border border-line/50">
+              <FileText className="size-3.5 text-muted shrink-0 mt-0.5" />
+              <p>{stage.dataSnippet.clinicalNote}</p>
+            </div>
+          </div>
+
+          {/* Connected Data Handoff (The Core Advantage) */}
+          <div className="mt-3 flex items-start gap-2 rounded-xl bg-accent-50/90 border border-accent-200/70 p-2.5 sm:p-3 text-[12px] text-accent-900">
+            <ArrowRight className="size-3.5 text-accent-600 shrink-0 mt-0.5" />
+            <div>
+              <strong className="font-semibold text-accent-800">Connected Data Continuity: </strong>
+              <span>{stage.dataSnippet.handoff}</span>
+            </div>
+          </div>
         </div>
       </Card>
     </div>
@@ -273,7 +396,7 @@ export function WorkflowVisual() {
 
 function NetworkVisual() {
   return (
-    <div className="relative w-full max-w-[340px]">
+    <div className="relative mx-auto w-full max-w-[340px]">
       <Card className="space-y-2.5 p-4">
         {[
           { label: "Core network switch", icon: Router },
@@ -302,7 +425,7 @@ function NetworkVisual() {
 function AnalyticsVisual() {
   const bars = [42, 58, 50, 72, 64, 86, 78];
   return (
-    <Card className="w-full max-w-[400px] p-5">
+    <Card className="mx-auto w-full max-w-[400px] p-5">
       <div className="flex items-start justify-between">
         <div>
           <p className="text-[12px] font-medium text-muted">Monthly outpatient attendance</p>
@@ -337,7 +460,7 @@ function ClaimsVisual() {
     { id: "DEMO-C-2043", status: "Approved", tone: "bg-success-soft text-success" },
   ];
   return (
-    <div className="relative w-full max-w-[380px]">
+    <div className="relative mx-auto w-full max-w-[380px]">
       <Card className="p-5">
         <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-muted">Insurance claims</p>
         <ul className="mt-4 space-y-2.5">

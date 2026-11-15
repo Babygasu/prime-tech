@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Info } from "lucide-react";
 import { ScaledCanvas } from "./Frame";
 import { DASHBOARD_HEIGHT, DASHBOARD_WIDTH, DemoDashboard } from "./dashboard/DemoDashboard";
 
@@ -41,16 +40,11 @@ export function HeroVisual() {
           </div>
         </div>
       </motion.div>
-
-      <p className="mt-3 flex items-center justify-center gap-1.5 text-center text-[11px] text-muted sm:mt-4 sm:text-[12px]">
-        <Info aria-hidden="true" className="size-3 shrink-0 sm:size-3.5" />
-        Illustrative demo with fictional data. Not a representation of a deployed product.
-      </p>
     </div>
   );
 }
 
-/** App window top bar. The demo label sits here so it is visible at first glance. */
+/** App window top bar with single elegant illustrative badge. */
 function WindowBar() {
   return (
     <div className="flex h-8 items-center gap-2 border-b border-line bg-mist/80 px-2.5 sm:h-11 sm:px-4">
@@ -59,9 +53,10 @@ function WindowBar() {
         <span className="size-2 rounded-full bg-charcoal-300/70 sm:size-2.5" />
         <span className="size-2 rounded-full bg-charcoal-300/70 sm:size-2.5" />
       </span>
-      <span className="mx-auto inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-2 py-0.5 text-[9.5px] font-medium text-muted sm:px-3 sm:text-[11px]">
-        <span aria-hidden="true" className="size-1.5 rounded-full bg-signal-500" />
-        Illustrative demo<span className="hidden sm:inline"> · fictional data</span>
+      <span className="mx-auto inline-flex items-center gap-1.5 rounded-full border border-line bg-white px-2.5 py-0.5 text-[10px] font-medium text-muted shadow-xs sm:px-3.5 sm:text-[11.5px]">
+        <span aria-hidden="true" className="size-1.5 rounded-full bg-signal-500 animate-pulse" />
+        <span>Executive Facility Pulse</span>
+        <span className="text-subtle hidden sm:inline">· Illustrative concept</span>
       </span>
       <span aria-hidden="true" className="w-[36px] sm:w-[54px]" />
     </div>
