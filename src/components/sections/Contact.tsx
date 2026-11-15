@@ -1,4 +1,4 @@
-import { MapPin } from "lucide-react";
+import { CheckCircle2, MapPin } from "lucide-react";
 import { finalCta, site } from "@/content/site";
 import { Container, Eyebrow } from "@/components/ui/primitives";
 import { Reveal } from "@/components/motion/Reveal";
@@ -22,6 +22,22 @@ export function Contact() {
                   {finalCta.title}
                 </h2>
                 <p className="mt-6 max-w-lg text-lg leading-relaxed text-navy-300">{finalCta.lead}</p>
+
+                {/* Operational Reassurance Badges */}
+                <div className="mt-8 space-y-3.5 border-t border-white/10 pt-6">
+                  <div className="flex items-center gap-2.5 text-[13.5px] text-navy-200">
+                    <CheckCircle2 className="size-4 text-signal-400 shrink-0" />
+                    <span>Direct consultation with healthcare IT specialists</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 text-[13.5px] text-navy-200">
+                    <CheckCircle2 className="size-4 text-signal-400 shrink-0" />
+                    <span>Facility visits & needs assessments across all regions in Ghana</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 text-[13.5px] text-navy-200">
+                    <CheckCircle2 className="size-4 text-signal-400 shrink-0" />
+                    <span>Prompt turnaround on deployment plans & quotations</span>
+                  </div>
+                </div>
 
                 <div className="mt-10 flex items-start gap-3 lg:mt-auto lg:pt-10">
                   <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-white/[0.06] text-signal-400 ring-1 ring-white/10">

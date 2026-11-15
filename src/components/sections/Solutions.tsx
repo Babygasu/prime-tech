@@ -15,6 +15,7 @@ export type ServiceSlide = {
   image: string;
   alt: string;
   href: string;
+  impactTag: string;
 };
 
 export const services: ServiceSlide[] = [
@@ -23,6 +24,7 @@ export const services: ServiceSlide[] = [
     category: "DIGITAL HEALTH",
     heading: "Electronic Medical Records",
     description: "Smarter patient records and streamlined clinical workflows.",
+    impactTag: "Zero Lost Folders · Real-Time Vitals",
     image: "/images/image-1.jpg",
     alt: "Healthcare professionals working with modern electronic medical records in a Ghanaian clinic.",
     href: "/solutions/#electronic-medical-records",
@@ -32,6 +34,7 @@ export const services: ServiceSlide[] = [
     category: "HEALTH DATA & MANAGEMENT",
     heading: "Health Management Information Systems",
     description: "Connected healthcare data for more informed decisions.",
+    impactTag: "Facility-Wide Department Sync",
     image: "/images/image-12.jpg",
     alt: "Healthcare administrators analyzing data and health management information systems in a hospital.",
     href: "/solutions/#health-management-information-systems",
@@ -41,6 +44,7 @@ export const services: ServiceSlide[] = [
     category: "HEALTHCARE INFRASTRUCTURE",
     heading: "Network Infrastructure & Configuration",
     description: "Reliable, secure connectivity for modern healthcare facilities.",
+    impactTag: "99.9% Uptime for Critical Care",
     image: "/images/image-123.jpg",
     alt: "Healthcare IT specialist configuring reliable network infrastructure and communications hardware.",
     href: "/solutions/#network-infrastructure",
@@ -50,6 +54,7 @@ export const services: ServiceSlide[] = [
     category: "TRAINING & SUPPORT",
     heading: "Claims Systems Support & Training",
     description: "Helping healthcare teams manage digital insurance claims efficiently.",
+    impactTag: "Faster NHIS Reconciliations",
     image: "/images/image-1234.jpg",
     alt: "Healthcare staff participating in computer-based health insurance claims training.",
     href: "/solutions/#health-insurance-claims",
@@ -261,12 +266,17 @@ export function Solutions() {
                   {/* Content Overlay */}
                   <div className="absolute inset-0 flex flex-col justify-end p-6 sm:p-9 lg:p-11">
                     <div className="flex items-end justify-between gap-4">
-                      {/* Left side: Category, Heading, Description */}
+                      {/* Left side: Category, Impact Tag, Heading, Description */}
                       <div className="max-w-2xl">
-                        <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300 drop-shadow-sm sm:text-xs">
-                          {service.category}
-                        </span>
-                        <h3 className="mt-2 text-xl font-bold leading-tight tracking-tight text-white drop-shadow-sm sm:text-3xl lg:text-[2.25rem] lg:leading-[1.12]">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.16em] text-accent-300 drop-shadow-sm sm:text-xs">
+                            {service.category}
+                          </span>
+                          <span className="inline-flex items-center rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-semibold text-white backdrop-blur-md ring-1 ring-white/30 sm:text-[11px]">
+                            {service.impactTag}
+                          </span>
+                        </div>
+                        <h3 className="mt-2.5 text-xl font-bold leading-tight tracking-tight text-white drop-shadow-sm sm:text-3xl lg:text-[2.25rem] lg:leading-[1.12]">
                           {service.heading}
                         </h3>
                         <p className="mt-2.5 max-w-xl text-[13.5px] leading-relaxed text-white/85 drop-shadow-sm sm:mt-3 sm:text-base sm:leading-relaxed">

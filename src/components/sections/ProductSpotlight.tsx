@@ -65,7 +65,7 @@ export function ProductSpotlight() {
 
           {/* Right Column: Interactive Patient Journey Demonstration */}
           <Reveal delay={0.1}>
-            <VisualFrame badge="Illustrative concept · not an Applify EMR screenshot">
+            <VisualFrame badge="Illustrative concept · Demonstrating Applify EMR data continuity">
               <WorkflowVisual />
             </VisualFrame>
           </Reveal>

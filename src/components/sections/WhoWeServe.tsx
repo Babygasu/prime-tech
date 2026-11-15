@@ -32,18 +32,30 @@ export function WhoWeServe({
             <Reveal delay={(i % 3) * 0.05} className="h-full">
               <div
                 className={cn(
-                  "group flex h-full items-center gap-3.5 rounded-2xl border border-line bg-white p-4 shadow-soft transition-[box-shadow,transform] duration-500 ease-premium hover:-translate-y-0.5 hover:shadow-lift sm:rounded-3xl sm:p-5",
-                  !photo && "sm:flex-row sm:items-center sm:p-6",
+                  "group flex h-full items-start gap-3.5 rounded-2xl border border-line bg-white p-4.5 shadow-soft transition-[box-shadow,transform] duration-500 ease-premium hover:-translate-y-0.5 hover:shadow-lift sm:rounded-3xl sm:p-5",
+                  !photo && "sm:p-6",
                 )}
               >
                 <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-cloud text-charcoal-900 transition-colors duration-500 group-hover:bg-accent-600 group-hover:text-white sm:size-12 sm:rounded-2xl">
                   <Icon aria-hidden className="size-5 sm:size-[22px]" strokeWidth={1.75} />
                 </span>
-                <div className="min-w-0">
+                <div className="min-w-0 flex-1">
                   <p className="font-display text-[16px] font-bold tracking-tight text-ink sm:text-[17px]">{c.label}</p>
-                  {"note" in c ? (
+                  {c.note ? (
                     <p className="mt-0.5 text-[12px] leading-snug text-muted sm:text-[13px]">{c.note}</p>
                   ) : null}
+                  {c.tags && c.tags.length > 0 && (
+                    <div className="mt-2.5 flex flex-wrap gap-1.5">
+                      {c.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="inline-flex items-center rounded-md bg-cloud px-2 py-0.5 text-[10.5px] font-medium text-charcoal-700"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </Reveal>

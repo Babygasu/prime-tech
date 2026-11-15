@@ -1,15 +1,10 @@
-import { about, site } from "@/content/site";
+import { about } from "@/content/site";
 import { Container } from "@/components/ui/primitives";
 import { Reveal } from "@/components/motion/Reveal";
 import { NetworkIllustration } from "@/components/visuals/NetworkIllustration";
+import { MapPin, ShieldCheck, Zap } from "lucide-react";
 
 export function About() {
-  const facts = [
-    { value: `${site.experienceYears}+`, label: "Years of industry experience" },
-    { value: "Accra", label: "Headquartered on Spintex Road" },
-    { value: "Ghana", label: "Nationwide service delivery" },
-  ];
-
   return (
     <section id="about" aria-labelledby="about-title" className="bg-mist py-20 sm:py-28 lg:py-32">
       <Container>
@@ -25,25 +20,41 @@ export function About() {
             </Reveal>
 
             <Reveal delay={0.08}>
-              <div className="mt-4 max-w-[34rem] space-y-3 sm:mt-5">
+              <div className="mt-4 max-w-[34rem] space-y-3.5 sm:mt-5">
                 {about.paragraphs.map((p, i) => (
-                  <p key={i} className="text-[17px] leading-relaxed text-body sm:text-[18px] sm:leading-relaxed">
+                  <p key={i} className="text-[16.5px] leading-relaxed text-body sm:text-[17.5px] sm:leading-relaxed">
                     {p}
                   </p>
                 ))}
               </div>
             </Reveal>
 
+            {/* Nationwide commitment and healthcare mission callouts */}
             <Reveal delay={0.14}>
-              <dl className="mt-6 grid max-w-[34rem] grid-cols-3 divide-x divide-line border-y border-line py-1 sm:mt-8">
-                {facts.map((f) => (
-                  <div key={f.label} className="py-3.5 px-3 first:pl-0 sm:px-4 sm:py-4">
-                    <dt className="sr-only">{f.label}</dt>
-                    <dd className="font-display text-2xl font-bold tracking-tight text-charcoal-900 sm:text-3xl">{f.value}</dd>
-                    <dd className="mt-1 text-[12px] leading-snug text-muted sm:text-[13px]">{f.label}</dd>
+              <div className="mt-6 max-w-[34rem] rounded-2xl border border-line bg-white/80 p-4.5 shadow-soft backdrop-blur-sm sm:mt-8 sm:p-5">
+                <div className="flex items-start gap-3">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-accent-50 text-accent-700 ring-1 ring-accent-200/60">
+                    <MapPin className="size-4.5" />
+                  </span>
+                  <div>
+                    <h3 className="text-[14px] font-bold text-ink sm:text-[15px]">Nationwide Deployment & Support</h3>
+                    <p className="mt-1 text-[13px] leading-relaxed text-body sm:text-[13.5px]">
+                      {about.reach}
+                    </p>
                   </div>
-                ))}
-              </dl>
+                </div>
+
+                <div className="mt-4 grid grid-cols-2 gap-3 border-t border-line/70 pt-3.5">
+                  <div className="flex items-center gap-2 text-[12.5px] font-medium text-ink">
+                    <ShieldCheck className="size-4 text-signal-500 shrink-0" />
+                    <span>GHS & NHIS Aligned</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[12.5px] font-medium text-ink">
+                    <Zap className="size-4 text-accent-600 shrink-0" />
+                    <span>24/7 Local Support</span>
+                  </div>
+                </div>
+              </div>
             </Reveal>
           </div>
 
@@ -51,7 +62,7 @@ export function About() {
             <figure className="relative rounded-[28px] border border-line bg-white p-4 shadow-soft sm:p-7">
               <NetworkIllustration />
               <figcaption className="mt-3.5 text-center text-[12px] text-muted">
-                Connected care: information moving securely between facilities.
+                Connected care: information moving securely between facilities across Ghana.
               </figcaption>
             </figure>
           </Reveal>

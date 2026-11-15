@@ -1,14 +1,13 @@
 import type { NextConfig } from "next";
 
 /**
- * Static export keeps the site deployable on the existing Hostinger
- * static hosting: `npm run build` writes plain HTML/CSS/JS to `out/`.
- * Remove `output: "export"` later if server features (API routes,
- * client portals) are introduced.
+ * For Vercel / server deployment, API routes (/api/chat, /api/lead) run as serverless functions.
+ * When building for purely static hosting (e.g. Hostinger HTML files), set STATIC_EXPORT=true.
  */
+const isStaticExport = process.env.STATIC_EXPORT === "true";
+
 const nextConfig: NextConfig = {
-  output: "export",
-  trailingSlash: true,
+  ...(isStaticExport ? { output: "export", trailingSlash: true } : {}),
   images: { unoptimized: true },
 };
 
